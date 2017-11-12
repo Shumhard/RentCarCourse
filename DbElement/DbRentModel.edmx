@@ -1,0 +1,363 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище OpenRentModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Car">
+          <Key>
+            <PropertyRef Name="Guid" />
+          </Key>
+          <Property Name="Guid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Model" Type="varchar" MaxLength="200" />
+          <Property Name="Color" Type="varchar" MaxLength="200" />
+          <Property Name="Photo" Type="varchar(max)" />
+          <Property Name="YearProduction" Type="int" />
+          <Property Name="Price" Type="float" />
+          <Property Name="Mileage" Type="float" />
+          <Property Name="Status" Type="int" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="Guid" />
+          </Key>
+          <Property Name="Guid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="200" />
+          <Property Name="LastName" Type="varchar" MaxLength="200" />
+          <Property Name="Patronymic" Type="varchar" MaxLength="200" />
+          <Property Name="Birthday" Type="date" />
+          <Property Name="Sex" Type="varchar" MaxLength="200" />
+          <Property Name="Mileage" Type="float" />
+          <Property Name="PassportSeries" Type="varchar" MaxLength="200" />
+          <Property Name="PassportNumber" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="ClientOrders">
+          <Key>
+            <PropertyRef Name="Guid" />
+          </Key>
+          <Property Name="Guid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ClientGuid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="OrderGuid" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="Guid" />
+          </Key>
+          <Property Name="Guid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CarGuid" Type="uniqueidentifier" />
+          <Property Name="Address" Type="varchar(max)" />
+          <Property Name="OrderDate" Type="datetime" />
+          <Property Name="DeliveryDate" Type="datetime" />
+          <Property Name="ExpirationDate" Type="datetime" />
+          <Property Name="Status" Type="int" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "OpenRent.Reference.CarStatus" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="CarStatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "OpenRent.Reference.OrderStatus" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="OrderStatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <Association Name="FK_ClientOrders_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="ClientOrders" Type="Self.ClientOrders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Guid" />
+            </Principal>
+            <Dependent Role="ClientOrders">
+              <PropertyRef Name="ClientGuid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClientOrders_Order">
+          <End Role="Order" Type="Self.Order" Multiplicity="1" />
+          <End Role="ClientOrders" Type="Self.ClientOrders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="Guid" />
+            </Principal>
+            <Dependent Role="ClientOrders">
+              <PropertyRef Name="OrderGuid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Car">
+          <End Role="Car" Type="Self.Car" Multiplicity="0..1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Car">
+              <PropertyRef Name="Guid" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="CarGuid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище OpenRentModelContainer">
+          <EntitySet Name="Car" EntityType="Self.Car" Schema="Order" store:Type="Tables" />
+          <EntitySet Name="Client" EntityType="Self.Client" Schema="Order" store:Type="Tables" />
+          <EntitySet Name="ClientOrders" EntityType="Self.ClientOrders" Schema="Order" store:Type="Tables" />
+          <EntitySet Name="Order" EntityType="Self.Order" Schema="Order" store:Type="Tables" />
+          <EntitySet Name="CarStatus" EntityType="Self.CarStatus" store:Type="Tables" store:Schema="Reference">
+            <DefiningQuery>SELECT 
+    [CarStatus].[Id] AS [Id], 
+    [CarStatus].[Name] AS [Name]
+    FROM [Reference].[CarStatus] AS [CarStatus]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="OrderStatus" EntityType="Self.OrderStatus" store:Type="Tables" store:Schema="Reference">
+            <DefiningQuery>SELECT 
+    [OrderStatus].[Id] AS [Id], 
+    [OrderStatus].[Name] AS [Name]
+    FROM [Reference].[OrderStatus] AS [OrderStatus]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_ClientOrders_Client" Association="Self.FK_ClientOrders_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="ClientOrders" EntitySet="ClientOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClientOrders_Order" Association="Self.FK_ClientOrders_Order">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="ClientOrders" EntitySet="ClientOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Car" Association="Self.FK_Order_Car">
+            <End Role="Car" EntitySet="Car" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="OpenRentModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Car">
+          <Key>
+            <PropertyRef Name="Guid" />
+          </Key>
+          <Property Name="Guid" Type="Guid" Nullable="false" />
+          <Property Name="Model" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Color" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="YearProduction" Type="Int32" />
+          <Property Name="Price" Type="Double" />
+          <Property Name="Mileage" Type="Double" />
+          <Property Name="Status" Type="Int32" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_Order_Car" FromRole="Car" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="Guid" />
+          </Key>
+          <Property Name="Guid" Type="Guid" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Patronymic" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Birthday" Type="DateTime" Precision="0" />
+          <Property Name="Sex" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Mileage" Type="Double" />
+          <Property Name="PassportSeries" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="PassportNumber" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ClientOrders" Relationship="Self.FK_ClientOrders_Client" FromRole="Client" ToRole="ClientOrders" />
+        </EntityType>
+        <EntityType Name="ClientOrders">
+          <Key>
+            <PropertyRef Name="Guid" />
+          </Key>
+          <Property Name="Guid" Type="Guid" Nullable="false" />
+          <Property Name="ClientGuid" Type="Guid" Nullable="false" />
+          <Property Name="OrderGuid" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_ClientOrders_Client" FromRole="ClientOrders" ToRole="Client" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_ClientOrders_Order" FromRole="ClientOrders" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="Guid" />
+          </Key>
+          <Property Name="Guid" Type="Guid" Nullable="false" />
+          <Property Name="CarGuid" Type="Guid" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="OrderDate" Type="DateTime" Precision="3" />
+          <Property Name="DeliveryDate" Type="DateTime" Precision="3" />
+          <Property Name="ExpirationDate" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="Int32" />
+          <NavigationProperty Name="Car" Relationship="Self.FK_Order_Car" FromRole="Order" ToRole="Car" />
+          <NavigationProperty Name="ClientOrders" Relationship="Self.FK_ClientOrders_Order" FromRole="Order" ToRole="ClientOrders" />
+        </EntityType>
+        <EntityType Name="CarStatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="OrderStatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_Order_Car">
+          <End Role="Car" Type="Self.Car" Multiplicity="0..1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Car">
+              <PropertyRef Name="Guid" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="CarGuid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClientOrders_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="ClientOrders" Type="Self.ClientOrders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Guid" />
+            </Principal>
+            <Dependent Role="ClientOrders">
+              <PropertyRef Name="ClientGuid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClientOrders_Order">
+          <End Role="Order" Type="Self.Order" Multiplicity="1" />
+          <End Role="ClientOrders" Type="Self.ClientOrders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="Guid" />
+            </Principal>
+            <Dependent Role="ClientOrders">
+              <PropertyRef Name="OrderGuid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="OpenRentEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Car" EntityType="Self.Car" />
+          <EntitySet Name="Client" EntityType="Self.Client" />
+          <EntitySet Name="ClientOrders" EntityType="Self.ClientOrders" />
+          <EntitySet Name="Order" EntityType="Self.Order" />
+          <EntitySet Name="CarStatus" EntityType="Self.CarStatus" />
+          <EntitySet Name="OrderStatus" EntityType="Self.OrderStatus" />
+          <AssociationSet Name="FK_Order_Car" Association="Self.FK_Order_Car">
+            <End Role="Car" EntitySet="Car" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClientOrders_Client" Association="Self.FK_ClientOrders_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="ClientOrders" EntitySet="ClientOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClientOrders_Order" Association="Self.FK_ClientOrders_Order">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="ClientOrders" EntitySet="ClientOrders" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище OpenRentModelContainer" CdmEntityContainer="OpenRentEntities">
+          <EntitySetMapping Name="Car">
+            <EntityTypeMapping TypeName="OpenRentModel.Car">
+              <MappingFragment StoreEntitySet="Car">
+                <ScalarProperty Name="Guid" ColumnName="Guid" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="YearProduction" ColumnName="YearProduction" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Mileage" ColumnName="Mileage" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Client">
+            <EntityTypeMapping TypeName="OpenRentModel.Client">
+              <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="Guid" ColumnName="Guid" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+                <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="Mileage" ColumnName="Mileage" />
+                <ScalarProperty Name="PassportSeries" ColumnName="PassportSeries" />
+                <ScalarProperty Name="PassportNumber" ColumnName="PassportNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClientOrders">
+            <EntityTypeMapping TypeName="OpenRentModel.ClientOrders">
+              <MappingFragment StoreEntitySet="ClientOrders">
+                <ScalarProperty Name="Guid" ColumnName="Guid" />
+                <ScalarProperty Name="ClientGuid" ColumnName="ClientGuid" />
+                <ScalarProperty Name="OrderGuid" ColumnName="OrderGuid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Order">
+            <EntityTypeMapping TypeName="OpenRentModel.Order">
+              <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="Guid" ColumnName="Guid" />
+                <ScalarProperty Name="CarGuid" ColumnName="CarGuid" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="DeliveryDate" ColumnName="DeliveryDate" />
+                <ScalarProperty Name="ExpirationDate" ColumnName="ExpirationDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CarStatus">
+            <EntityTypeMapping TypeName="OpenRentModel.CarStatus">
+              <MappingFragment StoreEntitySet="CarStatus">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderStatus">
+            <EntityTypeMapping TypeName="OpenRentModel.OrderStatus">
+              <MappingFragment StoreEntitySet="OrderStatus">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

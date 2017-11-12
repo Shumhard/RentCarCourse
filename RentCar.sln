@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentCar", "RentCar\RentCar.csproj", "{EAB0EB42-999D-4F89-B211-68C02239A694}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbElement", "DbElement\DbElement.csproj", "{67426960-A981-45D9-944E-9E96F2400CD7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentCarTest", "RentCarTest\RentCarTest.csproj", "{953DC845-AEE1-47DA-B511-4DCA63BFECBB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EAB0EB42-999D-4F89-B211-68C02239A694}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EAB0EB42-999D-4F89-B211-68C02239A694}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EAB0EB42-999D-4F89-B211-68C02239A694}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EAB0EB42-999D-4F89-B211-68C02239A694}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67426960-A981-45D9-944E-9E96F2400CD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67426960-A981-45D9-944E-9E96F2400CD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67426960-A981-45D9-944E-9E96F2400CD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67426960-A981-45D9-944E-9E96F2400CD7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{953DC845-AEE1-47DA-B511-4DCA63BFECBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{953DC845-AEE1-47DA-B511-4DCA63BFECBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{953DC845-AEE1-47DA-B511-4DCA63BFECBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{953DC845-AEE1-47DA-B511-4DCA63BFECBB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
