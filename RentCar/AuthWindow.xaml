@@ -1,0 +1,13 @@
+﻿<Window x:Class="RentCar.AuthWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RentCar"
+        xmlns:controls="clr-namespace:RentCar.Controls"
+        mc:Ignorable="d"
+        Title="Авторизация" Height="420" Width="270" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize">
+    <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <ContentControl x:Name="MainControl"></ContentControl>
+    </StackPanel>
+</Window>

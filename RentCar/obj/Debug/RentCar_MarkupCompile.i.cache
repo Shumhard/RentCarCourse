@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\shuhard93\Documents\Visual Studio 2015\Projects\RentCar\RentCar\obj\Debug\
+C:\Users\shumihinvs\Desktop\RentCar\RentCar\obj\Debug\
 RentCar
 none
 false
 DEBUG;TRACE
-C:\Users\shuhard93\Documents\Visual Studio 2015\Projects\RentCar\RentCar\App.xaml
-11151548125
+C:\Users\shumihinvs\Desktop\RentCar\RentCar\App.xaml
+121455357196
 
-17-2088259136
-181815813724
-MainWindow.xaml;
+31-1758500931
+18912367571
+AuthWindow.xaml;ConditionsWindow.xaml;Controls\CompleteOrderControl.xaml;Controls\OrderControl.xaml;Controls\PersonnelInfoControl.xaml;Controls\PersonnelInfoEditControl.xaml;Controls\SignInControl.xaml;Controls\SignUpControl.xaml;MainWindow.xaml;OrderWindow.xaml;Personnel CabinetWindow.xaml;Styles\BaseStyle.xaml;
 
-False
+True
 

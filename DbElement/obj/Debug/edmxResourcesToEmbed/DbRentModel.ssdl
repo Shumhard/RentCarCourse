@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище OpenRentModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Car">
+    <Key>
+      <PropertyRef Name="Guid" />
+    </Key>
+    <Property Name="Guid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Model" Type="varchar" MaxLength="200" />
+    <Property Name="Color" Type="varchar" MaxLength="200" />
+    <Property Name="Photo" Type="varchar(max)" />
+    <Property Name="YearProduction" Type="int" />
+    <Property Name="Price" Type="float" />
+    <Property Name="Mileage" Type="float" />
+    <Property Name="Status" Type="int" />
+  </EntityType>
+  <EntityType Name="Client">
+    <Key>
+      <PropertyRef Name="Guid" />
+    </Key>
+    <Property Name="Guid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="FirstName" Type="varchar" MaxLength="200" />
+    <Property Name="LastName" Type="varchar" MaxLength="200" />
+    <Property Name="Patronymic" Type="varchar" MaxLength="200" />
+    <Property Name="Birthday" Type="date" />
+    <Property Name="Sex" Type="varchar" MaxLength="200" />
+    <Property Name="Mileage" Type="float" />
+    <Property Name="PassportSeries" Type="varchar" MaxLength="200" />
+    <Property Name="PassportNumber" Type="varchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="ClientOrders">
+    <Key>
+      <PropertyRef Name="Guid" />
+    </Key>
+    <Property Name="Guid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ClientGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="OrderGuid" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="Guid" />
+    </Key>
+    <Property Name="Guid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="CarGuid" Type="uniqueidentifier" />
+    <Property Name="Address" Type="varchar(max)" />
+    <Property Name="OrderDate" Type="datetime" />
+    <Property Name="DeliveryDate" Type="datetime" />
+    <Property Name="ExpirationDate" Type="datetime" />
+    <Property Name="Status" Type="int" />
+  </EntityType>
+  <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "OpenRent.Reference.CarStatus" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+  <EntityType Name="CarStatus">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "OpenRent.Reference.OrderStatus" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+  <EntityType Name="OrderStatus">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <Association Name="FK_ClientOrders_Client">
+    <End Role="Client" Type="Self.Client" Multiplicity="1" />
+    <End Role="ClientOrders" Type="Self.ClientOrders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="Guid" />
+      </Principal>
+      <Dependent Role="ClientOrders">
+        <PropertyRef Name="ClientGuid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ClientOrders_Order">
+    <End Role="Order" Type="Self.Order" Multiplicity="1" />
+    <End Role="ClientOrders" Type="Self.ClientOrders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="Guid" />
+      </Principal>
+      <Dependent Role="ClientOrders">
+        <PropertyRef Name="OrderGuid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Order_Car">
+    <End Role="Car" Type="Self.Car" Multiplicity="0..1" />
+    <End Role="Order" Type="Self.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Car">
+        <PropertyRef Name="Guid" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="CarGuid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Хранилище OpenRentModelContainer">
+    <EntitySet Name="Car" EntityType="Self.Car" Schema="Order" store:Type="Tables" />
+    <EntitySet Name="Client" EntityType="Self.Client" Schema="Order" store:Type="Tables" />
+    <EntitySet Name="ClientOrders" EntityType="Self.ClientOrders" Schema="Order" store:Type="Tables" />
+    <EntitySet Name="Order" EntityType="Self.Order" Schema="Order" store:Type="Tables" />
+    <EntitySet Name="CarStatus" EntityType="Self.CarStatus" store:Type="Tables" store:Schema="Reference">
+      <DefiningQuery>SELECT 
+    [CarStatus].[Id] AS [Id], 
+    [CarStatus].[Name] AS [Name]
+    FROM [Reference].[CarStatus] AS [CarStatus]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="OrderStatus" EntityType="Self.OrderStatus" store:Type="Tables" store:Schema="Reference">
+      <DefiningQuery>SELECT 
+    [OrderStatus].[Id] AS [Id], 
+    [OrderStatus].[Name] AS [Name]
+    FROM [Reference].[OrderStatus] AS [OrderStatus]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_ClientOrders_Client" Association="Self.FK_ClientOrders_Client">
+      <End Role="Client" EntitySet="Client" />
+      <End Role="ClientOrders" EntitySet="ClientOrders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ClientOrders_Order" Association="Self.FK_ClientOrders_Order">
+      <End Role="Order" EntitySet="Order" />
+      <End Role="ClientOrders" EntitySet="ClientOrders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Order_Car" Association="Self.FK_Order_Car">
+      <End Role="Car" EntitySet="Car" />
+      <End Role="Order" EntitySet="Order" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

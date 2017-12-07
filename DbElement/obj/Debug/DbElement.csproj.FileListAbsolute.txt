@@ -1,0 +1,10 @@
+C:\Users\shuhard93\Documents\Visual Studio 2015\Projects\RentCar\DbElement\obj\Debug\DbElement.csprojResolveAssemblyReference.cache
+C:\Users\shuhard93\Documents\Visual Studio 2015\Projects\RentCar\DbElement\bin\Debug\DbElement.dll.config
+C:\Users\shuhard93\Documents\Visual Studio 2015\Projects\RentCar\DbElement\bin\Debug\DbElement.dll
+C:\Users\shuhard93\Documents\Visual Studio 2015\Projects\RentCar\DbElement\bin\Debug\DbElement.pdb
+C:\Users\shuhard93\Documents\Visual Studio 2015\Projects\RentCar\DbElement\bin\Debug\EntityFramework.dll
+C:\Users\shuhard93\Documents\Visual Studio 2015\Projects\RentCar\DbElement\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\shuhard93\Documents\Visual Studio 2015\Projects\RentCar\DbElement\bin\Debug\EntityFramework.xml
+C:\Users\shuhard93\Documents\Visual Studio 2015\Projects\RentCar\DbElement\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\shuhard93\Documents\Visual Studio 2015\Projects\RentCar\DbElement\obj\Debug\DbElement.dll
+C:\Users\shuhard93\Documents\Visual Studio 2015\Projects\RentCar\DbElement\obj\Debug\DbElement.pdb

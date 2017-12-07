@@ -1,0 +1,80 @@
+﻿<Window x:Class="RentCar.Personnel_CabinetWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RentCar"
+        mc:Ignorable="d"
+        Title="Личный кабинет" Height="640" Width="640" MaxWidth="1024" MaxHeight="1024" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles/BaseStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <Style TargetType="Button" BasedOn="{StaticResource BaseButton}">
+                <Setter Property="Width" Value="125"/>
+                <Setter Property="Height" Value="30"/>
+                <Setter Property="Margin" Value="5"/>
+            </Style>
+            <!--<Style TargetType="TextBlock" x:Key="FilterTextBlock" BasedOn="{StaticResource BaseTextBlock}">
+                <Setter Property="Foreground" Value="#2196F3"/>
+            </Style>
+            <Style TargetType="TextBox" BasedOn="{StaticResource BaseTextBox}">
+                <Setter Property="Width" Value="70"/>
+            </Style>-->
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <ContentControl x:Name="PersonelInfoContent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></ContentControl>
+
+        <ListBox Grid.Row="1" x:Name="MyOrdersListView" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Image Grid.Column="0"></Image>
+                        <StackPanel Grid.Column="1" Margin="5">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock>Дата заказа: </TextBlock>
+                                <TextBlock></TextBlock>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button></Button>
+                                    <Button></Button>
+                                </StackPanel>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock>Дата проката:</TextBlock>
+                                <TextBlock></TextBlock>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock>Район проката:</TextBlock>
+                                <TextBlock></TextBlock>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock>Состояние заказа:</TextBlock>
+                                <TextBlock></TextBlock>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Button>Отменить заказ</Button>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock>Стоимость заказа:</TextBlock>
+                                    <TextBlock></TextBlock>
+                                </StackPanel>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</Window>

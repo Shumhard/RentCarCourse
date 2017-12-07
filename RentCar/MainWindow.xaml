@@ -5,8 +5,107 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RentCar"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="640" Width="480" MinHeight="640" MinWidth="480" WindowState="Maximized" Visibility="Collapsed"
+        Loaded="Window_Loaded" Closed="Window_Closed">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles/BaseStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <Style TargetType="Button" BasedOn="{StaticResource BaseButton}">
+                <Setter Property="Width" Value="175"/>
+                <Setter Property="Height" Value="30"/>
+                <Setter Property="Margin" Value="17"/>
+            </Style>
+            <Style TargetType="TextBlock" x:Key="FilterTextBlock" BasedOn="{StaticResource BaseTextBlock}">
+                <Setter Property="Foreground" Value="#2196F3"/>
+            </Style>
+            <Style TargetType="TextBox" BasedOn="{StaticResource BaseTextBox}">
+                <Setter Property="Width" Value="80"/>
+            </Style>
+
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        </ResourceDictionary>
+    </Window.Resources>
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <DockPanel Grid.Row="0" Background="#F6F6F6">
+            <StackPanel DockPanel.Dock="Left" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="17">
+                <TextBlock Style="{StaticResource FilterTextBlock}"><Hyperlink x:Name="PriceOrder" Click="PriceOrder_OnClick">Цена</Hyperlink></TextBlock>
+                <TextBlock Margin="10 0" Foreground="#DDDDDD">/</TextBlock>
+                <TextBlock Style="{StaticResource FilterTextBlock}"><Hyperlink x:Name="YearOrder" Click="YearOrder_OnClick">Год выпуска</Hyperlink></TextBlock>
+                <TextBlock Margin="10 0" Foreground="#DDDDDD">/</TextBlock>
+                <TextBlock Style="{StaticResource FilterTextBlock}"><Hyperlink x:Name="ModelOrder" Click="ModelOrder_OnClick">Модель</Hyperlink></TextBlock>
+            </StackPanel>
+            <Button x:Name="PersonnelCabinetBtn"  DockPanel.Dock="Right" HorizontalAlignment="Right" Click="PersonnelCabinetBtn_Click" 
+                    Visibility="{Binding IsAuthorized, Converter={StaticResource BooleanToVisibilityConverter}}">Личный кабинет</Button>
+        </DockPanel>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="200"/>
+            </Grid.ColumnDefinitions>
+
+            <ListBox x:Name="OrderListBox" Margin="10" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{Binding Cars}"
+                     SelectionMode="Single" SelectionChanged="OrderListBox_OnSelectionChanged">
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel IsItemsHost="True" />
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderThickness="1" BorderBrush="DimGray">
+                            <Grid Background="DarkGray" Width="128">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="3*"/>
+                                </Grid.RowDefinitions>
+
+                                <StackPanel Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="DimGray">
+                                    <TextBlock Text="{Binding Model}" HorizontalAlignment="Center" Foreground="White"></TextBlock>
+                                    <TextBlock Text="{Binding PriceFull}" Margin="0 3" HorizontalAlignment="Center" Foreground="White"></TextBlock>
+                                </StackPanel>
+                                <Image Grid.Row="1" Width="128" Height="128" Stretch="UniformToFill" RenderOptions.BitmapScalingMode="Fant" Source="{Binding ImagePath}"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"></Image>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            
+            <StackPanel Grid.Column="1" Margin="10">
+                <TextBlock Margin="12 5">Город</TextBlock>
+                <ComboBox x:Name="CityCmb" SelectionChanged="CityCmb_OnSelectionChanged" ItemsSource="{Binding CityList}"></ComboBox>
+                <TextBlock Margin="12 5">Марка</TextBlock>
+                <ComboBox x:Name="MarkCmb" SelectionChanged="MarkCmb_OnSelectionChanged" ItemsSource="{Binding MarkList}"></ComboBox>
+                <TextBlock Margin="12 5">Модель</TextBlock>
+                <ComboBox x:Name="ModelCmb" SelectionChanged="ModelCmb_OnSelectionChanged" ItemsSource="{Binding ModelList}"></ComboBox>
+                <TextBlock Margin="12 5">Тип</TextBlock>
+                <ComboBox x:Name="TypeCmb" SelectionChanged="TypeCmb_OnSelectionChanged" ItemsSource="{Binding TypeList}"></ComboBox>
+                <TextBlock Margin="12 5">Дата проката</TextBlock>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <TextBox x:Name="LowDate"></TextBox>
+                    <TextBlock Margin="5 0"> - </TextBlock>
+                    <TextBox x:Name="HighDate"></TextBox>
+                </StackPanel>
+                <TextBlock Margin="12 5">Цена / сутки</TextBlock>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <TextBox x:Name="LowPrice"></TextBox>
+                    <TextBlock Margin="5 0"> -</TextBlock>
+                    <TextBox x:Name="HighPrice"></TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Button x:Name="SearchBtn" Click="SearchBtn_OnClick" HorizontalAlignment="Left" Width="80" Margin="0 17">Найти</Button>
+                    <Button x:Name="ClearBtn" Click="ClearBtn_OnClick" HorizontalAlignment="Left" Width="80" Margin="10 17">Очистить</Button>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Window>
