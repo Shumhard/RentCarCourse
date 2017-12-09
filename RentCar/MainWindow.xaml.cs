@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -30,10 +31,10 @@ namespace RentCar
             var model = new MainWindowModel();
             model.IsAuthorized = true;
             model.Cars = new List<CarModel>();
-            model.Cars.Add(new CarModel {ImagePath = @"C:\Users\shumihinvs\Desktop\Mazda.jpg", Model = "Mazda", Price = 1.0 });
-            model.Cars.Add(new CarModel { ImagePath = @"C:\Users\shumihinvs\Desktop\Mazda.jpg", Model = "Mazda", Price = 10.5 });
-            model.Cars.Add(new CarModel { ImagePath = @"C:\Users\shumihinvs\Desktop\Mazda.jpg", Model = "Mazda", Price = 100.55 });
-            model.Cars.Add(new CarModel { ImagePath = @"C:\Users\shumihinvs\Desktop\Mazda.jpg", Model = "Mazda", Price = 1000.50 });
+            model.Cars.Add(new CarModel {ImagePath = @"C:\Users\shuhard93\Desktop\audi.jpg", Model = "Mazda", Price = 1.0 });
+            model.Cars.Add(new CarModel { ImagePath = @"C:\Users\shuhard93\Desktop\audi.jpg", Model = "Mazda", Price = 10.5 });
+            model.Cars.Add(new CarModel { ImagePath = @"C:\Users\shuhard93\Desktop\audi.jpg", Model = "Mazda", Price = 100.55 });
+            model.Cars.Add(new CarModel { ImagePath = @"C:\Users\shuhard93\Desktop\audi.jpg", Model = "Mazda", Price = 1000.50 });
             DataContext = model;
         }
 
@@ -44,10 +45,10 @@ namespace RentCar
             var model = new MainWindowModel();
             model.IsAuthorized = isAuthorized;
             model.Cars = new List<CarModel>();
-            model.Cars.Add(new CarModel { ImagePath = @"C:\Users\shumihinvs\Desktop\Mazda.jpg", Model = "Mazda", Price = 1.0 });
-            model.Cars.Add(new CarModel { ImagePath = @"C:\Users\shumihinvs\Desktop\Mazda.jpg", Model = "Mazda", Price = 10.5 });
-            model.Cars.Add(new CarModel { ImagePath = @"C:\Users\shumihinvs\Desktop\Mazda.jpg", Model = "Mazda", Price = 100.55 });
-            model.Cars.Add(new CarModel { ImagePath = @"C:\Users\shumihinvs\Desktop\Mazda.jpg", Model = "Mazda", Price = 1000.50 });
+            model.Cars.Add(new CarModel { ImagePath = @"C:\Users\shuhard93\Desktop\audi.jpg", Model = "Mazda", Price = 1.0 });
+            model.Cars.Add(new CarModel { ImagePath = @"C:\Users\shuhard93\Desktop\audi.jpg", Model = "Mazda", Price = 10.5 });
+            model.Cars.Add(new CarModel { ImagePath = @"C:\Users\shuhard93\Desktop\audi.jpg", Model = "Mazda", Price = 100.55 });
+            model.Cars.Add(new CarModel { ImagePath = @"C:\Users\shuhard93\Desktop\audi.jpg", Model = "Mazda", Price = 1000.50 });
             DataContext = model;
         }
 
@@ -142,6 +143,11 @@ namespace RentCar
 
         private void ClearBtn_OnClick(object sender, RoutedEventArgs e)
         {
+            
+        }
+
+        private void ExitBtn_Click(object sender, RoutedEventArgs e)
+        {            
             
         }
     }

@@ -26,7 +26,8 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Column="0" x:Name="PhotoPanel">
-            <Image></Image>
+            <Image Width="150" Height="256" Margin="0 10 0 0"></Image>
+            <Button x:Name="JournalBtn" Click="JournalBtn_Click" HorizontalAlignment="Center">Журнал заказов</Button>
         </StackPanel>
 
         <StackPanel Grid.Column="1" x:Name="InfoPanel" Margin="10">
@@ -70,7 +71,7 @@
                 <TextBlock>Банковская карта:</TextBlock>
                 <TextBlock></TextBlock>
             </StackPanel>
-            <Button x:Name="EditBtn" Click="EditBtn_Click">Редактировать</Button>
+            <Button x:Name="EditBtn" Click="EditBtn_Click" HorizontalAlignment="Right">Редактировать</Button>
         </StackPanel>
     </Grid>
 </UserControl>

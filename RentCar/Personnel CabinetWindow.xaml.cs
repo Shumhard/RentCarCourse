@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using RentCar.Controls;
+using Models;
 
 namespace RentCar
 {
@@ -32,8 +33,6 @@ namespace RentCar
 
         private void SetPersonnelInfo()
         {
-            MyOrdersListView.Visibility = Visibility.Visible;
-
             var infoContet = new PersonnelInfoControl();
             infoContet.EditStarted += OnEditStarted;
             PersonelInfoContent.Content = infoContet;
@@ -41,8 +40,6 @@ namespace RentCar
 
         private void SetPersonnelInfoEdit()
         {
-            MyOrdersListView.Visibility = Visibility.Collapsed;
-
             var editInfoContet = new PersonnelInfoEditControl();
             editInfoContet.EditEnded += OnEditEnded;
             PersonelInfoContent.Content = editInfoContet;
@@ -56,6 +53,13 @@ namespace RentCar
         private void OnEditEnded(object sender, EventArgs e)
         {
             SetPersonnelInfo();
+        }
+
+        private void EditBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var orderWindow = new OrderWindow();
+            orderWindow.Owner = this;
+            orderWindow.ShowDialog();
         }
     }
 }

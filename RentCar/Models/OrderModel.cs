@@ -8,5 +8,18 @@ namespace Models
 {
     public class OrderModel
     {
+        public string ImgPath { get; set; }
+
+        public string OrderDate { get; set; }
+
+        public string RentRange { get; set; }
+
+        public string Area { get; set; }
+
+        public string StatusString { get; set; }
+
+        public string PriceString { get; set; }
+
+        public List<string> ServicesList { get; set; }
     }
 }

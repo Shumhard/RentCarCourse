@@ -49,7 +49,7 @@ namespace RentCar.Controls
 
         private void Hyperlink_Click(object sender, RoutedEventArgs e)
         {
-            Window.GetWindow(this).Close();
+            Application.Current.Shutdown();
         }
 
         private void GuestBtn_OnClick(object sender, RoutedEventArgs e)

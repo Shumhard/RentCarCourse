@@ -42,8 +42,10 @@
                 <TextBlock Margin="10 0" Foreground="#DDDDDD">/</TextBlock>
                 <TextBlock Style="{StaticResource FilterTextBlock}"><Hyperlink x:Name="ModelOrder" Click="ModelOrder_OnClick">Модель</Hyperlink></TextBlock>
             </StackPanel>
+            <!--<Button x:Name="ExitBtn"  DockPanel.Dock="Right" HorizontalAlignment="Right" Click="ExitBtn_Click" 
+                    Visibility="{Binding IsAuthorized, Converter={StaticResource BooleanToVisibilityConverter}}">Выход</Button>-->
             <Button x:Name="PersonnelCabinetBtn"  DockPanel.Dock="Right" HorizontalAlignment="Right" Click="PersonnelCabinetBtn_Click" 
-                    Visibility="{Binding IsAuthorized, Converter={StaticResource BooleanToVisibilityConverter}}">Личный кабинет</Button>
+                    Visibility="{Binding IsAuthorized, Converter={StaticResource BooleanToVisibilityConverter}}">Личный кабинет</Button>            
         </DockPanel>
 
         <Grid Grid.Row="1">

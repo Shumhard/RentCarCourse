@@ -112,6 +112,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="JournalWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -128,6 +132,7 @@
     <Compile Include="Common\Client.cs" />
     <Compile Include="Common\Order.cs" />
     <Compile Include="Common\OrderStatus.cs" />
+    <Compile Include="Common\UserData.cs" />
     <Compile Include="ConditionsWindow.xaml.cs">
       <DependentUpon>ConditionsWindow.xaml</DependentUpon>
     </Compile>
@@ -154,6 +159,9 @@
     <Compile Include="DbWorkers\DbClientWorker.cs" />
     <Compile Include="DbWorkers\DbOrderWorker.cs" />
     <Compile Include="EventArgs\AuthorizedEventArgs.cs" />
+    <Compile Include="JournalWindow.xaml.cs">
+      <DependentUpon>JournalWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -174,6 +182,7 @@
   <ItemGroup>
     <Compile Include="Models\MainWindowModel.cs" />
     <Compile Include="Models\OrderModel.cs" />
+    <Compile Include="Models\PersonnelCabinetWindowModel.cs" />
     <Compile Include="OrderWindow.xaml.cs">
       <DependentUpon>OrderWindow.xaml</DependentUpon>
     </Compile>

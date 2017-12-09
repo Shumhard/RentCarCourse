@@ -26,7 +26,7 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Column="0" x:Name="PhotoPanel">
-            <Image></Image>
+            <Image Width="150" Height="256" Margin="0 10 0 0"></Image>
             <Button x:Name="LoadImageBtn" Click="LoadImageBtn_Click">Загрузить...</Button>
         </StackPanel>
         

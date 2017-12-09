@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Models;
 
 namespace RentCar.Controls
 {
@@ -25,6 +26,7 @@ namespace RentCar.Controls
         public PersonnelInfoControl()
         {
             InitializeComponent();
+            
         }
 
         private void EditBtn_Click(object sender, RoutedEventArgs e)
@@ -33,6 +35,13 @@ namespace RentCar.Controls
             {
                 EditStarted(this, new EventArgs());
             }
+        }
+
+        private void JournalBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var journalWindow = new JournalWindow();
+            journalWindow.Owner = Window.GetWindow(this);
+            journalWindow.ShowDialog();
         }
     }
 }
