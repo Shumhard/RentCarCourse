@@ -29,11 +29,13 @@ namespace RentCar.Controls
 
         private void LoadImageBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            //TODO: Загрузка новой аватарки клиента
         }
 
         private void SaveBtn_Click(object sender, RoutedEventArgs e)
         {
+            //TODO: Сохранение новой инфы о клиенте
+
             Close();
         }
 

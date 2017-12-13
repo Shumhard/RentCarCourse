@@ -28,5 +28,10 @@ namespace RentCar
         {
             this.Close();
         }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            //TODO: Получение текста пользовательского соглашения
+        }
     }
 }

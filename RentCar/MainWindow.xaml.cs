@@ -54,7 +54,7 @@ namespace RentCar
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            
+            //TODO: Получение списка автомобилей
         }
         
         private void PersonnelCabinetBtn_Click(object sender, RoutedEventArgs e)
@@ -138,12 +138,12 @@ namespace RentCar
 
         private void SearchBtn_OnClick(object sender, RoutedEventArgs e)
         {
-            
+            //TODO: Выборка автомобилей по фильтру
         }
 
         private void ClearBtn_OnClick(object sender, RoutedEventArgs e)
         {
-            
+            //TODO: Очистка фильтра
         }
 
         private void ExitBtn_Click(object sender, RoutedEventArgs e)

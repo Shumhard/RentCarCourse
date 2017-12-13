@@ -29,6 +29,8 @@ namespace RentCar.Controls
 
         private void SignUpBtn_Click(object sender, RoutedEventArgs e)
         {
+            //TODO: Создание нового клиента
+
             if(RegisterEnded != null)
             {
                 RegisterEnded(this, new EventArgs());

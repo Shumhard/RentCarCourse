@@ -43,5 +43,10 @@ namespace RentCar.Controls
             journalWindow.Owner = Window.GetWindow(this);
             journalWindow.ShowDialog();
         }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            //TODO: Получение данных о клиенте
+        }
     }
 }

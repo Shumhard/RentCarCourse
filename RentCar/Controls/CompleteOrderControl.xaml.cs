@@ -30,6 +30,8 @@ namespace RentCar.Controls
 
         private void CompleteBtn_OnClick(object sender, RoutedEventArgs e)
         {
+            //TODO: Создание нового Заказа
+
             if (CompleteSuccessed != null)
             {
                 CompleteSuccessed(this, new EventArgs());

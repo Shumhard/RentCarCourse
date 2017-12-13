@@ -95,7 +95,7 @@ namespace RentCar
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-
+            //TODO: Получение заказов клиента
         }
     }
 }
