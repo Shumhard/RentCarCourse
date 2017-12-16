@@ -23,67 +23,6 @@ namespace RentCar
         public JournalWindow()
         {
             InitializeComponent();
-
-            var model = new PersonnelCabinetWindowModel
-            {
-                MyOrders = new List<OrderModel>()
-            };
-            model.MyOrders.Add(new OrderModel
-            {
-                ImgPath = @"C:\Users\shuhard93\Desktop\audi.jpg",
-                OrderDate = DateTime.Now.Date.ToShortDateString(),
-                RentRange = DateTime.Now.Date.ToShortDateString() + " - " + DateTime.Now.Date.ToShortDateString(),
-                Area = "Каштак 2",
-                PriceString = "1000.5 рублей",
-                StatusString = "В процессе (не оплачен)",
-                ServicesList = new List<string>(new string[] { "Капуччино", "Покер" })
-            });
-            model.MyOrders.Add(new OrderModel
-            {
-                ImgPath = @"C:\Users\shuhard93\Desktop\audi.jpg",
-                OrderDate = DateTime.Now.Date.ToShortDateString(),
-                RentRange = DateTime.Now.Date.ToShortDateString() + " - " + DateTime.Now.Date.ToShortDateString(),
-                Area = "Каштак 2",
-                PriceString = "1000.5 рублей",
-                StatusString = "В процессе (не оплачен)"
-            });
-            model.MyOrders.Add(new OrderModel
-            {
-                ImgPath = @"C:\Users\shuhard93\Desktop\audi.jpg",
-                OrderDate = DateTime.Now.Date.ToShortDateString(),
-                RentRange = DateTime.Now.Date.ToShortDateString() + " - " + DateTime.Now.Date.ToShortDateString(),
-                Area = "Каштак 2",
-                PriceString = "1000.5 рублей",
-                StatusString = "В процессе (не оплачен)"
-            });
-            model.MyOrders.Add(new OrderModel
-            {
-                ImgPath = @"C:\Users\shuhard93\Desktop\audi.jpg",
-                OrderDate = DateTime.Now.Date.ToShortDateString(),
-                RentRange = DateTime.Now.Date.ToShortDateString() + " - " + DateTime.Now.Date.ToShortDateString(),
-                Area = "Каштак 2",
-                PriceString = "1000.5 рублей",
-                StatusString = "В процессе (не оплачен)"
-            });
-            model.MyOrders.Add(new OrderModel
-            {
-                ImgPath = @"C:\Users\shuhard93\Desktop\audi.jpg",
-                OrderDate = DateTime.Now.Date.ToShortDateString(),
-                RentRange = DateTime.Now.Date.ToShortDateString() + " - " + DateTime.Now.Date.ToShortDateString(),
-                Area = "Каштак 2",
-                PriceString = "1000.5 рублей",
-                StatusString = "В процессе (не оплачен)"
-            });
-            model.MyOrders.Add(new OrderModel
-            {
-                ImgPath = @"C:\Users\shuhard93\Desktop\audi.jpg",
-                OrderDate = DateTime.Now.Date.ToShortDateString(),
-                RentRange = DateTime.Now.Date.ToShortDateString() + " - " + DateTime.Now.Date.ToShortDateString(),
-                Area = "Каштак 2",
-                PriceString = "1000.5 рублей",
-                StatusString = "В процессе (не оплачен)"
-            });
-            DataContext = model;
         }
 
         private void EditBtn_Click(object sender, RoutedEventArgs e)
@@ -96,6 +35,67 @@ namespace RentCar
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             //TODO: Получение заказов клиента
+
+            var model = new JournalWindowModel
+            {
+                Orders = new List<OrderModel>()
+            };
+            model.Orders.Add(new OrderModel
+            {
+                ImgPath = @"C:\Users\shuhard93\Desktop\audi.jpg",
+                OrderDate = DateTime.Now.Date.ToShortDateString(),
+                RentRange = DateTime.Now.Date.ToShortDateString() + " - " + DateTime.Now.Date.ToShortDateString(),
+                Area = "Каштак 2",
+                PriceString = "1000.5 рублей",
+                StatusString = "В процессе (не оплачен)",
+                ServicesList = new List<string>(new string[] { "Капуччино", "Покер" })
+            });
+            model.Orders.Add(new OrderModel
+            {
+                ImgPath = @"C:\Users\shuhard93\Desktop\audi.jpg",
+                OrderDate = DateTime.Now.Date.ToShortDateString(),
+                RentRange = DateTime.Now.Date.ToShortDateString() + " - " + DateTime.Now.Date.ToShortDateString(),
+                Area = "Каштак 2",
+                PriceString = "1000.5 рублей",
+                StatusString = "В процессе (не оплачен)"
+            });
+            model.Orders.Add(new OrderModel
+            {
+                ImgPath = @"C:\Users\shuhard93\Desktop\audi.jpg",
+                OrderDate = DateTime.Now.Date.ToShortDateString(),
+                RentRange = DateTime.Now.Date.ToShortDateString() + " - " + DateTime.Now.Date.ToShortDateString(),
+                Area = "Каштак 2",
+                PriceString = "1000.5 рублей",
+                StatusString = "В процессе (не оплачен)"
+            });
+            model.Orders.Add(new OrderModel
+            {
+                ImgPath = @"C:\Users\shuhard93\Desktop\audi.jpg",
+                OrderDate = DateTime.Now.Date.ToShortDateString(),
+                RentRange = DateTime.Now.Date.ToShortDateString() + " - " + DateTime.Now.Date.ToShortDateString(),
+                Area = "Каштак 2",
+                PriceString = "1000.5 рублей",
+                StatusString = "В процессе (не оплачен)"
+            });
+            model.Orders.Add(new OrderModel
+            {
+                ImgPath = @"C:\Users\shuhard93\Desktop\audi.jpg",
+                OrderDate = DateTime.Now.Date.ToShortDateString(),
+                RentRange = DateTime.Now.Date.ToShortDateString() + " - " + DateTime.Now.Date.ToShortDateString(),
+                Area = "Каштак 2",
+                PriceString = "1000.5 рублей",
+                StatusString = "В процессе (не оплачен)"
+            });
+            model.Orders.Add(new OrderModel
+            {
+                ImgPath = @"C:\Users\shuhard93\Desktop\audi.jpg",
+                OrderDate = DateTime.Now.Date.ToShortDateString(),
+                RentRange = DateTime.Now.Date.ToShortDateString() + " - " + DateTime.Now.Date.ToShortDateString(),
+                Area = "Каштак 2",
+                PriceString = "1000.5 рублей",
+                StatusString = "В процессе (не оплачен)"
+            });
+            DataContext = model;
         }
     }
 }

@@ -47,6 +47,10 @@ namespace RentCar.Controls
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             //TODO: Получение данных о клиенте
+
+            var window = Window.GetWindow(this);
+            var model = (PersonnelCabinetWindowModel)window.DataContext;
+            DataContext = model;
         }
     }
 }

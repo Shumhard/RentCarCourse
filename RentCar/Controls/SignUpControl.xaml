@@ -28,9 +28,9 @@
             <TextBlock Margin="0 0 0 0">Логин</TextBlock>
             <TextBox x:Name="LoginTxt" Margin="0 5 0 0"></TextBox>
             <TextBlock Margin="0 10 0 0">Пароль</TextBlock>
-            <TextBox x:Name="PasswordTxt" Margin="0 5 0 0"></TextBox>
+            <PasswordBox x:Name="PasswordTxt" Margin="0 5 0 0"></PasswordBox>
             <TextBlock Margin="0 10 0 0">Пароль еще раз</TextBlock>
-            <TextBox x:Name="PasswordRepeatTxt" Margin="0 5 0 0"></TextBox>
+            <PasswordBox x:Name="PasswordRepeatTxt" Margin="0 5 0 0"></PasswordBox>
             <TextBlock Margin="0 10 0 0">Телефон</TextBlock>
             <TextBox x:Name="PhoneTxt" Margin="0 5 0 0"></TextBox>
             <TextBlock Margin="0 10 0 0">E-mail</TextBlock>

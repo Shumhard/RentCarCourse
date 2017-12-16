@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using RentCar.Models;
 
 namespace RentCar.Controls
 {
@@ -44,6 +45,13 @@ namespace RentCar.Controls
             {
                 CompleteCanceled(this, new EventArgs());
             }
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            var window = Window.GetWindow(this);
+            var model = (OrderWindowModel)window.DataContext;
+            DataContext = model;
         }
     }
 }

@@ -132,6 +132,7 @@
     <Compile Include="Common\Client.cs" />
     <Compile Include="Common\Order.cs" />
     <Compile Include="Common\OrderStatus.cs" />
+    <Compile Include="Common\ReferenceValue.cs" />
     <Compile Include="Common\UserData.cs" />
     <Compile Include="ConditionsWindow.xaml.cs">
       <DependentUpon>ConditionsWindow.xaml</DependentUpon>
@@ -158,6 +159,7 @@
     <Compile Include="DbWorkers\DbCarWorker.cs" />
     <Compile Include="DbWorkers\DbClientWorker.cs" />
     <Compile Include="DbWorkers\DbOrderWorker.cs" />
+    <Compile Include="DbWorkers\DbReferenceWorker.cs" />
     <Compile Include="EventArgs\AuthorizedEventArgs.cs" />
     <Compile Include="JournalWindow.xaml.cs">
       <DependentUpon>JournalWindow.xaml</DependentUpon>
@@ -180,8 +182,11 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\CarModel.cs" />
+    <Compile Include="Models\JournalWindowModel.cs" />
     <Compile Include="Models\MainWindowModel.cs" />
     <Compile Include="Models\OrderModel.cs" />
+    <Compile Include="Models\OrderWindowModel.cs" />
     <Compile Include="Models\PersonnelCabinetWindowModel.cs" />
     <Compile Include="OrderWindow.xaml.cs">
       <DependentUpon>OrderWindow.xaml</DependentUpon>

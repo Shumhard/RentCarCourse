@@ -20,6 +20,11 @@
         <Setter Property="FontSize" Value="14"/>
     </Style>
 
+    <Style TargetType="ComboBox" x:Key="BaseComboBox">
+        <Setter Property="MaxDropDownHeight" Value="150"/>
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+    </Style>
+
     <Style x:Key="ScrollBarLineButtonStyle" TargetType="{x:Type RepeatButton}">
         <Setter Property="Focusable" Value="False"/>
         <Setter Property="Template">

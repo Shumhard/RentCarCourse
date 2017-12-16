@@ -84,13 +84,17 @@
             
             <StackPanel Grid.Column="1" Margin="10">
                 <TextBlock Margin="12 5">Город</TextBlock>
-                <ComboBox x:Name="CityCmb" SelectionChanged="CityCmb_OnSelectionChanged" ItemsSource="{Binding CityList}"></ComboBox>
+                <ComboBox x:Name="CityCmb" MaxDropDownHeight="150" ScrollViewer.HorizontalScrollBarVisibility="Disabled" DisplayMemberPath="Name" 
+                          SelectedValuePath="Name" ItemsSource="{Binding CityList}"></ComboBox>
                 <TextBlock Margin="12 5">Марка</TextBlock>
-                <ComboBox x:Name="MarkCmb" SelectionChanged="MarkCmb_OnSelectionChanged" ItemsSource="{Binding MarkList}"></ComboBox>
+                <ComboBox x:Name="MarkCmb" MaxDropDownHeight="150" ScrollViewer.HorizontalScrollBarVisibility="Disabled" DisplayMemberPath="Name" 
+                          SelectedValuePath="Name" ItemsSource="{Binding MarkList}"></ComboBox>
                 <TextBlock Margin="12 5">Модель</TextBlock>
-                <ComboBox x:Name="ModelCmb" SelectionChanged="ModelCmb_OnSelectionChanged" ItemsSource="{Binding ModelList}"></ComboBox>
+                <ComboBox x:Name="ModelCmb" MaxDropDownHeight="150" ScrollViewer.HorizontalScrollBarVisibility="Disabled" DisplayMemberPath="Name" 
+                          SelectedValuePath="Name" ItemsSource="{Binding ModelList}"></ComboBox>
                 <TextBlock Margin="12 5">Тип</TextBlock>
-                <ComboBox x:Name="TypeCmb" SelectionChanged="TypeCmb_OnSelectionChanged" ItemsSource="{Binding TypeList}"></ComboBox>
+                <ComboBox x:Name="TypeCmb" MaxDropDownHeight="150" ScrollViewer.HorizontalScrollBarVisibility="Disabled" DisplayMemberPath="Name" 
+                          SelectedValuePath="Name" ItemsSource="{Binding TypeList}"></ComboBox>
                 <TextBlock Margin="12 5">Дата проката</TextBlock>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                     <TextBox x:Name="LowDate"></TextBox>

@@ -26,50 +26,50 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Column="0" x:Name="PhotoPanel">
-            <Image Width="150" Height="256" Margin="0 10 0 0"></Image>
+            <Image Width="150" Height="256" Margin="0 10 0 0" Source="{Binding ImagePath}"></Image>
             <Button x:Name="JournalBtn" Click="JournalBtn_Click" HorizontalAlignment="Center">Журнал заказов</Button>
         </StackPanel>
 
         <StackPanel Grid.Column="1" x:Name="InfoPanel" Margin="10">
             <StackPanel Orientation="Horizontal">
                 <TextBlock>Логин:</TextBlock>
-                <TextBlock></TextBlock>
+                <TextBlock Text="{Binding Login}" Margin="5"></TextBlock>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock>Пароль:</TextBlock>
-                <TextBlock></TextBlock>
+                <TextBlock Text="{Binding PasswordString}" Margin="5"></TextBlock>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <TextBlock>ФИО</TextBlock>
+                <TextBlock FontSize="16" FontWeight="DemiBold" TextWrapping="Wrap" Text="{Binding FullName}"></TextBlock>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock>Телефон:</TextBlock>
-                <TextBlock></TextBlock>
+                <TextBlock Text="{Binding Phone}" Margin="5"></TextBlock>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock>E-mail:</TextBlock>
-                <TextBlock></TextBlock>
+                <TextBlock Text="{Binding Email}" Margin="5"></TextBlock>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock>Дата рождения:</TextBlock>
-                <TextBlock></TextBlock>
+                <TextBlock Text="{Binding Burthday}" Margin="5"></TextBlock>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock>Пол:</TextBlock>
-                <TextBlock></TextBlock>
+                <TextBlock Text="{Binding Sex}" Margin="5"></TextBlock>
             </StackPanel>
             <StackPanel Orientation="Vertical">
                 <TextBlock>Паспортные данные</TextBlock>
-                <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Horizontal" Margin="10 0">
                     <TextBlock>серия:</TextBlock>
-                    <TextBlock></TextBlock>
+                    <TextBlock Text="{Binding PassportSeria}" Margin="5"></TextBlock>
                     <TextBlock>номер:</TextBlock>
-                    <TextBlock></TextBlock>
+                    <TextBlock Text="{Binding PassportNumber}" Margin="5"></TextBlock>
                 </StackPanel>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock>Банковская карта:</TextBlock>
-                <TextBlock></TextBlock>
+                <TextBlock Text="{Binding BankCard}" Margin="5"></TextBlock>
             </StackPanel>
             <Button x:Name="EditBtn" Click="EditBtn_Click" HorizontalAlignment="Right">Редактировать</Button>
         </StackPanel>

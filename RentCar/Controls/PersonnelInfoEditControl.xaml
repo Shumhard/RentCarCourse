@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:RentCar.Controls"
              mc:Ignorable="d" 
-             d:DesignHeight="640" d:DesignWidth="480">
+             d:DesignHeight="640" d:DesignWidth="480" Loaded="UserControl_Loaded">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -26,38 +26,39 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Column="0" x:Name="PhotoPanel">
-            <Image Width="150" Height="256" Margin="0 10 0 0"></Image>
+            <Image Width="150" Height="256" Margin="0 10 0 0" Source="{Binding ImagePath, Mode=OneWay}"></Image>
             <Button x:Name="LoadImageBtn" Click="LoadImageBtn_Click">Загрузить...</Button>
         </StackPanel>
         
         <StackPanel Grid.Column="1" x:Name="EditPanel" Margin="10">
             <TextBlock Margin="10 3 0 1">Логин</TextBlock>
-            <TextBox></TextBox>
+            <TextBox x:Name="LoginTxt" Text="{Binding Login, Mode=OneWay}"></TextBox>
             <TextBlock Margin="10 3 0 1">Пароль</TextBlock>
-            <TextBox></TextBox>
+            <PasswordBox x:Name="Password"></PasswordBox>
             <TextBlock Margin="10 3 0 1">Повторите пароль</TextBlock>
-            <TextBox></TextBox>
+            <PasswordBox x:Name="RepeatPassword"></PasswordBox>
             <TextBlock Margin="10 3 0 1">Фамилия</TextBlock>
-            <TextBox></TextBox>
+            <TextBox x:Name="SecondNameTxt" Text="{Binding SecondName, Mode=OneWay}"></TextBox>
             <TextBlock Margin="10 3 0 1">Имя</TextBlock>
-            <TextBox></TextBox>
+            <TextBox x:Name="FirstNameTxt" Text="{Binding FirstName, Mode=OneWay}"></TextBox>
             <TextBlock Margin="10 3 0 1">Отчество</TextBlock>
-            <TextBox></TextBox>
+            <TextBox x:Name="PatronymicTxt" Text="{Binding Patronymic, Mode=OneWay}"></TextBox>
             <TextBlock Margin="10 3 0 1">Телефон</TextBlock>
-            <TextBox></TextBox>
+            <TextBox x:Name="PhoneTxt" Text="{Binding Phone, Mode=OneWay}"></TextBox>
             <TextBlock Margin="10 3 0 1">E-mail</TextBlock>
-            <TextBox></TextBox>
+            <TextBox x:Name="EmailTxt" Text="{Binding Email, Mode=OneWay}"></TextBox>
             <TextBlock Margin="10 3 0 1">Дата рождения</TextBlock>
-            <TextBox Width="100"></TextBox>
+            <TextBox x:Name="BurthdayTxt" Width="100" HorizontalAlignment="Left" Text="{Binding Burthday, Mode=OneWay}"></TextBox>
             <TextBlock Margin="10 3 0 1">Пол</TextBlock>
-            <ComboBox></ComboBox>
+            <ComboBox x:Name="SexCmb" Width="100" HorizontalAlignment="Left" DisplayMemberPath="Name" SelectedValuePath="Name" 
+                      SelectedValue="{Binding Sex, Mode=OneWay}"></ComboBox>
             <TextBlock Margin="10 3 0 1">Паспортные данные</TextBlock>
-            <TextBlock Margin="20 2 0 1">серия</TextBlock>
-            <TextBox></TextBox>
-            <TextBlock Margin="20 3 0 1">номер</TextBlock>
-            <TextBox></TextBox>
+            <TextBlock x:Name="PassportSeriaTxt" Margin="20 2 0 1">серия</TextBlock>
+            <TextBox Text="{Binding PassportNumber, Mode=OneWay}" Width="120" Margin="20 0 0 0" HorizontalAlignment="Left"></TextBox>
+            <TextBlock x:Name="PassportNumberTxt" Margin="20 3 0 1">номер</TextBlock>
+            <TextBox Text="{Binding PassportNumber, Mode=OneWay}" Width="120" Margin="20 0 0 0" HorizontalAlignment="Left"></TextBox>
             <TextBlock Margin="10 3 0 1">Номер банковской карты</TextBlock>
-            <TextBox></TextBox>
+            <TextBox x:Name="BankCard" Text="{Binding BankCard, Mode=OneWay}"></TextBox>
             <StackPanel Orientation="Horizontal" Margin="0 5">
                 <Button x:Name="SaveBtn" Click="SaveBtn_Click">Сохранить</Button>
                 <Button x:Name="CancelBtn" Click="CancelBtn_Click">Отмена</Button>

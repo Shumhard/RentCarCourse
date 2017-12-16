@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using DbWorkers;
+using Models;
 
 namespace RentCar.Controls
 {
@@ -50,6 +52,17 @@ namespace RentCar.Controls
             {
                 EditEnded(this, new EventArgs());
             }
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            var window = Window.GetWindow(this);
+            var model = (PersonnelCabinetWindowModel)window.DataContext;
+            DataContext = model;
+
+            Password.Password = model.Password;
+            var sexList = DbReferenceWorker.GetSexReference();
+            SexCmb.ItemsSource = sexList;
         }
     }
 }

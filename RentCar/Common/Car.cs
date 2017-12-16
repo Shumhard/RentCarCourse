@@ -16,5 +16,8 @@ namespace Common
         public double Price { get; set; }
         public double Mileage { get; set; }
         public CarStatus Status { get; set; }
+        public string City { get; set; }
+
+        public string FullName { get; }
     }
 }

@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using RentCar.Controls;
+using DbWorkers;
+using RentCar.Models;
 
 namespace RentCar
 {
@@ -23,10 +25,35 @@ namespace RentCar
         public OrderWindow()
         {
             InitializeComponent();
+
+            var additionalServices = DbReferenceWorker.GetAdditionalServiceReference();
+
+            var model = new OrderWindowModel
+            {
+                OrderGuid = Guid.Empty,
+                AdditionalServices = additionalServices.Select(x => new AdditionalService { Checked = false, Name = x.Name }).ToList()
+            };
+            DataContext = model;
+        }
+
+        public OrderWindow(Guid orderGuid)
+        {
+            InitializeComponent();
+
+            var additionalServices = DbReferenceWorker.GetAdditionalServiceReference();
+
+            var model = new OrderWindowModel
+            {
+                OrderGuid = orderGuid,
+                AdditionalServices = additionalServices.Select(x => new AdditionalService { Checked = false, Name = x.Name }).ToList()
+            };
+            DataContext = model;
         }
 
         private void OrderWindow_OnLoaded(object sender, RoutedEventArgs e)
         {
+            var model = (OrderWindowModel)DataContext;
+
             SetOrderControl();
         }
 
