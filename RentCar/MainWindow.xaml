@@ -63,7 +63,7 @@
                 </ListBox.ItemsPanel>
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <Border BorderThickness="1" BorderBrush="DimGray">
+                        <Border BorderThickness="1" BorderBrush="DimGray" Visibility="{Binding Visible, Converter={StaticResource BooleanToVisibilityConverter}}">
                             <Grid Background="DarkGray" Width="128">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*"/>
