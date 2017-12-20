@@ -42,7 +42,7 @@ namespace RentCar
 
             model.Cars = new ObservableCollection<CarModel>();
             
-            for (int i = 0; i < 10; i++)
+            for (int i = 2; i < 12; i++)
             {
                 CarModel carmod = new CarModel();
                 carmod.setDebugCarModel(i * 50);
@@ -173,7 +173,7 @@ namespace RentCar
                 _highDate = this.HighDate.Text.ToString() == ""? new DateTime() : Convert.ToDateTime(this.HighDate.Text.ToString());
                 _lowDate = this.LowDate.Text.ToString() == "" ? new DateTime() : Convert.ToDateTime(this.LowDate.Text.ToString());
                 if (_highPrice < _lowPrice) throw new Exception();
-                if (_highDate.CompareTo(_lowDate) < 0) throw new Exception();
+                if (_highDate.CompareTo(_lowDate) <= 0) throw new Exception();
             }
             catch (Exception ex)
             {
@@ -191,7 +191,7 @@ namespace RentCar
                     (_highPrice != 0 && car.Price.CompareTo(_highPrice) > 0) ||
                     (_lowPrice != 0 && car.Price.CompareTo(_lowPrice) < 0) ||
                     (_highDate.Year != 1 && car.RentalDate.HighDate.CompareTo(_highDate) > 0) ||
-                    (_lowDate.Year != 1 && car.RentalDate.LowDate.CompareTo(_lowDate) < 0))
+                    (_lowDate.Year != 1 && car.RentalDate.HighDate.CompareTo(_lowDate) > 0))
                     car.Visible = false;
             }
             model.Cars = new ObservableCollection<CarModel>(model.Cars.OrderByDescending(x => x.Visible));
