@@ -29,7 +29,6 @@
             </StackPanel>
             <TextBlock Margin="0 5 0 3" HorizontalAlignment="Center">Район проката (выбран город <TextBlock x:Name="CityTextBlock" Text="{Binding City}"></TextBlock>)</TextBlock>
             <ComboBox x:Name="AreaCmb" DisplayMemberPath="Name" SelectedValuePath="Name" SelectedValue="{Binding Area}"></ComboBox>
-            <TextBox x:Name="NameTextBox" Height="30" VerticalContentAlignment="Center" Margin="0 3 0 20" Text="{Binding Name}"></TextBox>
             <TextBlock Margin="0 0 0 3">Дополнительные услуги</TextBlock>
             <Border BorderBrush="LightGray" Background="LightGray" BorderThickness="1,1,1,1" CornerRadius="8,8,8,8">
                 <ListBox Height="150" Background="LightGray" Margin="5" BorderThickness="0" ItemsSource="{Binding AdditionalServices}"

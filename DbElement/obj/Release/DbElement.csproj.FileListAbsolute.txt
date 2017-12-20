@@ -1,0 +1,9 @@
+F:\WORKSPACES\WS_VS\GITHUB_RENTCAR\RentCarCourse\DbElement\bin\Release\DbElement.dll.config
+F:\WORKSPACES\WS_VS\GITHUB_RENTCAR\RentCarCourse\DbElement\bin\Release\DbElement.dll
+F:\WORKSPACES\WS_VS\GITHUB_RENTCAR\RentCarCourse\DbElement\bin\Release\DbElement.pdb
+F:\WORKSPACES\WS_VS\GITHUB_RENTCAR\RentCarCourse\DbElement\bin\Release\EntityFramework.dll
+F:\WORKSPACES\WS_VS\GITHUB_RENTCAR\RentCarCourse\DbElement\bin\Release\EntityFramework.SqlServer.dll
+F:\WORKSPACES\WS_VS\GITHUB_RENTCAR\RentCarCourse\DbElement\bin\Release\EntityFramework.xml
+F:\WORKSPACES\WS_VS\GITHUB_RENTCAR\RentCarCourse\DbElement\bin\Release\EntityFramework.SqlServer.xml
+F:\WORKSPACES\WS_VS\GITHUB_RENTCAR\RentCarCourse\DbElement\obj\Release\DbElement.dll
+F:\WORKSPACES\WS_VS\GITHUB_RENTCAR\RentCarCourse\DbElement\obj\Release\DbElement.pdb

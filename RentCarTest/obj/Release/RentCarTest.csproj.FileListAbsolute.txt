@@ -1,0 +1,5 @@
+F:\WORKSPACES\WS_VS\GITHUB_RENTCAR\RentCarCourse\RentCarTest\bin\Release\RentCarTest.dll
+F:\WORKSPACES\WS_VS\GITHUB_RENTCAR\RentCarCourse\RentCarTest\bin\Release\RentCarTest.pdb
+F:\WORKSPACES\WS_VS\GITHUB_RENTCAR\RentCarCourse\RentCarTest\obj\Release\RentCarTest.csprojResolveAssemblyReference.cache
+F:\WORKSPACES\WS_VS\GITHUB_RENTCAR\RentCarCourse\RentCarTest\obj\Release\RentCarTest.dll
+F:\WORKSPACES\WS_VS\GITHUB_RENTCAR\RentCarCourse\RentCarTest\obj\Release\RentCarTest.pdb

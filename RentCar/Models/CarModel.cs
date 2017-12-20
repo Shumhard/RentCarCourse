@@ -30,5 +30,24 @@ namespace Models
         public int YearProduction { get; set; }
         public string City { get; set; }
         public bool Visible { get; set; }
+
+        public CarModel setDebugCarModel(
+            double user_price = 1005, 
+            string user_hdate = "10/12/15",
+            string user_ldate = "10/12/17")
+        {
+            ImagePath = @"C:\Users\shuhard93\Desktop\audi.jpg";
+            Model = "cx-5";
+            Mark = "MAZDA";
+            Type = "Crossover";
+            RentalDate = new DateInterval();
+            RentalDate.HighDate = Convert.ToDateTime(user_hdate);
+            RentalDate.LowDate = Convert.ToDateTime(user_ldate);
+            Price = user_price;
+            YearProduction = 2015;
+            City = "Город";
+            Visible = true;
+            return this;
+        }
     }
 }
