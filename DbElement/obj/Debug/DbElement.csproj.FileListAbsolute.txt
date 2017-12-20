@@ -8,3 +8,13 @@ C:\Users\shuhard93\Documents\Visual Studio 2015\Projects\RentCar\DbElement\bin\D
 C:\Users\shuhard93\Documents\Visual Studio 2015\Projects\RentCar\DbElement\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\shuhard93\Documents\Visual Studio 2015\Projects\RentCar\DbElement\obj\Debug\DbElement.dll
 C:\Users\shuhard93\Documents\Visual Studio 2015\Projects\RentCar\DbElement\obj\Debug\DbElement.pdb
+F:\WORKSPACES\WS_VS\GITHUB_RENTCAR\RentCarCourse\DbElement\bin\Debug\DbElement.dll.config
+F:\WORKSPACES\WS_VS\GITHUB_RENTCAR\RentCarCourse\DbElement\bin\Debug\DbElement.dll
+F:\WORKSPACES\WS_VS\GITHUB_RENTCAR\RentCarCourse\DbElement\bin\Debug\DbElement.pdb
+F:\WORKSPACES\WS_VS\GITHUB_RENTCAR\RentCarCourse\DbElement\bin\Debug\EntityFramework.dll
+F:\WORKSPACES\WS_VS\GITHUB_RENTCAR\RentCarCourse\DbElement\bin\Debug\EntityFramework.SqlServer.dll
+F:\WORKSPACES\WS_VS\GITHUB_RENTCAR\RentCarCourse\DbElement\bin\Debug\EntityFramework.xml
+F:\WORKSPACES\WS_VS\GITHUB_RENTCAR\RentCarCourse\DbElement\bin\Debug\EntityFramework.SqlServer.xml
+F:\WORKSPACES\WS_VS\GITHUB_RENTCAR\RentCarCourse\DbElement\obj\Debug\DbElement.csprojResolveAssemblyReference.cache
+F:\WORKSPACES\WS_VS\GITHUB_RENTCAR\RentCarCourse\DbElement\obj\Debug\DbElement.dll
+F:\WORKSPACES\WS_VS\GITHUB_RENTCAR\RentCarCourse\DbElement\obj\Debug\DbElement.pdb

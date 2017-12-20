@@ -37,7 +37,7 @@ namespace RentCar.Controls
         private void CancelBtn_OnClick(object sender, RoutedEventArgs e)
         {
             var window = Window.GetWindow(this);
-            window?.Close();
+            window.Close();
         }
 
         private void OrderBtn_OnClick(object sender, RoutedEventArgs e)

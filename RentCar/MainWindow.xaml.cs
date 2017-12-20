@@ -30,17 +30,7 @@ namespace RentCar
         bool sortByModelState = false;
 
         public MainWindow()
-        {
-            /*InitializeComponent();
-
-            var model = new MainWindowModel();
-            model.IsAuthorized = false;
-            model.Cars = new ObservableCollection<CarModel>();            
-            model.Cars.Add(new CarModel { ImagePath = @"C:\Users\shuhard93\Desktop\audi.jpg", Model = "Mazda", Price = 10.5 });
-            model.Cars.Add(new CarModel { ImagePath = @"C:\Users\shuhard93\Desktop\audi.jpg", Model = "Mazda", Price = 1.0 });
-            model.Cars.Add(new CarModel { ImagePath = @"C:\Users\shuhard93\Desktop\audi.jpg", Model = "Mazda", Price = 100.55 });
-            model.Cars.Add(new CarModel { ImagePath = @"C:\Users\shuhard93\Desktop\audi.jpg", Model = "Mazda", Price = 1000.50 });
-            DataContext = model;*/
+        {            
         }
 
         public MainWindow(bool isAuthorized)
@@ -49,11 +39,13 @@ namespace RentCar
 
             var model = new MainWindowModel();
             model.IsAuthorized = isAuthorized;
+
             model.Cars = new ObservableCollection<CarModel>();
             model.Cars.Add(new CarModel { ImagePath = @"C:\Users\shuhard93\Desktop\audi.jpg", Model = "Mazda", Price = 10.5, Visible = true });
             model.Cars.Add(new CarModel { ImagePath = @"C:\Users\shuhard93\Desktop\audi.jpg", Model = "Mazda", Price = 100.55, Visible = true });
             model.Cars.Add(new CarModel { ImagePath = @"C:\Users\shuhard93\Desktop\audi.jpg", Model = "Mazda", Price = 1.0, Visible = true });
             model.Cars.Add(new CarModel { ImagePath = @"C:\Users\shuhard93\Desktop\audi.jpg", Model = "Mazda", Price = 1000.50, Visible = true });
+            
             model.CityList = DbReferenceWorker.GetCityReference();
             model.MarkList = DbReferenceWorker.GetMarkReference();
             model.ModelList = DbReferenceWorker.GetModelReference();
