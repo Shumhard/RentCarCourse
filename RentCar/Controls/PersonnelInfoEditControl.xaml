@@ -26,7 +26,7 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Column="0" x:Name="PhotoPanel">
-            <Image Width="150" Height="256" Margin="0 10 0 0" Source="{Binding ImagePath, Mode=OneWay}"></Image>
+            <Image x:Name="Image" Width="150" Height="256" Margin="0 10 0 0" Source="{Binding ImagePath, Mode=OneWay}"></Image>
             <Button x:Name="LoadImageBtn" Click="LoadImageBtn_Click">Загрузить...</Button>
         </StackPanel>
         
@@ -53,10 +53,10 @@
             <ComboBox x:Name="SexCmb" Width="100" HorizontalAlignment="Left" DisplayMemberPath="Name" SelectedValuePath="Name" 
                       SelectedValue="{Binding Sex, Mode=OneWay}"></ComboBox>
             <TextBlock Margin="10 3 0 1">Паспортные данные</TextBlock>
-            <TextBlock x:Name="PassportSeriaTxt" Margin="20 2 0 1">серия</TextBlock>
-            <TextBox Text="{Binding PassportNumber, Mode=OneWay}" Width="120" Margin="20 0 0 0" HorizontalAlignment="Left"></TextBox>
-            <TextBlock x:Name="PassportNumberTxt" Margin="20 3 0 1">номер</TextBlock>
-            <TextBox Text="{Binding PassportNumber, Mode=OneWay}" Width="120" Margin="20 0 0 0" HorizontalAlignment="Left"></TextBox>
+            <TextBlock Margin="20 2 0 1">серия</TextBlock>
+            <TextBox x:Name="PassportSeriaTxt" Text="{Binding PassportSeria, Mode=OneWay}" Width="120" Margin="20 0 0 0" HorizontalAlignment="Left"></TextBox>
+            <TextBlock Margin="20 3 0 1">номер</TextBlock>
+            <TextBox x:Name="PassportNumberTxt" Text="{Binding PassportNumber, Mode=OneWay}" Width="120" Margin="20 0 0 0" HorizontalAlignment="Left"></TextBox>
             <TextBlock Margin="10 3 0 1">Номер банковской карты</TextBlock>
             <TextBox x:Name="BankCard" Text="{Binding BankCard, Mode=OneWay}"></TextBox>
             <StackPanel Orientation="Horizontal" Margin="0 5">
