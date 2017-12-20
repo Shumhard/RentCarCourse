@@ -12,12 +12,15 @@ namespace Common
         public string Model { get; set; }
         public string Color { get; set; }
         public string Photo { get; set; }
+        public string Mark { get; set; }
+        public string Type { get; set; }
+        public DateInterval RentalDate { get; set; }
         public int YearProduction { get; set; }
         public double Price { get; set; }
         public double Mileage { get; set; }
         public CarStatus Status { get; set; }
         public string City { get; set; }
 
-        public string FullName { get; }
+        public string FullName { get; set; }
     }
 }

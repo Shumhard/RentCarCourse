@@ -122,3 +122,6 @@ C:\Git\RentCarCourse\RentCar\obj\Debug\RentCar.Properties.Resources.resources
 C:\Git\RentCarCourse\RentCar\obj\Debug\RentCar.csproj.GenerateResource.Cache
 C:\Git\RentCarCourse\RentCar\obj\Debug\JournalWindow.g.cs
 C:\Git\RentCarCourse\RentCar\obj\Debug\JournalWindow.baml
+F:\WORKSPACES\WS_VS\GITHUB_RENTCAR\RentCarCourse\RentCar\bin\Debug\RentCar.exe.config
+F:\WORKSPACES\WS_VS\GITHUB_RENTCAR\RentCarCourse\RentCar\obj\Debug\RentCar.exe
+F:\WORKSPACES\WS_VS\GITHUB_RENTCAR\RentCarCourse\RentCar\obj\Debug\RentCar.pdb

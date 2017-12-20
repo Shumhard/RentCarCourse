@@ -130,6 +130,7 @@
     <Compile Include="Common\Car.cs" />
     <Compile Include="Common\CarStatus.cs" />
     <Compile Include="Common\Client.cs" />
+    <Compile Include="Common\DateInterval.cs" />
     <Compile Include="Common\Order.cs" />
     <Compile Include="Common\OrderStatus.cs" />
     <Compile Include="Common\ReferenceValue.cs" />
