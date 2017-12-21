@@ -94,7 +94,7 @@ namespace RentCar.Models
         
         public string TotalCostString
         {
-            get { return _totalCost.ToString() + " рублей"; }
+            get { return _totalCost.ToString() + " руб."; }
         }
 
         public Car Car { get; set; }
