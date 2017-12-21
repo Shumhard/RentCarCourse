@@ -50,7 +50,7 @@ namespace RentCar.Controls
                 Image.Source = BitmapFrame.Create(new Uri(model.ImagePath));
             }
 
-            DbWorkers.DbClientWorker.UpdateClient(model.getClient());
+            DbWorkers.DbClientWorker.UpdateClient(model.GetClient());
         }
 
         private void SaveBtn_Click(object sender, RoutedEventArgs e)
@@ -65,7 +65,7 @@ namespace RentCar.Controls
                     model.Password = Password.Password;
 
                 fillModelByWindowFields(ref model);
-                DbWorkers.DbClientWorker.UpdateClient(model.getClient());
+                DbWorkers.DbClientWorker.UpdateClient(model.GetClient());
 
                 Close();
             }

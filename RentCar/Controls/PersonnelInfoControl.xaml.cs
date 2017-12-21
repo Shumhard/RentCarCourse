@@ -53,7 +53,7 @@ namespace RentCar.Controls
 
             var window = Window.GetWindow(this);
             var model = (PersonnelCabinetWindowModel)window.DataContext;
-            model.setClientInfo(DbWorkers.DbClientWorker.GetClient(model.Guid));
+            model.SetClientInfo(DbWorkers.DbClientWorker.GetClient(model.Guid));
             DataContext = model;
         }
     }

@@ -12,6 +12,7 @@ namespace Models
     public class PersonnelCabinetWindowModel : INotifyPropertyChanged
     {
         private readonly Guid _guid;
+        public event PropertyChangedEventHandler PropertyChanged;
 
         private string _login;
         private string _password;
@@ -27,18 +28,10 @@ namespace Models
         private string _bankCard;
         private string _imagePath;
 
-        public PersonnelCabinetWindowModel() { }
-
-        public PersonnelCabinetWindowModel(Guid guid)
-        {
-            this._guid = guid;
-        }
-
         public Guid Guid
         {
             get { return _guid; }
         }
-
         public string Login
         {
             get { return _login; }
@@ -48,7 +41,6 @@ namespace Models
                 OnPropertyChanged("Login");
             }
         }
-
         public string Password
         {
             get { return _password; }
@@ -59,7 +51,6 @@ namespace Models
                 OnPropertyChanged("PasswordString");
             }
         }
-
         public string PasswordString
         {
             get
@@ -77,7 +68,6 @@ namespace Models
                 return string.Format("{0}******", _password[0]);
             }
         }
-
         public string FirstName
         {
             get { return _firstName; }
@@ -88,7 +78,6 @@ namespace Models
                 OnPropertyChanged("FullName");
             }
         }
-
         public string SecondName
         {
             get { return _secondName; }
@@ -99,7 +88,6 @@ namespace Models
                 OnPropertyChanged("FullName");
             }
         }
-
         public string Patronymic
         {
             get { return _patronymic; }
@@ -110,7 +98,6 @@ namespace Models
                 OnPropertyChanged("FullName");
             }
         }
-
         public string FullName
         {
             get
@@ -118,7 +105,6 @@ namespace Models
                 return string.Join(" ", new string[] { _secondName, _firstName, _patronymic });
             }
         }
-
         public string Phone
         {
             get { return _phone; }
@@ -128,7 +114,6 @@ namespace Models
                 OnPropertyChanged("Phone");
             }
         }
-
         public string Email
         {
             get { return _email; }
@@ -138,7 +123,6 @@ namespace Models
                 OnPropertyChanged("Email");
             }
         }
-
         public string Sex
         {
             get { return _sex; }
@@ -148,7 +132,6 @@ namespace Models
                 OnPropertyChanged("Sex");
             }
         }
-
         public string Burthday
         {
             get { return _burthday.HasValue ? _burthday.Value.ToShortDateString() : ""; }
@@ -166,7 +149,6 @@ namespace Models
                 OnPropertyChanged("Burthday");
             }
         }
-
         public string PassportSeria
         {
             get { return _passportSeria; }
@@ -176,7 +158,6 @@ namespace Models
                 OnPropertyChanged("PassportSeria");
             }
         }
-
         public string PassportNumber
         {
             get { return _passportNumber; }
@@ -186,7 +167,6 @@ namespace Models
                 OnPropertyChanged("PassportNumber");
             }
         }
-
         public string BankCard
         {
             get { return _bankCard; }
@@ -196,7 +176,6 @@ namespace Models
                 OnPropertyChanged("BankCard");
             }
         }
-
         public string ImagePath
         {
             get { return _imagePath; }
@@ -207,7 +186,13 @@ namespace Models
             }
         }
 
-        public void setClientInfo(Common.Client client)
+        public PersonnelCabinetWindowModel() { }
+        public PersonnelCabinetWindowModel(Guid guid)
+        {
+            _guid = guid;
+        }
+
+        public void SetClientInfo(Client client)
         {
             this._login = client.Login;
             this._password = client.Password;
@@ -223,8 +208,7 @@ namespace Models
             this._bankCard = client.BankCard;
             this._imagePath = client.ImagePath;
         }
-
-        public Common.Client getClient()
+        public Client GetClient()
         {
             return new Common.Client
             {
@@ -244,8 +228,6 @@ namespace Models
                 ImagePath = this._imagePath
             };
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName]string prop = "")
         {
             if (PropertyChanged != null)
