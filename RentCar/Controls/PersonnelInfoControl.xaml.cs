@@ -26,7 +26,6 @@ namespace RentCar.Controls
         public PersonnelInfoControl()
         {
             InitializeComponent();
-            
         }
 
         private void EditBtn_Click(object sender, RoutedEventArgs e)
@@ -48,8 +47,13 @@ namespace RentCar.Controls
         {
             //TODO: Получение данных о клиенте
 
+            //var window = Window.GetWindow(this);
+            //var model = (PersonnelCabinetWindowModel)window.DataContext;
+            //DataContext = model;
+
             var window = Window.GetWindow(this);
             var model = (PersonnelCabinetWindowModel)window.DataContext;
+            model.setClientInfo(DbWorkers.DbClientWorker.GetClient(model.Guid));
             DataContext = model;
         }
     }

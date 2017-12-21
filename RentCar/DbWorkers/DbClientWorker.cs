@@ -58,11 +58,14 @@ namespace DbWorkers
                 Patronymic = dbClient.Patronymic,
                 Birthday = dbClient.Birthday,
                 Phone = dbClient.Phone,
-                Email = dbClient.Email,
-                Password = dbClient.Password,
                 Sex = dbClient.Sex,
+                Email = dbClient.Email,
+                //Login = dbClient.Login,
+                Password = dbClient.Password,
                 PassportNumber = dbClient.PassportNumber,
                 PassportSeries = dbClient.PassportSeries
+                //BankCard = dbClient.BankCard,
+                //ImagePath = dbClient.ImagePath
             };
         }
 
@@ -72,17 +75,20 @@ namespace DbWorkers
             {
                 context.Client.Add(new Db.Client
                 {
+                    Guid = client.Guid,
                     FirstName = client.FirstName,
                     LastName = client.LastName,
                     Patronymic = client.Patronymic,
                     Birthday = client.Birthday,
-                    Guid = client.Guid,
-                    Email = client.Email,
+                    Phone = client.Phone,
                     Sex = client.Sex,
-                    Phone =  client.Phone,
-                    PassportNumber = client.PassportNumber,
-                    PassportSeries = client.PassportSeries,
+                    Email = client.Email,
+                    //Login = client.Login,
                     Password = client.Password,
+                    PassportNumber = client.PassportNumber,
+                    PassportSeries = client.PassportSeries
+                    //BankCard = client.BankCard,
+                    //ImagePath = client.ImagePath
                 });
                 context.SaveChanges();
             }
@@ -117,11 +123,16 @@ namespace DbWorkers
                 dbClient.LastName = client.LastName;
                 dbClient.Patronymic = client.Patronymic;
                 dbClient.Birthday = client.Birthday;
-                dbClient.Sex = client.Sex;
                 dbClient.Phone = client.Phone;
+                dbClient.Sex = client.Sex;
+                dbClient.Email = client.Email;
+                //dbClient.Login = client.Login;
                 dbClient.Password = client.Password;
                 dbClient.PassportSeries = client.PassportSeries;
                 dbClient.PassportNumber = client.PassportNumber;
+                //dbClient.BankCard = client.BankCard;
+                //dbClient.ImagePath = client.ImagePath;
+
 
                 context.SaveChanges();
             }

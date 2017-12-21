@@ -11,6 +11,8 @@ namespace Models
 {
     public class PersonnelCabinetWindowModel : INotifyPropertyChanged
     {
+        private readonly Guid _guid;
+
         private string _login;
         private string _password;
         private string _firstName = "";
@@ -24,6 +26,18 @@ namespace Models
         private string _passportNumber;
         private string _bankCard;
         private string _imagePath;
+
+        public PersonnelCabinetWindowModel() { }
+
+        public PersonnelCabinetWindowModel(Guid guid)
+        {
+            this._guid = guid;
+        }
+
+        public Guid Guid
+        {
+            get { return _guid; }
+        }
 
         public string Login
         {
@@ -191,6 +205,44 @@ namespace Models
                 _imagePath = value;
                 OnPropertyChanged("ImagePath");
             }
+        }
+
+        public void setClientInfo(Common.Client client)
+        {
+            this._login = client.Login;
+            this._password = client.Password;
+            this._firstName = client.FirstName;
+            this._secondName = client.LastName;
+            this._patronymic = client.Patronymic;
+            this._phone = client.Phone;
+            this._email = client.Email;
+            this._burthday = client.Birthday;
+            this._sex = client.Sex;
+            this._passportSeria = client.PassportSeries;
+            this._passportNumber = client.PassportNumber;
+            this._bankCard = client.BankCard;
+            this._imagePath = client.ImagePath;
+        }
+
+        public Common.Client getClient()
+        {
+            return new Common.Client
+            {
+                Guid = this._guid,
+                FirstName = this._firstName,
+                LastName = this._secondName,
+                Patronymic = this._patronymic,
+                Birthday = this._burthday,
+                Sex = this._sex,
+                PassportSeries = this._passportSeria,
+                PassportNumber = this._passportNumber,
+                Login = this._login,
+                Password = this._password,
+                Phone = this._phone,
+                Email = this._email,
+                BankCard = this._bankCard,
+                ImagePath = this._imagePath
+            };
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -38,8 +38,11 @@ namespace Common
         public string Sex { get; set; }
         public string PassportSeries { get; set; }
         public string PassportNumber { get; set; }
+        public string BankCard { get; set; }
+        public string Login { get; set; }
         public string Password { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
+        public string ImagePath { get; set; }
     }
 }
