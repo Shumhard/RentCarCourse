@@ -47,7 +47,7 @@ namespace RentCar.Controls
                 var fileName = ofd.FileName;
                 var filePath = ofd.InitialDirectory.ToString() + fileName;
                 model.ImagePath = filePath;
-                AvatarImage.Source = BitmapFrame.Create(new Uri(model.ImagePath));
+                AvatarImg.Source = BitmapFrame.Create(new Uri(model.ImagePath));
             }
 
             DbWorkers.DbClientWorker.UpdateClient(model.GetClient());
@@ -125,7 +125,7 @@ namespace RentCar.Controls
             PassportNumberTxt.Text = model.PassportNumber;
             BankCard.Text = model.BankCard;
             model.ImagePath = @"C:\\Users\zel1b08a\Pictures\pasport.jpg";
-            AvatarImage.Source = BitmapFrame.Create(new Uri(model.ImagePath));
+            AvatarImg.Source = BitmapFrame.Create(new Uri(model.ImagePath));
         }
 
         private void FillModelByWindowFields(ref PersonnelCabinetWindowModel model)
