@@ -13,16 +13,10 @@ namespace Models
 {
     public class MainWindowModel : INotifyPropertyChanged
     {
-        private ObservableCollection<CarModel> _Cars;
-
-        public bool IsAuthorized { get; set; }
-
+        private ObservableCollection<CarModel> _Cars;    
         public ObservableCollection<CarModel> Cars
         {
-            get
-            {
-                return this._Cars;
-            }
+            get { return this._Cars; }
             set
             {
                 this._Cars = value;
@@ -30,12 +24,11 @@ namespace Models
             }
         }
 
+        public bool IsAuthorized { get; set; }
+
         public List<ReferenceValue> CityList { get; set; }
-
         public List<ReferenceValue> MarkList { get; set; }
-
         public List<ReferenceValue> ModelList { get; set; }
-
         public List<ReferenceValue> TypeList { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;

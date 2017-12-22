@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using RentCar.Models;
+using Common;
 
 namespace RentCar.Controls
 {
@@ -30,8 +31,37 @@ namespace RentCar.Controls
         }
 
         private void CompleteBtn_OnClick(object sender, RoutedEventArgs e)
-        {
-            //TODO: Создание нового Заказа
+        {           
+            var window = (OrderWindow)(Window.GetWindow(this));
+            OrderWindowModel orderWindowModel = (OrderWindowModel)window.DataContext;
+            Order order = new Order();
+
+            order.Guid = Guid.NewGuid();
+            order.Address = orderWindowModel.City;
+            order.Area = orderWindowModel.Area;
+            order.Car = orderWindowModel.Car;
+            order.OrderDate = DateTime.Now;
+            order.DeliveryDate = Convert.ToDateTime(orderWindowModel.BeginRentDate);
+            order.ExpirationDate = Convert.ToDateTime(orderWindowModel.EndRentDate);
+            order.TotalCost = orderWindowModel.TotalCost;
+            order.ServicesList = new List<string>();
+            foreach (var service in orderWindowModel.AdditionalServices)
+                order.ServicesList.Add(service.Name);
+            if ((bool)this.PayBank.IsChecked)
+                order.Status = OrderStatus.InProgressPaid;
+            if ((bool)this.PayCash.IsChecked)
+                order.Status = OrderStatus.InProgressNotPaid;
+
+            // TODO
+            //DbWorkers.DbOrderWorker.AddOrder(order);
+            //DbWorkers.DbOrderWorker.UpdateOrder(order);
+
+            order.Car.LowRentalDate = order.DeliveryDate;
+            order.Car.HighRentalDate = (DateTime)order.ExpirationDate;
+            if (order.Car.LowRentalDate.Date.CompareTo(DateTime.Now.Date) == 0)
+                order.Car.Status = CarStatus.Busy;
+
+            //DbWorkers.DbCarWorker.UpdateCar(order.Car);
 
             if (CompleteSuccessed != null)
             {
@@ -51,6 +81,7 @@ namespace RentCar.Controls
         {
             var window = Window.GetWindow(this);
             var model = (OrderWindowModel)window.DataContext;
+
             DataContext = model;
         }
     }

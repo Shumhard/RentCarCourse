@@ -63,7 +63,10 @@
                 </ListBox.ItemsPanel>
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <Border BorderThickness="1" BorderBrush="DimGray" Visibility="{Binding Visible, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <Border BorderThickness="1" BorderBrush="DimGray"                                 
+                                Visibility="{Binding Visible, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                IsEnabled="{Binding Enable}"
+                                >
                             <Grid Background="DarkGray" Width="128">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*"/>
@@ -71,7 +74,7 @@
                                 </Grid.RowDefinitions>
 
                                 <StackPanel Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="DimGray">
-                                    <TextBlock Text="{Binding Model}" HorizontalAlignment="Center" Foreground="White"></TextBlock>
+                                    <TextBlock Text="{Binding NameFull}" HorizontalAlignment="Center" Foreground="White"></TextBlock>
                                     <TextBlock Text="{Binding PriceFull}" Margin="0 3" HorizontalAlignment="Center" Foreground="White"></TextBlock>
                                 </StackPanel>
                                 <Image Grid.Row="1" Width="128" Height="128" Stretch="UniformToFill" RenderOptions.BitmapScalingMode="Fant" Source="{Binding ImagePath}"

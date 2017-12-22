@@ -42,6 +42,44 @@ namespace RentCar.Controls
 
         private void OrderBtn_OnClick(object sender, RoutedEventArgs e)
         {
+            DateTime _highDate, _lowDate;
+            DateTime _now = DateTime.Now;
+            string _area;
+
+            try
+            {
+                _highDate = Convert.ToDateTime(this.EndRentDate.Text.ToString());
+                _lowDate = Convert.ToDateTime(this.BeginRentDate.Text.ToString());
+                if (_highDate.CompareTo(_lowDate) <= 0) throw new Exception();
+                if (_lowDate.CompareTo(_now) < 0) throw new Exception();
+            }
+            catch
+            {
+                MessageBox.Show("Дата указана не корректно!");
+                return;
+            }
+            try
+            {
+                _area = this.AreaCmb.SelectedItem.ToString();
+            }
+            catch
+            {
+                MessageBox.Show("Выберите район проката!");
+                return;
+            }
+
+            var window = (OrderWindow)(Window.GetWindow(this));
+            OrderWindowModel orderWindowModel = (OrderWindowModel)window.DataContext;
+
+            if ((!((orderWindowModel.Car.HighRentalDate.CompareTo(_highDate) < 0 && orderWindowModel.Car.LowRentalDate.CompareTo(_highDate) <= 0) ||
+                (orderWindowModel.Car.HighRentalDate.CompareTo(_highDate) > 0 && orderWindowModel.Car.LowRentalDate.CompareTo(_highDate) > 0))) ||
+                (!((orderWindowModel.Car.HighRentalDate.CompareTo(_lowDate) <= 0 && orderWindowModel.Car.LowRentalDate.CompareTo(_lowDate) < 0) ||
+                (orderWindowModel.Car.HighRentalDate.CompareTo(_lowDate) > 0 && orderWindowModel.Car.LowRentalDate.CompareTo(_lowDate) > 0))))
+            {
+                MessageBox.Show("В этот промежуток машина недоступна!");
+                return;
+            }
+
             if (CompleteStarted != null)
             {
                 CompleteStarted(this, new EventArgs());
@@ -54,8 +92,6 @@ namespace RentCar.Controls
             var model = (OrderWindowModel)window.DataContext;
             DataContext = model;
 
-            model.Car = new Common.Car();
-            model.Car.City = "Томск";
             model.City = model.Car.City;
             var areaList = DbReferenceWorker.GetAreaReference(model.City);
             AreaCmb.ItemsSource = areaList;

@@ -16,6 +16,7 @@ namespace RentCar.Models
         private string _city;
         private string _area;
         private string _name;
+        private string _carName;
         private List<AdditionalService> _additionalServices;
         private double _totalCost;
 
@@ -71,6 +72,19 @@ namespace RentCar.Models
             }
         }
 
+        public string CarName
+        {
+            get 
+            {
+                return string.Format("{0} {1} / {2}", this.Car.Mark, this.Car.Model, this.Car.City);
+            }
+            set
+            {
+                _name = value;
+                OnPropertyChanged("CarName");
+            }
+        }
+
         public List<AdditionalService> AdditionalServices
         {
             get { return _additionalServices; }
@@ -94,7 +108,7 @@ namespace RentCar.Models
         
         public string TotalCostString
         {
-            get { return _totalCost.ToString() + " рублей"; }
+            get { return _totalCost.ToString() + " руб."; }
         }
 
         public Car Car { get; set; }
@@ -111,6 +125,8 @@ namespace RentCar.Models
     {
         private bool _checked;
         private string _name;
+
+        public double Price { get; set; }
 
         public bool Checked
         {

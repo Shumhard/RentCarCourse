@@ -32,7 +32,7 @@
 
                 <StackPanel Margin="12 5">
                     <TextBlock>Прокат автомобиля</TextBlock>
-                    <TextBlock x:Name="NameTextBlock" Margin="0 5" Text="{Binding Path=Car.FullName}"></TextBlock>
+                    <TextBlock x:Name="NameTextBlock" Margin="0 5" Text="{Binding CarName}"></TextBlock>
                     <TextBlock>Дата проката</TextBlock>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                         <TextBox x:Name="BeginRentDate" IsEnabled="false" Width="80" Margin="0 5 5 5" Text="{Binding BeginRentDate}"></TextBox>
@@ -74,8 +74,8 @@
                     <TextBlock Foreground="White" Margin="5 3" HorizontalAlignment="Center">Способ оплаты</TextBlock>
                 </Border>
 
-                <RadioButton GroupName="PayType"  IsChecked="True" Margin="0 7">Наличные</RadioButton>
-                <RadioButton GroupName="PayType">Банковский перевод</RadioButton>
+                <RadioButton x:Name="PayCash" GroupName="PayType"  IsChecked="True" Margin="0 7">Наличные</RadioButton>
+                <RadioButton x:Name="PayBank" GroupName="PayType">Банковский перевод</RadioButton>
             </StackPanel>
 
             <TextBlock HorizontalAlignment="Center" Margin="0 10 0 3">Итоговая цена</TextBlock>

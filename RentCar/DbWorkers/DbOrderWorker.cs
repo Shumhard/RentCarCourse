@@ -43,7 +43,6 @@ namespace DbWorkers
                         {
                             Guid = dbOrder.Car.Guid,
                             Model = dbOrder.Car.Model,
-                            Color = dbOrder.Car.Color,
                             YearProduction = dbOrder.Car.YearProduction.Value,
                             Photo = dbOrder.Car.Photo,
                             Mileage = dbOrder.Car.Mileage.Value,
@@ -79,7 +78,6 @@ namespace DbWorkers
                     {
                         Guid = dbOrder.Car.Guid,
                         Model = dbOrder.Car.Model,
-                        Color = dbOrder.Car.Color,
                         YearProduction = dbOrder.Car.YearProduction.Value,
                         Photo = dbOrder.Car.Photo,
                         Mileage = dbOrder.Car.Mileage.Value,

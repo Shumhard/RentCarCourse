@@ -46,7 +46,7 @@ namespace RentCar
                 OrderDate = DateTime.Now.Date.ToShortDateString(),
                 RentRange = DateTime.Now.Date.ToShortDateString() + " - " + DateTime.Now.Date.ToShortDateString(),
                 Area = "Каштак 2",
-                PriceString = "1000.5 рублей",
+                //PriceString = "1000.5 рублей",
                 StatusString = "В процессе (не оплачен)",
                 ServicesList = new List<string>(new string[] { "Капуччино", "Покер" })
             });
@@ -56,7 +56,7 @@ namespace RentCar
                 OrderDate = DateTime.Now.Date.ToShortDateString(),
                 RentRange = DateTime.Now.Date.ToShortDateString() + " - " + DateTime.Now.Date.ToShortDateString(),
                 Area = "Каштак 2",
-                PriceString = "1000.5 рублей",
+                //PriceString = "1000.5 рублей",
                 StatusString = "В процессе (не оплачен)"
             });
             model.Orders.Add(new OrderModel
@@ -65,7 +65,7 @@ namespace RentCar
                 OrderDate = DateTime.Now.Date.ToShortDateString(),
                 RentRange = DateTime.Now.Date.ToShortDateString() + " - " + DateTime.Now.Date.ToShortDateString(),
                 Area = "Каштак 2",
-                PriceString = "1000.5 рублей",
+                //PriceString = "1000.5 рублей",
                 StatusString = "В процессе (не оплачен)"
             });
             model.Orders.Add(new OrderModel
@@ -74,7 +74,7 @@ namespace RentCar
                 OrderDate = DateTime.Now.Date.ToShortDateString(),
                 RentRange = DateTime.Now.Date.ToShortDateString() + " - " + DateTime.Now.Date.ToShortDateString(),
                 Area = "Каштак 2",
-                PriceString = "1000.5 рублей",
+                //PriceString = "1000.5 рублей",
                 StatusString = "В процессе (не оплачен)"
             });
             model.Orders.Add(new OrderModel
@@ -83,7 +83,7 @@ namespace RentCar
                 OrderDate = DateTime.Now.Date.ToShortDateString(),
                 RentRange = DateTime.Now.Date.ToShortDateString() + " - " + DateTime.Now.Date.ToShortDateString(),
                 Area = "Каштак 2",
-                PriceString = "1000.5 рублей",
+                //PriceString = "1000.5 рублей",
                 StatusString = "В процессе (не оплачен)"
             });
             model.Orders.Add(new OrderModel
@@ -92,7 +92,7 @@ namespace RentCar
                 OrderDate = DateTime.Now.Date.ToShortDateString(),
                 RentRange = DateTime.Now.Date.ToShortDateString() + " - " + DateTime.Now.Date.ToShortDateString(),
                 Area = "Каштак 2",
-                PriceString = "1000.5 рублей",
+                //PriceString = "1000.5 рублей",
                 StatusString = "В процессе (не оплачен)"
             });
             DataContext = model;

@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using RentCar.Controls;
 using DbWorkers;
 using RentCar.Models;
+using Common;
 
 namespace RentCar
 {
@@ -27,7 +28,7 @@ namespace RentCar
             InitializeComponent();
 
             var additionalServices = DbReferenceWorker.GetAdditionalServiceReference();
-
+            
             var model = new OrderWindowModel
             {
                 OrderGuid = Guid.Empty,
@@ -36,18 +37,15 @@ namespace RentCar
             DataContext = model;
         }
 
-        public OrderWindow(Guid orderGuid)
+        public void LoadOrderByOrderGuid(Guid orderGuid)
         {
-            InitializeComponent();
+            var order = DbOrderWorker.GetOrder(orderGuid);
+            ((OrderWindowModel)this.DataContext).Car = order.Car;
+        }
 
-            var additionalServices = DbReferenceWorker.GetAdditionalServiceReference();
-
-            var model = new OrderWindowModel
-            {
-                OrderGuid = orderGuid,
-                AdditionalServices = additionalServices.Select(x => new AdditionalService { Checked = false, Name = x.Name }).ToList()
-            };
-            DataContext = model;
+        public void CreateOrderByCar(Car car)
+        {
+            ((OrderWindowModel)this.DataContext).Car = car;
         }
 
         private void OrderWindow_OnLoaded(object sender, RoutedEventArgs e)

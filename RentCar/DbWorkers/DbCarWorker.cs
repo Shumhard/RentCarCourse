@@ -45,7 +45,6 @@ namespace DbWorkers
             return new Common.Car
             {
                 Guid = dbCar.Guid,
-                Color = dbCar.Color,
                 Model = dbCar.Model,
                 Mileage = dbCar.Mileage.Value,
                 Photo = dbCar.Photo,
@@ -89,7 +88,6 @@ namespace DbWorkers
                 }
 
                 dbCar.Model = car.Model;
-                dbCar.Color = car.Color;
                 dbCar.YearProduction = car.YearProduction;
                 dbCar.Photo = car.Photo;
                 dbCar.Price = car.Price;

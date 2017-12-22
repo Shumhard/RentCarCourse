@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using System.Collections.ObjectModel;
 using DbWorkers;
 using Models;
+using Common;
 
 namespace RentCar
 {
@@ -24,36 +25,48 @@ namespace RentCar
     /// </summary>
     public partial class MainWindow : Window
     {
-        Window _personnelWindow = null;
-        bool sortByPriceState = false;
-        bool sortByYearState = false;
-        bool sortByModelState = false;
+        private Window _personnelWindow = null;
+        private bool sortByPriceState = false;
+        private bool sortByYearState = false;
+        private bool sortByModelState = false;
 
-        public MainWindow()
-        {            
-        }
-
+        public MainWindow() { ; }
         public MainWindow(bool isAuthorized)
         {
             InitializeComponent();
 
             var model = new MainWindowModel();
             model.IsAuthorized = isAuthorized;
-
-            model.Cars = new ObservableCollection<CarModel>();
             
+            // debug ----------------------------
+            var cars = new List<Car>();
+            model.Cars = new ObservableCollection<CarModel>();            
             for (int i = 2; i < 12; i++)
             {
-                CarModel carmod = new CarModel();
-                carmod.setDebugCarModel(i * 50);
-                model.Cars.Add(carmod);
+                Car car = new Car();
+                car.Guid = Guid.NewGuid();
+                car.City = "Томск";
+                car.HighRentalDate = Convert.ToDateTime("10/12/15");
+                car.HighRentalDate = Convert.ToDateTime("10/12/17");
+                car.Mark = "mazda";
+                car.Model = "cx-5";
+                car.Type = "Crossover";
+                car.Mileage = 20005;
+                car.Photo = @"F:\r2-d2.jpg";
+                car.YearProduction = 2015;
+                car.Status = CarStatus.Free;
+                car.Price = 50 * i;
+                cars.Add(car);
             }
+            // debug ----------------------------
 
-            /*model.Cars.Add(new CarModel { ImagePath = @"C:\Users\shuhard93\Desktop\audi.jpg", Model = "Mazda", Price = 10.5, Visible = true });
-            model.Cars.Add(new CarModel { ImagePath = @"C:\Users\shuhard93\Desktop\audi.jpg", Model = "Mazda", Price = 100.55, Visible = true });
-            model.Cars.Add(new CarModel { ImagePath = @"C:\Users\shuhard93\Desktop\audi.jpg", Model = "Mazda", Price = 1.0, Visible = true });
-            model.Cars.Add(new CarModel { ImagePath = @"C:\Users\shuhard93\Desktop\audi.jpg", Model = "Mazda", Price = 1000.50, Visible = true });
-            */
+            //cars = DbCarWorker.GetCars();
+            //model.Cars = new ObservableCollection<CarModel>();
+            foreach (var car in cars) 
+            {
+                CarModel carModel = new CarModel(car);
+                model.Cars.Add(carModel);
+            }
             model.CityList = DbReferenceWorker.GetCityReference();
             model.MarkList = DbReferenceWorker.GetMarkReference();
             model.ModelList = DbReferenceWorker.GetModelReference();
@@ -65,7 +78,6 @@ namespace RentCar
         {
             this.HighDate.Text = "21/12/12";
             this.LowDate.Text = "12/12/12";
-            //TODO: Получение списка автомобилей
         }
 
         private void PersonnelCabinetBtn_Click(object sender, RoutedEventArgs e)
@@ -104,6 +116,8 @@ namespace RentCar
                 if (model.IsAuthorized)
                 {
                     var orderWindow = new OrderWindow();
+                    var _carModel = (CarModel)((sender as ListBox).SelectedItem);
+                    orderWindow.CreateOrderByCar(_carModel.Car);
                     orderWindow.Owner = this;
                     orderWindow.ShowDialog();
                 }
@@ -116,9 +130,9 @@ namespace RentCar
         {
             var model = (MainWindowModel)this.DataContext;
             if (sortByPriceState)
-                model.Cars = new ObservableCollection<CarModel>(model.Cars.OrderByDescending(x => x.Visible).ThenBy(x => x.Price));
+                model.Cars = new ObservableCollection<CarModel>(model.Cars.OrderByDescending(x => x.Visible).ThenBy(x => x.Car.Price));
             else
-                model.Cars = new ObservableCollection<CarModel>(model.Cars.OrderByDescending(x => x.Visible).ThenByDescending(x => x.Price));
+                model.Cars = new ObservableCollection<CarModel>(model.Cars.OrderByDescending(x => x.Visible).ThenByDescending(x => x.Car.Price));
             this.sortByPriceState = !sortByPriceState;
         }
 
@@ -126,9 +140,9 @@ namespace RentCar
         {
             var model = (MainWindowModel)this.DataContext;
             if (sortByYearState)
-                model.Cars = new ObservableCollection<CarModel>(model.Cars.OrderByDescending(x => x.Visible).ThenBy(x => x.YearProduction));
+                model.Cars = new ObservableCollection<CarModel>(model.Cars.OrderByDescending(x => x.Visible).ThenBy(x => x.Car.YearProduction));
             else
-                model.Cars = new ObservableCollection<CarModel>(model.Cars.OrderByDescending(x => x.Visible).ThenByDescending(x => x.YearProduction));
+                model.Cars = new ObservableCollection<CarModel>(model.Cars.OrderByDescending(x => x.Visible).ThenByDescending(x => x.Car.YearProduction));
             this.sortByYearState = !sortByYearState;
         }
 
@@ -136,9 +150,9 @@ namespace RentCar
         {
             var model = (MainWindowModel)this.DataContext;
             if (sortByModelState)
-                model.Cars = new ObservableCollection<CarModel>(model.Cars.OrderByDescending(x => x.Visible).ThenBy(x => x.Model));
+                model.Cars = new ObservableCollection<CarModel>(model.Cars.OrderByDescending(x => x.Visible).ThenBy(x => x.Car.Model));
             else
-                model.Cars = new ObservableCollection<CarModel>(model.Cars.OrderByDescending(x => x.Visible).ThenByDescending(x => x.Model));
+                model.Cars = new ObservableCollection<CarModel>(model.Cars.OrderByDescending(x => x.Visible).ThenByDescending(x => x.Car.Model));
             this.sortByModelState = !sortByModelState;
         }
 
@@ -161,6 +175,7 @@ namespace RentCar
         {
             double _highPrice = 0, _lowPrice = 0;
             DateTime _highDate, _lowDate;
+            DateTime _now = DateTime.Now;
             string _city, _model, _mark, _type;
             try
             {
@@ -172,8 +187,13 @@ namespace RentCar
                 _lowPrice = this.LowPrice.Text.ToString() == "" ? 0 : Convert.ToDouble(this.LowPrice.Text.ToString());
                 _highDate = this.HighDate.Text.ToString() == ""? new DateTime() : Convert.ToDateTime(this.HighDate.Text.ToString());
                 _lowDate = this.LowDate.Text.ToString() == "" ? new DateTime() : Convert.ToDateTime(this.LowDate.Text.ToString());
-                if (_highPrice < _lowPrice) throw new Exception();
-                if (_highDate.CompareTo(_lowDate) <= 0) throw new Exception();
+                if (_highPrice < _lowPrice) 
+                    throw new Exception();
+                if (_lowDate.Year != 1 && _lowDate.CompareTo(_now) < 0) 
+                    throw new Exception();               
+                if (_highDate.Year != 1 && _lowDate.Year != 1 && 
+                    _highDate.CompareTo(_lowDate) <= 0) 
+                    throw new Exception();
             }
             catch (Exception ex)
             {
@@ -182,17 +202,22 @@ namespace RentCar
             }
 
             var model = (MainWindowModel)this.DataContext;
-            foreach (var car in model.Cars)
-            {                
-                if ((_city != "" && car.City.CompareTo(_city) != 0) ||
-                    (_model != "" && car.Model.CompareTo(_model) != 0) ||
-                    (_mark != "" && car.Mark.CompareTo(_mark) != 0) ||
-                    (_type != "" && car.Type.CompareTo(_type) != 0) ||
-                    (_highPrice != 0 && car.Price.CompareTo(_highPrice) > 0) ||
-                    (_lowPrice != 0 && car.Price.CompareTo(_lowPrice) < 0) ||
-                    (_highDate.Year != 1 && car.RentalDate.HighDate.CompareTo(_highDate) > 0) ||
-                    (_lowDate.Year != 1 && car.RentalDate.HighDate.CompareTo(_lowDate) > 0))
-                    car.Visible = false;
+            foreach (var carmod in model.Cars)
+            {
+                if ((_city != "" && carmod.Car.City.CompareTo(_city) != 0) ||
+                    (_model != "" && carmod.Car.Model.CompareTo(_model) != 0) ||
+                    (_mark != "" && carmod.Car.Mark.CompareTo(_mark) != 0) ||
+                    (_type != "" && carmod.Car.Type.CompareTo(_type) != 0) ||
+                    (_highPrice != 0 && carmod.Car.Price.CompareTo(_highPrice) > 0) ||
+                    (_lowPrice != 0 && carmod.Price.CompareTo(_lowPrice) < 0) ||
+                    (_highDate.Year != 1 && !((carmod.Car.HighRentalDate.CompareTo(_highDate) < 0 && carmod.Car.LowRentalDate.CompareTo(_highDate) <= 0) ||
+                    (carmod.Car.HighRentalDate.CompareTo(_highDate) > 0 && carmod.Car.LowRentalDate.CompareTo(_highDate) > 0))) ||
+                    (_lowDate.Year != 1 && !((carmod.Car.HighRentalDate.CompareTo(_lowDate) <= 0 && carmod.Car.LowRentalDate.CompareTo(_lowDate) < 0) ||
+                    (carmod.Car.HighRentalDate.CompareTo(_lowDate) > 0 && carmod.Car.LowRentalDate.CompareTo(_lowDate) > 0))))
+                {
+                    carmod.Enable = false;
+                    carmod.Visible = false;                    
+                }                    
             }
             model.Cars = new ObservableCollection<CarModel>(model.Cars.OrderByDescending(x => x.Visible));
         }
@@ -200,8 +225,11 @@ namespace RentCar
         private void ClearBtn_OnClick(object sender, RoutedEventArgs e)
         {
             var model = (MainWindowModel)this.DataContext;
-            foreach (var car in model.Cars)
-                car.Visible = true;
+            foreach (var carmod in model.Cars)
+            {
+                carmod.Enable = true;
+                carmod.Visible = true;                
+            }                
             model.Cars = new ObservableCollection<CarModel>(model.Cars.OrderByDescending(x => x.Visible));
         }
 

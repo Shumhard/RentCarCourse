@@ -9,45 +9,46 @@ using Common;
 namespace Models
 {
     public class CarModel
-    {
+    {        
         private double? _price;
+        private Car _car;
 
+        public Car Car 
+        {
+            get { return _car; }
+        }
         public string ImagePath { get; set; }
         public string Model { get; set; }
         public string Mark { get; set; }
-        public string Type { get; set; }
-        public DateInterval RentalDate { get; set; }
+        public string City { get; set; }
         public double Price
         {
             get { return _price ?? 0; }
-
             set { _price = value; }
-        }
+        }        
         public string PriceFull
         {
-            get { return string.Format("{0} руб.", _price.HasValue ? _price.Value.ToString(CultureInfo.CurrentCulture) : "0"); }
+            get { return string.Format("{0} руб./сут.", _price.HasValue ? _price.Value.ToString(CultureInfo.CurrentCulture) : "0"); }
         }
-        public int YearProduction { get; set; }
-        public string City { get; set; }
-        public bool Visible { get; set; }
-
-        public CarModel setDebugCarModel(
-            double user_price = 1005, 
-            string user_hdate = "10/12/15",
-            string user_ldate = "10/12/17")
+        public string NameFull
         {
-            ImagePath = @"C:\Users\shuhard93\Desktop\audi.jpg";
-            Model = "cx-5";
-            Mark = "MAZDA";
-            Type = "Crossover";
-            RentalDate = new DateInterval();
-            RentalDate.HighDate = Convert.ToDateTime(user_hdate);
-            RentalDate.LowDate = Convert.ToDateTime(user_ldate);
-            Price = user_price;
-            YearProduction = 2015;
-            City = "Город";
-            Visible = true;
-            return this;
+            get { return string.Format("{0} {1} / {2}", this.Mark, this.Model, this.City); }
+        }
+
+        public bool Visible { get; set; }
+        public bool Enable { get; set; }
+
+        public CarModel() { ; }
+        public CarModel(Car car)
+        {
+            this._car = car;
+            this.ImagePath = car.Photo;
+            this.Model = car.Model;
+            this.Mark = car.Mark;
+            this.City = car.City;
+            this.Price = car.Price;
+            this.Enable = true;
+            this.Visible = true;
         }
     }
 }
