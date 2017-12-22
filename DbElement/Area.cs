@@ -12,30 +12,20 @@ namespace DbElement
     using System;
     using System.Collections.Generic;
     
-    public partial class Client
+    public partial class Area
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Client()
+        public Area()
         {
-            this.ClientOrders = new HashSet<ClientOrders>();
+            this.Order = new HashSet<Order>();
         }
     
         public System.Guid Guid { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Patronymic { get; set; }
-        public Nullable<System.DateTime> Birthday { get; set; }
-        public string Sex { get; set; }
-        public string PassportSeries { get; set; }
-        public string PassportNumber { get; set; }
-        public string Password { get; set; }
-        public string Phone { get; set; }
-        public string Email { get; set; }
-        public string Login { get; set; }
-        public string BankCard { get; set; }
-        public string ImagePath { get; set; }
+        public string Area1 { get; set; }
+        public string City { get; set; }
+        public Nullable<double> PriceMultiplier { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ClientOrders> ClientOrders { get; set; }
+        public virtual ICollection<Order> Order { get; set; }
     }
 }

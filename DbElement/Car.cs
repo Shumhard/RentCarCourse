@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Db
+namespace DbElement
 {
     using System;
     using System.Collections.Generic;
@@ -28,6 +28,9 @@ namespace Db
         public Nullable<double> Price { get; set; }
         public Nullable<double> Mileage { get; set; }
         public Nullable<int> Status { get; set; }
+        public string Mark { get; set; }
+        public string Type { get; set; }
+        public string City { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Order { get; set; }

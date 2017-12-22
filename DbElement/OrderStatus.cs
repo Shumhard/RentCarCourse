@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Db
+namespace DbElement
 {
     using System;
     using System.Collections.Generic;

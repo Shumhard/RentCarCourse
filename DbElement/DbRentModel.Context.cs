@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Db
+namespace DbElement
 {
     using System;
     using System.Data.Entity;
@@ -18,8 +18,6 @@ namespace Db
         public OpenRentEntities()
             : base("name=OpenRentEntities")
         {
-            var ensureDLLIsCopied = System.Data.Entity.SqlServer.SqlProviderServices.Instance;
-            Database.SetInitializer<OpenRentEntities>(null);
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -28,10 +26,13 @@ namespace Db
         }
     
         public virtual DbSet<Car> Car { get; set; }
-        public virtual DbSet<Client> Client { get; set; }
-        public virtual DbSet<ClientOrders> ClientOrders { get; set; }
-        public virtual DbSet<Order> Order { get; set; }
         public virtual DbSet<CarStatus> CarStatus { get; set; }
         public virtual DbSet<OrderStatus> OrderStatus { get; set; }
+        public virtual DbSet<AdditionalServices> AdditionalServices { get; set; }
+        public virtual DbSet<Area> Area { get; set; }
+        public virtual DbSet<OrderAdditionalServices> OrderAdditionalServices { get; set; }
+        public virtual DbSet<Client> Client { get; set; }
+        public virtual DbSet<Order> Order { get; set; }
+        public virtual DbSet<ClientOrders> ClientOrders { get; set; }
     }
 }

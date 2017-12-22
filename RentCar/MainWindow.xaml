@@ -51,7 +51,7 @@
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="250"/>
             </Grid.ColumnDefinitions>
 
             <ListBox x:Name="OrderListBox" Margin="10" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{Binding Cars}"
@@ -97,9 +97,9 @@
                           SelectedValuePath="Name" ItemsSource="{Binding TypeList}"></ComboBox>
                 <TextBlock Margin="12 5">Дата проката</TextBlock>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <TextBox x:Name="LowDate"></TextBox>
+                    <TextBox x:Name="BeginDate"></TextBox>
                     <TextBlock Margin="5 0"> - </TextBlock>
-                    <TextBox x:Name="HighDate"></TextBox>
+                    <TextBox x:Name="EndDate"></TextBox>
                 </StackPanel>
                 <TextBlock Margin="12 5">Цена / сутки</TextBlock>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
@@ -107,7 +107,7 @@
                     <TextBlock Margin="5 0"> -</TextBlock>
                     <TextBox x:Name="HighPrice"></TextBox>
                 </StackPanel>
-                <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                     <Button x:Name="SearchBtn" Click="SearchBtn_OnClick" HorizontalAlignment="Left" Width="80" Margin="0 17">Найти</Button>
                     <Button x:Name="ClearBtn" Click="ClearBtn_OnClick" HorizontalAlignment="Left" Width="80" Margin="10 17">Очистить</Button>
                 </StackPanel>

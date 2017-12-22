@@ -12,13 +12,13 @@ namespace DbElement
     using System;
     using System.Collections.Generic;
     
-    public partial class ClientOrders
+    public partial class OrderAdditionalServices
     {
         public System.Guid Guid { get; set; }
-        public System.Guid ClientGuid { get; set; }
         public System.Guid OrderGuid { get; set; }
+        public System.Guid ServiceGuid { get; set; }
     
-        public virtual Client Client { get; set; }
+        public virtual AdditionalServices AdditionalServices { get; set; }
         public virtual Order Order { get; set; }
     }
 }

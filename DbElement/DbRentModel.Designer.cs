@@ -1,4 +1,4 @@
-﻿// Создание кода T4 для модели "c:\Users\shuhard93\documents\visual studio 2015\Projects\RentCar\DbElement\DbRentModel.edmx" включено. 
+﻿// Создание кода T4 для модели "C:\Git\RentCarCourse\DbElement\DbRentModel.edmx" включено. 
 // Чтобы включить формирование кода прежних версий, измените значение свойства "Стратегия создания кода" конструктора
 // на "Legacy ObjectContext". Это свойство доступно в окне "Свойства", если модель
 // открыта в конструкторе.
