@@ -18,6 +18,5 @@ namespace Common
         public CarStatus Status { get; set; }
         public string City { get; set; }
         public string FullName { get; }
-        public string ImagePath { get; set; }
     }
 }

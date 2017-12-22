@@ -31,7 +31,7 @@ namespace Models
 
         public OrderModel FillOrderModel(Order order)
         {
-            ImgPath = order.Car.ImagePath;
+            ImgPath = order.Car.Photo;
             OrderDate = order.OrderDate.ToString();
             RentRange = order.GetRentRange().ToString();
             Area = order.Area;
