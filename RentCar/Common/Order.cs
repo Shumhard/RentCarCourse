@@ -8,6 +8,8 @@ namespace Common
 {
     public class Order
     {
+        public static readonly string ArgumentNullExceptionMessage = "ExpirationDate is null";
+        public static readonly string InvalidOperationExceptionMessage = "DeliveryDate more then ExpirationDate";
         public Guid Guid { get; set; }
         public string Address { get; set; }
         public DateTime OrderDate { get; set; }
@@ -20,7 +22,18 @@ namespace Common
         public List<string> ServicesList { get; set; }
         public TimeSpan GetRentRange()
         {
-            return ExpirationDate.Value.Subtract(DeliveryDate);
+            if (ExpirationDate == null)
+            {
+                throw new ArgumentNullException(ArgumentNullExceptionMessage);
+            }
+            else if (ExpirationDate <= DeliveryDate)
+            {
+                throw new InvalidOperationException(InvalidOperationExceptionMessage);
+            }
+            else
+            {
+                return ExpirationDate.Value.Subtract(DeliveryDate);
+            }
         }
     }
 }
