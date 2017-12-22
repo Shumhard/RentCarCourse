@@ -17,8 +17,8 @@ namespace DbElement
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Order()
         {
-            this.ClientOrders = new HashSet<ClientOrders>();
             this.OrderAdditionalServices = new HashSet<OrderAdditionalServices>();
+            this.ClientOrders = new HashSet<ClientOrders>();
         }
     
         public System.Guid Guid { get; set; }
@@ -35,8 +35,8 @@ namespace DbElement
         public virtual Area Area { get; set; }
         public virtual Car Car { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ClientOrders> ClientOrders { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderAdditionalServices> OrderAdditionalServices { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ClientOrders> ClientOrders { get; set; }
     }
 }
