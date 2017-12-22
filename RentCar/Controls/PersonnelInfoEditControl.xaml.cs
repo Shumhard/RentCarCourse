@@ -47,7 +47,7 @@ namespace RentCar.Controls
                 var fileName = ofd.FileName;
                 var filePath = ofd.InitialDirectory.ToString() + fileName;
                 model.ImagePath = filePath;
-                Image.Source = BitmapFrame.Create(new Uri(model.ImagePath));
+                AvatarImage.Source = BitmapFrame.Create(new Uri(model.ImagePath));
             }
 
             DbWorkers.DbClientWorker.UpdateClient(model.GetClient());
@@ -64,7 +64,7 @@ namespace RentCar.Controls
                 if (Password.Password != null)
                     model.Password = Password.Password;
 
-                fillModelByWindowFields(ref model);
+                FillModelByWindowFields(ref model);
                 DbWorkers.DbClientWorker.UpdateClient(model.GetClient());
 
                 Close();
@@ -93,10 +93,10 @@ namespace RentCar.Controls
             var window = Window.GetWindow(this);
             var model = (PersonnelCabinetWindowModel)window.DataContext;
             DataContext = model;
-            fillWindowFieldsByModel(model);
+            FillWindowFieldsByModel(model);
         }
 
-        private void fillWindowFieldsByModel(PersonnelCabinetWindowModel model)
+        private void FillWindowFieldsByModel(PersonnelCabinetWindowModel model)
         {
             LoginTxt.Text = model.Login;
             //Password.Password = model.Password;
@@ -125,10 +125,10 @@ namespace RentCar.Controls
             PassportNumberTxt.Text = model.PassportNumber;
             BankCard.Text = model.BankCard;
             model.ImagePath = @"C:\\Users\zel1b08a\Pictures\pasport.jpg";
-            Image.Source = BitmapFrame.Create(new Uri(model.ImagePath));
+            AvatarImage.Source = BitmapFrame.Create(new Uri(model.ImagePath));
         }
 
-        private void fillModelByWindowFields(ref PersonnelCabinetWindowModel model)
+        private void FillModelByWindowFields(ref PersonnelCabinetWindowModel model)
         {
             model.Login = LoginTxt.Text;
             model.SecondName = SecondNameTxt.Text;
