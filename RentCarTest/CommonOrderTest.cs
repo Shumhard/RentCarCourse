@@ -7,15 +7,15 @@ namespace RentCarTest
     public class CommonOrderTest
     {
         [TestMethod]
-        public void GetRentRange_WithValidDateTime_2017_10_15_20_30_29_and_2016_12_2_1_29_19_Expected_0_10_13_19_1_10()
+        public void GetRentRange_WithValidDateTime_2018_10_15_20_30_29_and_2016_12_2_1_29_19_Expected_1_10_13_19_1_10()
         {
             //  Arrange
             var order = new Common.Order()
             {
                 DeliveryDate = new DateTime(2016, 12, 2, 1, 29, 19),
-                ExpirationDate = new DateTime(2017, 10, 15, 20, 30, 29)
+                ExpirationDate = new DateTime(2018, 10, 15, 20, 30, 29)
             };
-            var expected = new DateTime(0, 10, 13, 19, 1, 10);
+            var expected = new TimeSpan(682, 19, 1, 10);
 
             //  Act
             var result = order.GetRentRange();

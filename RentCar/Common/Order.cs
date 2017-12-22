@@ -20,7 +20,7 @@ namespace Common
         public double TotalCost { get; set; }
         public Car Car { get; set; }
         public List<string> ServicesList { get; set; }
-        public TimeSpan GetRentRange()
+        public TimeSpan GetRentRange()  //  in d:h:m:s
         {
             if (ExpirationDate == null)
             {
