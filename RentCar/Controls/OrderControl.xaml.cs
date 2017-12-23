@@ -71,10 +71,7 @@ namespace RentCar.Controls
             var window = (OrderWindow)(Window.GetWindow(this));
             OrderWindowModel orderWindowModel = (OrderWindowModel)window.DataContext;
 
-            if ((!((orderWindowModel.Car.HighRentalDate.CompareTo(_highDate) < 0 && orderWindowModel.Car.LowRentalDate.CompareTo(_highDate) <= 0) ||
-                (orderWindowModel.Car.HighRentalDate.CompareTo(_highDate) > 0 && orderWindowModel.Car.LowRentalDate.CompareTo(_highDate) > 0))) ||
-                (!((orderWindowModel.Car.HighRentalDate.CompareTo(_lowDate) <= 0 && orderWindowModel.Car.LowRentalDate.CompareTo(_lowDate) < 0) ||
-                (orderWindowModel.Car.HighRentalDate.CompareTo(_lowDate) > 0 && orderWindowModel.Car.LowRentalDate.CompareTo(_lowDate) > 0))))
+            if (orderWindowModel.Car.CheckBusyness(_lowDate, _highDate))
             {
                 MessageBox.Show("В этот промежуток машина недоступна!");
                 return;

@@ -46,8 +46,8 @@ namespace RentCar
                 Car car = new Car();
                 car.Guid = Guid.NewGuid();
                 car.City = "Томск";
-                car.HighRentalDate = Convert.ToDateTime("10/12/15");
-                car.HighRentalDate = Convert.ToDateTime("10/12/17");
+                car.LowRentalDate = Convert.ToDateTime("08/11/18");
+                car.HighRentalDate = Convert.ToDateTime("10/11/18");
                 car.Mark = "mazda";
                 car.Model = "cx-5";
                 car.Type = "Crossover";
@@ -76,8 +76,8 @@ namespace RentCar
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            this.HighDate.Text = "21/12/12";
-            this.LowDate.Text = "12/12/12";
+            this.HighDate.Text = "07/11/18";
+            this.LowDate.Text = "02/11/18";
         }
 
         private void PersonnelCabinetBtn_Click(object sender, RoutedEventArgs e)
@@ -190,7 +190,9 @@ namespace RentCar
                 if (_highPrice < _lowPrice) 
                     throw new Exception();
                 if (_lowDate.Year != 1 && _lowDate.CompareTo(_now) < 0) 
-                    throw new Exception();               
+                    throw new Exception();
+                if (_highDate.Year != 1 && _lowDate.Year == 1)
+                    _lowDate = _now;
                 if (_highDate.Year != 1 && _lowDate.Year != 1 && 
                     _highDate.CompareTo(_lowDate) <= 0) 
                     throw new Exception();
@@ -201,6 +203,7 @@ namespace RentCar
                 return;
             }
 
+            this.ClearFilter();
             var model = (MainWindowModel)this.DataContext;
             foreach (var carmod in model.Cars)
             {
@@ -210,10 +213,7 @@ namespace RentCar
                     (_type != "" && carmod.Car.Type.CompareTo(_type) != 0) ||
                     (_highPrice != 0 && carmod.Car.Price.CompareTo(_highPrice) > 0) ||
                     (_lowPrice != 0 && carmod.Price.CompareTo(_lowPrice) < 0) ||
-                    (_highDate.Year != 1 && !((carmod.Car.HighRentalDate.CompareTo(_highDate) < 0 && carmod.Car.LowRentalDate.CompareTo(_highDate) <= 0) ||
-                    (carmod.Car.HighRentalDate.CompareTo(_highDate) > 0 && carmod.Car.LowRentalDate.CompareTo(_highDate) > 0))) ||
-                    (_lowDate.Year != 1 && !((carmod.Car.HighRentalDate.CompareTo(_lowDate) <= 0 && carmod.Car.LowRentalDate.CompareTo(_lowDate) < 0) ||
-                    (carmod.Car.HighRentalDate.CompareTo(_lowDate) > 0 && carmod.Car.LowRentalDate.CompareTo(_lowDate) > 0))))
+                    carmod.Car.CheckBusyness(_lowDate, _highDate))
                 {
                     carmod.Enable = false;
                     carmod.Visible = false;                    
@@ -224,12 +224,17 @@ namespace RentCar
 
         private void ClearBtn_OnClick(object sender, RoutedEventArgs e)
         {
+            this.ClearFilter();
+        }
+
+        private void ClearFilter()
+        {
             var model = (MainWindowModel)this.DataContext;
             foreach (var carmod in model.Cars)
             {
                 carmod.Enable = true;
-                carmod.Visible = true;                
-            }                
+                carmod.Visible = true;
+            }
             model.Cars = new ObservableCollection<CarModel>(model.Cars.OrderByDescending(x => x.Visible));
         }
 
