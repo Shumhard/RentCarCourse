@@ -115,9 +115,9 @@
                           SelectedValuePath="Name" SelectedValue="{Binding SelectedType}" ItemsSource="{Binding TypeList}"></ComboBox>
                 <TextBlock Margin="12 5">Дата проката</TextBlock>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <TextBox x:Name="BeginDate" Text="{Binding DateFrom}"></TextBox>
+                    <DatePicker x:Name="BeginDate" Text="{Binding DateFrom}"></DatePicker>
                     <TextBlock Margin="5 0"> - </TextBlock>
-                    <TextBox x:Name="EndDate" Text="{Binding DateTo}"></TextBox>
+                    <DatePicker x:Name="EndDate" Text="{Binding DateTo}"></DatePicker>
                 </StackPanel>
                 <TextBlock Margin="12 5">Цена / сутки</TextBlock>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">

@@ -207,13 +207,12 @@ namespace DbWorkers
                 foreach (var dbRemoveService in dbRemoveServices)
                 {
                     dbOrder.OrderAdditionalServices.Remove(dbRemoveService);
+                    context.Entry(dbRemoveService).State = System.Data.Entity.EntityState.Deleted;
                 }
                 foreach (var dbAddService in dbAddServices)
                 {
                     dbOrder.OrderAdditionalServices.Add(dbAddService);
                 }
-
-                context.SaveChanges();
 
                 return true;
             }

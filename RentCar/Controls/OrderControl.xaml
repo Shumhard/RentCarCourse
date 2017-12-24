@@ -31,7 +31,7 @@
                 <DatePicker x:Name="EndRentDate" Width="100" Margin="5" SelectedDate="{Binding EndRentDate}" SelectedDateChanged="EndRentDate_SelectedDateChanged"></DatePicker>
             </StackPanel>
             <TextBlock Margin="0 5 0 3" HorizontalAlignment="Center">Район проката (выбран город <TextBlock x:Name="CityTextBlock" Text="{Binding City}"></TextBlock>)</TextBlock>
-            <ComboBox x:Name="AreaCmb" DisplayMemberPath="Name" SelectedValuePath="Name" SelectedItem="{Binding Area, Mode=TwoWay}" SelectionChanged="AreaCmb_SelectionChanged"></ComboBox>
+            <ComboBox x:Name="AreaCmb" DisplayMemberPath="Name" SelectedValuePath="Guid" SelectedItem="{Binding Area, Mode=TwoWay}" SelectionChanged="AreaCmb_SelectionChanged"></ComboBox>
             <TextBox x:Name="NameTextBox" Height="30" VerticalContentAlignment="Center" Margin="0 3 0 20" Text="{Binding Name}"></TextBox>
             <TextBlock Margin="0 0 0 3">Дополнительные услуги</TextBlock>
             <Border BorderBrush="LightGray" Background="LightGray" BorderThickness="1,1,1,1" CornerRadius="8,8,8,8">

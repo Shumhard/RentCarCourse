@@ -33,47 +33,40 @@ namespace RentCar.Controls
         {
             //TODO: Создание нового клиента
 
-            if (IsAgree.IsChecked.Value)
+            try
             {
+                CheckInputs();
+
                 var login = LoginTxt.Text;
                 var password = PasswordTxt.Password;
                 var passwordRepeat = PasswordRepeatTxt.Password;
                 var email = EmailTxt.Text;
                 var phone = PhoneTxt.Text;
 
-                if (password.Equals(passwordRepeat))
+                if (DbClientWorker.CheckClient(login))
                 {
-                    if (DbClientWorker.CheckClient(login))
-                    {
-                        var client = new Client
-                        {
-                            Guid = Guid.NewGuid(),
-                            Login = login,
-                            Password = password,
-                            Email = email,
-                            Phone = phone
-                        };
-
-                        DbClientWorker.AddClient(client);
-
-                        if (RegisterEnded != null)
-                        {
-                            RegisterEnded(this, new EventArgs());
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show("Error");
-                    }
+                    throw new Exception("Логин \"" + login + "\" уже существует");
                 }
-                else
+
+                var client = new Client
                 {
-                    MessageBox.Show("Error");
+                    Guid = Guid.NewGuid(),
+                    Login = login,
+                    Password = password,
+                    Email = email,
+                    Phone = phone
+                };
+
+                DbClientWorker.AddClient(client);
+
+                if (RegisterEnded != null)
+                {
+                    RegisterEnded(this, new EventArgs());
                 }
             }
-            else
+            catch(Exception ex)
             {
-                MessageBox.Show("Warning");
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -90,6 +83,34 @@ namespace RentCar.Controls
             var conditionsWindow = new ConditionsWindow();
             conditionsWindow.Owner = Window.GetWindow(this);
             conditionsWindow.ShowDialog();
+        }
+
+        private void CheckInputs()
+        {
+            if (!IsAgree.IsChecked.Value)
+            {
+                throw new Exception("Необходимо согласие с пользовательскими условиями");
+            }
+
+            if (string.IsNullOrEmpty(LoginTxt.Text))
+            {
+                throw new Exception("Необходимо выбрать логин");
+            }
+
+            if (string.IsNullOrEmpty(PasswordTxt.Password))
+            {
+                throw new Exception("Необходимо выбрать пароль");
+            }
+
+            if (string.IsNullOrEmpty(PasswordRepeatTxt.Password))
+            {
+                throw new Exception("Необходимо ввести пароль еще раз");
+            }
+
+            if (PasswordTxt.Password != PasswordRepeatTxt.Password)
+            {
+                throw new Exception("Подтверждение не совпадает с паролем");
+            }
         }
     }
 }

@@ -149,30 +149,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_OrderAdditionalServices_Order">
-    <End Role="Order" Type="Self.Order" Multiplicity="1" />
-    <End Role="OrderAdditionalServices" Type="Self.OrderAdditionalServices" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Order">
-        <PropertyRef Name="Guid" />
-      </Principal>
-      <Dependent Role="OrderAdditionalServices">
-        <PropertyRef Name="OrderGuid" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_OrderAdditionalServices_Service">
-    <End Role="AdditionalServices" Type="Self.AdditionalServices" Multiplicity="1" />
-    <End Role="OrderAdditionalServices" Type="Self.OrderAdditionalServices" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="AdditionalServices">
-        <PropertyRef Name="Guid" />
-      </Principal>
-      <Dependent Role="OrderAdditionalServices">
-        <PropertyRef Name="ServiceGuid" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityContainer Name="Хранилище OpenRentModelContainer">
     <EntitySet Name="AdditionalServices" EntityType="Self.AdditionalServices" Schema="Order" store:Type="Tables" />
     <EntitySet Name="Area" EntityType="Self.Area" Schema="Order" store:Type="Tables" />
@@ -208,14 +184,6 @@
     <AssociationSet Name="FK_Order_Car" Association="Self.FK_Order_Car">
       <End Role="Car" EntitySet="Car" />
       <End Role="Order" EntitySet="Order" />
-    </AssociationSet>
-    <AssociationSet Name="FK_OrderAdditionalServices_Order" Association="Self.FK_OrderAdditionalServices_Order">
-      <End Role="Order" EntitySet="Order" />
-      <End Role="OrderAdditionalServices" EntitySet="OrderAdditionalServices" />
-    </AssociationSet>
-    <AssociationSet Name="FK_OrderAdditionalServices_Service" Association="Self.FK_OrderAdditionalServices_Service">
-      <End Role="AdditionalServices" EntitySet="AdditionalServices" />
-      <End Role="OrderAdditionalServices" EntitySet="OrderAdditionalServices" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

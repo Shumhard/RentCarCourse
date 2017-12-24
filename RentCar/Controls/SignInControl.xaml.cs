@@ -35,24 +35,28 @@ namespace RentCar.Controls
         {
             //TODO: Логика проверки Клиента
 
-            var login = LoginTxt.Text;
-            var password = PasswordTxt.Password;
-
-            if(string.IsNullOrEmpty(login) || string.IsNullOrEmpty(password))
+            try
             {
-                MessageBox.Show("Error");
-            }
+                CheckInputs();
 
-            if((UserData.User.UserGuid = DbClientWorker.SignIn(login, password)) != null)
-            {
-                if (AutorizationCompleted != null)
+                var login = LoginTxt.Text;
+                var password = PasswordTxt.Password;
+
+                if ((UserData.User.UserGuid = DbClientWorker.SignIn(login, password)) != null)
                 {
-                    AutorizationCompleted(this, new AuthorizedEventArgs(true));
+                    if (AutorizationCompleted != null)
+                    {
+                        AutorizationCompleted(this, new AuthorizedEventArgs(true));
+                    }
+                }
+                else
+                {
+                    throw new Exception("Пользователя с таким логином и паролем не существует");
                 }
             }
-            else
+            catch(Exception ex)
             {
-                MessageBox.Show("Error");
+                MessageBox.Show(ex.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -74,6 +78,19 @@ namespace RentCar.Controls
             if (AutorizationCompleted != null)
             {
                 AutorizationCompleted(this, new AuthorizedEventArgs(false));
+            }
+        }
+
+        private void CheckInputs()
+        {
+            if (string.IsNullOrEmpty(LoginTxt.Text))
+            {
+                throw new Exception("Необходимо ввести логин");
+            }
+
+            if (string.IsNullOrEmpty(PasswordTxt.Password))
+            {
+                throw new Exception("Необходимо ввести пароль");
             }
         }
     }

@@ -52,6 +52,8 @@ namespace RentCar.Controls
 
             try
             {
+                CheckInputs();
+
                 var uri = new Uri(((BitmapFrame)EditImage.Source).Decoder.ToString());
 
                 var client = new Client
@@ -124,8 +126,32 @@ namespace RentCar.Controls
             DataContext = model;
 
             Password.Password = model.Password;
+            RepeatPassword.Password = model.Password;
             var sexList = DbReferenceWorker.GetSexReference();
             SexCmb.ItemsSource = sexList;
+        }
+
+        private void CheckInputs()
+        {
+            if (string.IsNullOrEmpty(LoginTxt.Text))
+            {
+                throw new Exception("Необходимо выбрать логин");
+            }
+
+            if (string.IsNullOrEmpty(Password.Password))
+            {
+                throw new Exception("Необходимо выбрать пароль");
+            }
+
+            if (string.IsNullOrEmpty(RepeatPassword.Password))
+            {
+                throw new Exception("Необходимо ввести пароль еще раз");
+            }
+
+            if (Password.Password != RepeatPassword.Password)
+            {
+                throw new Exception("Подтверждение не совпадает с паролем");
+            }
         }
     }
 }

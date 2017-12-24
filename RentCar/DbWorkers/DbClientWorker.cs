@@ -28,7 +28,7 @@ namespace DbWorkers
             using (var context = new Db.OpenRentEntities())
             {
                 var dbClient = context.Client.SingleOrDefault(x => x.Login == login);
-                return dbClient == null;
+                return dbClient != null;
             }
         }
 

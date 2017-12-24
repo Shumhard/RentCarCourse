@@ -121,31 +121,46 @@ namespace RentCar
         private void PriceOrder_OnClick(object sender, RoutedEventArgs e)
         {
             var model = (MainWindowModel)DataContext;
-
-            _directions.PriceDirection = _directions.PriceDirection == OrderDirection.Down ?
-                OrderDirection.Up : OrderDirection.Down;
-
-            model.Cars = GetOrderedCars(model.Cars);
+            if(_directions.PriceDirection == OrderDirection.Down)
+            {
+                model.Cars = new ObservableCollection<CarModel>(model.Cars.OrderByDescending(x => x.Price));
+                _directions.PriceDirection = OrderDirection.Up;
+            }
+            else
+            {
+                model.Cars = new ObservableCollection<CarModel>(model.Cars.OrderBy(x => x.Price));
+                _directions.PriceDirection = OrderDirection.Down;
+            }
         }
 
         private void YearOrder_OnClick(object sender, RoutedEventArgs e)
         {
             var model = (MainWindowModel)DataContext;
-
-            _directions.YearDirection = _directions.YearDirection == OrderDirection.Down ?
-                OrderDirection.Up : OrderDirection.Down;
-
-            model.Cars = GetOrderedCars(model.Cars);
+            if (_directions.YearDirection == OrderDirection.Down)
+            {
+                model.Cars = new ObservableCollection<CarModel>(model.Cars.OrderByDescending(x => x.YearProduction));
+                _directions.YearDirection = OrderDirection.Up;
+            }
+            else
+            {
+                model.Cars = new ObservableCollection<CarModel>(model.Cars.OrderBy(x => x.YearProduction));
+                _directions.YearDirection = OrderDirection.Down;
+            }
         }
 
         private void ModelOrder_OnClick(object sender, RoutedEventArgs e)
         {
             var model = (MainWindowModel)DataContext;
-
-            _directions.ModelDirection = _directions.ModelDirection == OrderDirection.Down ?
-                OrderDirection.Up : OrderDirection.Down;
-
-            model.Cars = GetOrderedCars(model.Cars);
+            if (_directions.ModelDirection == OrderDirection.Down)
+            {
+                model.Cars = new ObservableCollection<CarModel>(model.Cars.OrderByDescending(x => x.Model));
+                _directions.ModelDirection = OrderDirection.Up;
+            }
+            else
+            {
+                model.Cars = new ObservableCollection<CarModel>(model.Cars.OrderBy(x => x.Model));
+                _directions.ModelDirection = OrderDirection.Down;
+            }
         }
 
         private void SearchBtn_OnClick(object sender, RoutedEventArgs e)
@@ -163,8 +178,8 @@ namespace RentCar
             model.SelectedModel = null;
             model.SelectedMark = null;
             model.SelectedType = null;
-            model.DateFrom = "";
-            model.DateTo = "";
+            model.DateFrom = null;
+            model.DateTo = null;
             model.PriceFrom = "";
             model.PriceTo = "";
         }
@@ -179,18 +194,29 @@ namespace RentCar
             try
             {
                 var model = (MainWindowModel)DataContext;
+                var priceFrom = model.PriceFrom.ToDouble(null);
+                var priceTo = model.PriceTo.ToDouble(null);
+
+                if (model.DateFrom != null && model.DateTo != null && model.DateFrom > model.DateTo)
+                {
+                    throw new Exception("Неверный диапазон дат");
+                }
+                if (priceFrom != null && priceTo != null && priceFrom > priceTo)
+                {
+                    throw new Exception("Неверный диапазон цены");
+                }
 
                 var filter = new Common.Filter();
                 filter.City = model.SelectedCity;
                 filter.Model = model.SelectedModel;
                 filter.Mark = model.SelectedMark;
                 filter.Type = model.SelectedType;
-                filter.DateFrom = model.DateFrom.ToDateTime(null);
-                filter.DateTo = model.DateTo.ToDateTime(null);
-                filter.PriceFrom = model.PriceFrom.ToDouble(null);
-                filter.PriceTo = model.PriceTo.ToDouble(null);
+                filter.DateFrom = model.DateFrom;
+                filter.DateTo = model.DateTo;
+                filter.PriceFrom = priceFrom;
+                filter.PriceTo = priceTo;
                 
-                model.Cars = GetOrderedCars(DbCarWorker.GetCarsByFilter(filter));
+                model.Cars = DbCarWorker.GetCarsByFilter(filter);
             }
             catch (Exception ex)
             {
@@ -198,39 +224,39 @@ namespace RentCar
             }
         }
 
-        private ObservableCollection<CarModel> GetOrderedCars(ObservableCollection<CarModel> cars)
-        {
-            IOrderedEnumerable<CarModel> orderCars = cars.OrderBy(x => x.IsEnabled);
+        //private ObservableCollection<CarModel> GetOrderedCars(ObservableCollection<CarModel> cars)
+        //{
+        //    IOrderedEnumerable<CarModel> orderCars = cars.OrderBy(x => x.IsEnabled);
 
-            if (_directions.PriceDirection == OrderDirection.Down)
-            {
-                orderCars = orderCars.OrderBy(x => x.Price);
-            }
-            else
-            {
-                orderCars = orderCars.OrderByDescending(x => x.Price);
-            }
+        //    if (_directions.PriceDirection == OrderDirection.Down)
+        //    {
+        //        orderCars = orderCars.OrderBy(x => x.Price);
+        //    }
+        //    else
+        //    {
+        //        orderCars = orderCars.OrderByDescending(x => x.Price);
+        //    }
 
-            if (_directions.YearDirection == OrderDirection.Down)
-            {
-                orderCars = orderCars.OrderBy(x => x.YearProduction);
-            }
-            else
-            {
-                orderCars = orderCars.OrderByDescending(x => x.YearProduction);
-            }
+        //    if (_directions.YearDirection == OrderDirection.Down)
+        //    {
+        //        orderCars = orderCars.OrderBy(x => x.YearProduction);
+        //    }
+        //    else
+        //    {
+        //        orderCars = orderCars.OrderByDescending(x => x.YearProduction);
+        //    }
 
-            if (_directions.ModelDirection == OrderDirection.Down)
-            {
-                orderCars = orderCars.OrderBy(x => x.Model);
-            }
-            else
-            {
-                orderCars = orderCars.OrderByDescending(x => x.Model);
-            }
+        //    if (_directions.ModelDirection == OrderDirection.Down)
+        //    {
+        //        orderCars = orderCars.OrderBy(x => x.Model);
+        //    }
+        //    else
+        //    {
+        //        orderCars = orderCars.OrderByDescending(x => x.Model);
+        //    }
 
-            return new ObservableCollection<CarModel>(orderCars);
-        }
+        //    return new ObservableCollection<CarModel>(orderCars);
+        //}
     }
 
     public class OrderDirections

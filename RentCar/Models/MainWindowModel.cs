@@ -18,8 +18,8 @@ namespace Models
         private string _selectedModel;
         private string _selectedMark;
         private string _selectedType;
-        private string _dateFrom;
-        private string _dateTo;
+        private DateTime? _dateFrom;
+        private DateTime? _dateTo;
         private string _priceFrom;
         private string _priceTo;
 
@@ -90,7 +90,7 @@ namespace Models
             }
         }
 
-        public string DateFrom
+        public DateTime? DateFrom
         {
             get
             {
@@ -103,7 +103,7 @@ namespace Models
             }
         }
 
-        public string DateTo
+        public DateTime? DateTo
         {
             get
             {
