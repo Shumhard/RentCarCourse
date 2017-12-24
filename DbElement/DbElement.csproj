@@ -57,6 +57,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdditionalServices.cs">
+      <DependentUpon>DbRentModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Area.cs">
+      <DependentUpon>DbRentModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Car.cs">
       <DependentUpon>DbRentModel.tt</DependentUpon>
     </Compile>
@@ -85,6 +91,9 @@
       <DependentUpon>DbRentModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Order.cs">
+      <DependentUpon>DbRentModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OrderAdditionalServices.cs">
       <DependentUpon>DbRentModel.tt</DependentUpon>
     </Compile>
     <Compile Include="OrderStatus.cs">

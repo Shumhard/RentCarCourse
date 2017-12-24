@@ -8,18 +8,18 @@
         <EntityTypeShape EntityType="OpenRentModel.Car" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="OpenRentModel.CarStatus" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="OpenRentModel.OrderStatus" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="OpenRentModel.AdditionalServices" Width="1.5" PointX="6" PointY="7.375" />
-        <EntityTypeShape EntityType="OpenRentModel.Area" Width="1.5" PointX="0.75" PointY="5.25" />
-        <EntityTypeShape EntityType="OpenRentModel.OrderAdditionalServices" Width="1.5" PointX="8.25" PointY="3.25" />
-        <AssociationConnector Association="OpenRentModel.FK_OrderAdditionalServices_Service" />
         <EntityTypeShape EntityType="OpenRentModel.Client" Width="1.5" PointX="0.75" PointY="8.75" />
         <EntityTypeShape EntityType="OpenRentModel.Order" Width="1.5" PointX="3.375" PointY="2.375" />
-        <AssociationConnector Association="OpenRentModel.FK_Order_Area" />
         <AssociationConnector Association="OpenRentModel.FK_Order_Car" />
-        <AssociationConnector Association="OpenRentModel.FK_OrderAdditionalServices_Order" />
         <EntityTypeShape EntityType="OpenRentModel.ClientOrders" Width="1.5" PointX="8.625" PointY="6.5" />
         <AssociationConnector Association="OpenRentModel.FK_ClientOrders_Client" />
         <AssociationConnector Association="OpenRentModel.FK_ClientOrders_Order" />
+        <EntityTypeShape EntityType="OpenRentModel.AdditionalServices" Width="1.5" PointX="6.375" PointY="7.375" />
+        <EntityTypeShape EntityType="OpenRentModel.Area" Width="1.5" PointX="1.125" PointY="5.25" />
+        <EntityTypeShape EntityType="OpenRentModel.OrderAdditionalServices" Width="1.5" PointX="8.625" PointY="3.25" />
+        <AssociationConnector Association="OpenRentModel.FK_OrderAdditionalServices_Service" />
+        <AssociationConnector Association="OpenRentModel.FK_Order_Area" />
+        <AssociationConnector Association="OpenRentModel.FK_OrderAdditionalServices_Order" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

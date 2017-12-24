@@ -80,6 +80,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Common\Area.cs" />
+    <Compile Include="Common\PaymentType.cs" />
+    <Compile Include="Extentions\CodeHelper.cs" />
+    <Compile Include="Models\NotifyModel.cs" />
+    <Compile Include="Settings.cs" />
     <Page Include="AuthWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -130,6 +135,7 @@
     <Compile Include="Common\Car.cs" />
     <Compile Include="Common\CarStatus.cs" />
     <Compile Include="Common\Client.cs" />
+    <Compile Include="Common\Filter.cs" />
     <Compile Include="Common\Order.cs" />
     <Compile Include="Common\OrderStatus.cs" />
     <Compile Include="Common\ReferenceValue.cs" />

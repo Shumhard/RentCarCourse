@@ -7,13 +7,16 @@ using System.Threading.Tasks;
 
 namespace Models
 {
-    public class CarModel
+    public class CarModel : NotifyModel
     {
+        private bool _isEnabled;
         private double? _price;
 
         public string ImagePath { get; set; }
 
         public string Model { get; set; }
+
+        public string Name { get; set; }
 
         public double Price
         {
@@ -29,6 +32,16 @@ namespace Models
 
         public int YearProduction { get; set; }
 
-        public string City { get; set; }
+        public Guid Guid { get; set; }
+
+        public bool IsEnabled
+        {
+            get { return _isEnabled; }
+            set
+            {
+                _isEnabled = value;
+                OnPropertyChanged("IsEnabled");
+            }
+        }
     }
 }

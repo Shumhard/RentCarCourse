@@ -1,5 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="Хранилище OpenRentModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AdditionalServices">
+    <Key>
+      <PropertyRef Name="Guid" />
+    </Key>
+    <Property Name="Guid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="200" />
+    <Property Name="Price" Type="float" />
+  </EntityType>
+  <EntityType Name="Area">
+    <Key>
+      <PropertyRef Name="Guid" />
+    </Key>
+    <Property Name="Guid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Area" Type="varchar" MaxLength="200" />
+    <Property Name="City" Type="varchar" MaxLength="200" />
+    <Property Name="PriceMultiplier" Type="float" />
+  </EntityType>
   <EntityType Name="Car">
     <Key>
       <PropertyRef Name="Guid" />
@@ -12,6 +29,9 @@
     <Property Name="Price" Type="float" />
     <Property Name="Mileage" Type="float" />
     <Property Name="Status" Type="int" />
+    <Property Name="Mark" Type="varchar" MaxLength="200" />
+    <Property Name="Type" Type="varchar" MaxLength="200" />
+    <Property Name="City" Type="varchar" MaxLength="500" />
   </EntityType>
   <EntityType Name="Client">
     <Key>
@@ -23,9 +43,14 @@
     <Property Name="Patronymic" Type="varchar" MaxLength="200" />
     <Property Name="Birthday" Type="date" />
     <Property Name="Sex" Type="varchar" MaxLength="200" />
-    <Property Name="Mileage" Type="float" />
     <Property Name="PassportSeries" Type="varchar" MaxLength="200" />
     <Property Name="PassportNumber" Type="varchar" MaxLength="200" />
+    <Property Name="Password" Type="varchar" MaxLength="20" />
+    <Property Name="Phone" Type="varchar" MaxLength="20" />
+    <Property Name="Email" Type="varchar" MaxLength="50" />
+    <Property Name="Login" Type="varchar" MaxLength="50" />
+    <Property Name="BankCard" Type="varchar" MaxLength="50" />
+    <Property Name="ImagePath" Type="varchar(max)" />
   </EntityType>
   <EntityType Name="ClientOrders">
     <Key>
@@ -41,11 +66,22 @@
     </Key>
     <Property Name="Guid" Type="uniqueidentifier" Nullable="false" />
     <Property Name="CarGuid" Type="uniqueidentifier" />
-    <Property Name="Address" Type="varchar(max)" />
+    <Property Name="AreaGuid" Type="uniqueidentifier" />
     <Property Name="OrderDate" Type="datetime" />
-    <Property Name="DeliveryDate" Type="datetime" />
-    <Property Name="ExpirationDate" Type="datetime" />
-    <Property Name="Status" Type="int" />
+    <Property Name="RentBeginDate" Type="datetime" />
+    <Property Name="RentEndDate" Type="datetime" />
+    <Property Name="StatusId" Type="int" />
+    <Property Name="PaymentTypeId" Type="int" />
+    <Property Name="Name" Type="varchar" MaxLength="200" />
+    <Property Name="TotalCost" Type="float" />
+  </EntityType>
+  <EntityType Name="OrderAdditionalServices">
+    <Key>
+      <PropertyRef Name="Guid" />
+    </Key>
+    <Property Name="Guid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="OrderGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ServiceGuid" Type="uniqueidentifier" Nullable="false" />
   </EntityType>
   <!--Ошибки, обнаруженные при создании:
 предупреждение 6002: В таблице или представлении "OpenRent.Reference.CarStatus" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
@@ -89,6 +125,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Order_Area">
+    <End Role="Area" Type="Self.Area" Multiplicity="0..1" />
+    <End Role="Order" Type="Self.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Area">
+        <PropertyRef Name="Guid" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="AreaGuid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Order_Car">
     <End Role="Car" Type="Self.Car" Multiplicity="0..1" />
     <End Role="Order" Type="Self.Order" Multiplicity="*" />
@@ -101,11 +149,38 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_OrderAdditionalServices_Order">
+    <End Role="Order" Type="Self.Order" Multiplicity="1" />
+    <End Role="OrderAdditionalServices" Type="Self.OrderAdditionalServices" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="Guid" />
+      </Principal>
+      <Dependent Role="OrderAdditionalServices">
+        <PropertyRef Name="OrderGuid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderAdditionalServices_Service">
+    <End Role="AdditionalServices" Type="Self.AdditionalServices" Multiplicity="1" />
+    <End Role="OrderAdditionalServices" Type="Self.OrderAdditionalServices" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AdditionalServices">
+        <PropertyRef Name="Guid" />
+      </Principal>
+      <Dependent Role="OrderAdditionalServices">
+        <PropertyRef Name="ServiceGuid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="Хранилище OpenRentModelContainer">
+    <EntitySet Name="AdditionalServices" EntityType="Self.AdditionalServices" Schema="Order" store:Type="Tables" />
+    <EntitySet Name="Area" EntityType="Self.Area" Schema="Order" store:Type="Tables" />
     <EntitySet Name="Car" EntityType="Self.Car" Schema="Order" store:Type="Tables" />
     <EntitySet Name="Client" EntityType="Self.Client" Schema="Order" store:Type="Tables" />
     <EntitySet Name="ClientOrders" EntityType="Self.ClientOrders" Schema="Order" store:Type="Tables" />
     <EntitySet Name="Order" EntityType="Self.Order" Schema="Order" store:Type="Tables" />
+    <EntitySet Name="OrderAdditionalServices" EntityType="Self.OrderAdditionalServices" Schema="Order" store:Type="Tables" />
     <EntitySet Name="CarStatus" EntityType="Self.CarStatus" store:Type="Tables" store:Schema="Reference">
       <DefiningQuery>SELECT 
     [CarStatus].[Id] AS [Id], 
@@ -126,9 +201,21 @@
       <End Role="Order" EntitySet="Order" />
       <End Role="ClientOrders" EntitySet="ClientOrders" />
     </AssociationSet>
+    <AssociationSet Name="FK_Order_Area" Association="Self.FK_Order_Area">
+      <End Role="Area" EntitySet="Area" />
+      <End Role="Order" EntitySet="Order" />
+    </AssociationSet>
     <AssociationSet Name="FK_Order_Car" Association="Self.FK_Order_Car">
       <End Role="Car" EntitySet="Car" />
       <End Role="Order" EntitySet="Order" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderAdditionalServices_Order" Association="Self.FK_OrderAdditionalServices_Order">
+      <End Role="Order" EntitySet="Order" />
+      <End Role="OrderAdditionalServices" EntitySet="OrderAdditionalServices" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderAdditionalServices_Service" Association="Self.FK_OrderAdditionalServices_Service">
+      <End Role="AdditionalServices" EntitySet="AdditionalServices" />
+      <End Role="OrderAdditionalServices" EntitySet="OrderAdditionalServices" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

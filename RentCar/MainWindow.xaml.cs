@@ -15,6 +15,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using DbWorkers;
 using Models;
+using Extentions;
+using System.Collections.ObjectModel;
 
 namespace RentCar
 {
@@ -24,18 +26,25 @@ namespace RentCar
     public partial class MainWindow : Window
     {
         Window _personnelWindow = null;
+        OrderDirections _directions;
 
         public MainWindow()
         {
             InitializeComponent();
 
+            _directions = new OrderDirections
+            {
+                ModelDirection = OrderDirection.Down,
+                YearDirection = OrderDirection.Down,
+                PriceDirection = OrderDirection.Down
+            };
+
             var model = new MainWindowModel();
             model.IsAuthorized = false;
-            model.Cars = new List<CarModel>();
-            model.Cars.Add(new CarModel {ImagePath = @"C:\Users\shuhard93\Desktop\audi.jpg", Model = "Mazda", Price = 1.0 });
-            model.Cars.Add(new CarModel { ImagePath = @"C:\Users\shuhard93\Desktop\audi.jpg", Model = "Mazda", Price = 10.5 });
-            model.Cars.Add(new CarModel { ImagePath = @"C:\Users\shuhard93\Desktop\audi.jpg", Model = "Mazda", Price = 100.55 });
-            model.Cars.Add(new CarModel { ImagePath = @"C:\Users\shuhard93\Desktop\audi.jpg", Model = "Mazda", Price = 1000.50 });
+            model.CityList = DbReferenceWorker.GetCityReference();
+            model.MarkList = DbReferenceWorker.GetMarkReference();
+            model.ModelList = DbReferenceWorker.GetModelReference();
+            model.TypeList = DbReferenceWorker.GetTypeReference();
             DataContext = model;
         }
 
@@ -43,13 +52,15 @@ namespace RentCar
         {
             InitializeComponent();
 
+            _directions = new OrderDirections
+            {
+                ModelDirection = OrderDirection.Down,
+                YearDirection = OrderDirection.Down,
+                PriceDirection = OrderDirection.Down
+            };
+
             var model = new MainWindowModel();
             model.IsAuthorized = isAuthorized;
-            model.Cars = new List<CarModel>();
-            model.Cars.Add(new CarModel { ImagePath = @"C:\Users\shuhard93\Desktop\audi.jpg", Model = "Mazda", Price = 1.0 });
-            model.Cars.Add(new CarModel { ImagePath = @"C:\Users\shuhard93\Desktop\audi.jpg", Model = "Mazda", Price = 10.5 });
-            model.Cars.Add(new CarModel { ImagePath = @"C:\Users\shuhard93\Desktop\audi.jpg", Model = "Mazda", Price = 100.55 });
-            model.Cars.Add(new CarModel { ImagePath = @"C:\Users\shuhard93\Desktop\audi.jpg", Model = "Mazda", Price = 1000.50 });
             model.CityList = DbReferenceWorker.GetCityReference();
             model.MarkList = DbReferenceWorker.GetMarkReference();
             model.ModelList = DbReferenceWorker.GetModelReference();
@@ -60,6 +71,7 @@ namespace RentCar
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             //TODO: Получение списка автомобилей
+            GetCarsByFilter();
         }
         
         private void PersonnelCabinetBtn_Click(object sender, RoutedEventArgs e)
@@ -97,9 +109,9 @@ namespace RentCar
                 var model = (MainWindowModel) DataContext;
                 if (model.IsAuthorized)
                 {
-                    var orderWindow = new OrderWindow();
-                    orderWindow.Owner = this;
-                    orderWindow.ShowDialog();
+                    var selectedCarModel = (CarModel)OrderListBox.SelectedItem;
+                    var result = OrderWindow.CreateOrder(this, selectedCarModel.Guid);
+                    selectedCarModel.IsEnabled = !result;
                 }
 
                 OrderListBox.SelectedIndex = -1;
@@ -108,52 +120,129 @@ namespace RentCar
 
         private void PriceOrder_OnClick(object sender, RoutedEventArgs e)
         {
-            
+            var model = (MainWindowModel)DataContext;
+
+            _directions.PriceDirection = _directions.PriceDirection == OrderDirection.Down ?
+                OrderDirection.Up : OrderDirection.Down;
+
+            model.Cars = GetOrderedCars(model.Cars);
         }
 
         private void YearOrder_OnClick(object sender, RoutedEventArgs e)
         {
-            
+            var model = (MainWindowModel)DataContext;
+
+            _directions.YearDirection = _directions.YearDirection == OrderDirection.Down ?
+                OrderDirection.Up : OrderDirection.Down;
+
+            model.Cars = GetOrderedCars(model.Cars);
         }
 
         private void ModelOrder_OnClick(object sender, RoutedEventArgs e)
         {
-            
-        }
+            var model = (MainWindowModel)DataContext;
 
-        private void CityCmb_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            
-        }
+            _directions.ModelDirection = _directions.ModelDirection == OrderDirection.Down ?
+                OrderDirection.Up : OrderDirection.Down;
 
-        private void MarkCmb_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            
-        }
-
-        private void ModelCmb_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            
-        }
-
-        private void TypeCmb_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            
+            model.Cars = GetOrderedCars(model.Cars);
         }
 
         private void SearchBtn_OnClick(object sender, RoutedEventArgs e)
         {
             //TODO: Выборка автомобилей по фильтру
+            GetCarsByFilter();
         }
 
         private void ClearBtn_OnClick(object sender, RoutedEventArgs e)
         {
             //TODO: Очистка фильтра
+
+            var model = (MainWindowModel)DataContext;            
+            model.SelectedCity = null;
+            model.SelectedModel = null;
+            model.SelectedMark = null;
+            model.SelectedType = null;
+            model.DateFrom = "";
+            model.DateTo = "";
+            model.PriceFrom = "";
+            model.PriceTo = "";
         }
 
         private void ExitBtn_Click(object sender, RoutedEventArgs e)
         {            
             
         }
+
+        private void GetCarsByFilter()
+        {
+            try
+            {
+                var model = (MainWindowModel)DataContext;
+
+                var filter = new Common.Filter();
+                filter.City = model.SelectedCity;
+                filter.Model = model.SelectedModel;
+                filter.Mark = model.SelectedMark;
+                filter.Type = model.SelectedType;
+                filter.DateFrom = model.DateFrom.ToDateTime(null);
+                filter.DateTo = model.DateTo.ToDateTime(null);
+                filter.PriceFrom = model.PriceFrom.ToDouble(null);
+                filter.PriceTo = model.PriceTo.ToDouble(null);
+                
+                model.Cars = GetOrderedCars(DbCarWorker.GetCarsByFilter(filter));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private ObservableCollection<CarModel> GetOrderedCars(ObservableCollection<CarModel> cars)
+        {
+            IOrderedEnumerable<CarModel> orderCars = cars.OrderBy(x => x.IsEnabled);
+
+            if (_directions.PriceDirection == OrderDirection.Down)
+            {
+                orderCars = orderCars.OrderBy(x => x.Price);
+            }
+            else
+            {
+                orderCars = orderCars.OrderByDescending(x => x.Price);
+            }
+
+            if (_directions.YearDirection == OrderDirection.Down)
+            {
+                orderCars = orderCars.OrderBy(x => x.YearProduction);
+            }
+            else
+            {
+                orderCars = orderCars.OrderByDescending(x => x.YearProduction);
+            }
+
+            if (_directions.ModelDirection == OrderDirection.Down)
+            {
+                orderCars = orderCars.OrderBy(x => x.Model);
+            }
+            else
+            {
+                orderCars = orderCars.OrderByDescending(x => x.Model);
+            }
+
+            return new ObservableCollection<CarModel>(orderCars);
+        }
+    }
+
+    public class OrderDirections
+    {
+        public OrderDirection PriceDirection;
+        public OrderDirection YearDirection;
+        public OrderDirection ModelDirection;
+    }
+
+    public enum OrderDirection
+    {
+        Down = 1,
+        Up = 2
     }
 }

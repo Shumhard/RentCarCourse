@@ -262,26 +262,11 @@
           <EntitySet Name="Car" EntityType="Self.Car" />
           <EntitySet Name="CarStatus" EntityType="Self.CarStatus" />
           <EntitySet Name="OrderStatus" EntityType="Self.OrderStatus" />
-          <EntitySet Name="AdditionalServices" EntityType="OpenRentModel.AdditionalServices" />
-          <EntitySet Name="Area" EntityType="OpenRentModel.Area" />
-          <EntitySet Name="OrderAdditionalServices" EntityType="OpenRentModel.OrderAdditionalServices" />
-          <AssociationSet Name="FK_OrderAdditionalServices_Service" Association="OpenRentModel.FK_OrderAdditionalServices_Service">
-            <End Role="AdditionalServices" EntitySet="AdditionalServices" />
-            <End Role="OrderAdditionalServices" EntitySet="OrderAdditionalServices" />
-          </AssociationSet>
           <EntitySet Name="Client" EntityType="OpenRentModel.Client" />
           <EntitySet Name="Order" EntityType="OpenRentModel.Order" />
-          <AssociationSet Name="FK_Order_Area" Association="OpenRentModel.FK_Order_Area">
-            <End Role="Area" EntitySet="Area" />
-            <End Role="Order" EntitySet="Order" />
-          </AssociationSet>
           <AssociationSet Name="FK_Order_Car" Association="OpenRentModel.FK_Order_Car">
             <End Role="Car" EntitySet="Car" />
             <End Role="Order" EntitySet="Order" />
-          </AssociationSet>
-          <AssociationSet Name="FK_OrderAdditionalServices_Order" Association="OpenRentModel.FK_OrderAdditionalServices_Order">
-            <End Role="Order" EntitySet="Order" />
-            <End Role="OrderAdditionalServices" EntitySet="OrderAdditionalServices" />
           </AssociationSet>
           <EntitySet Name="ClientOrders" EntityType="OpenRentModel.ClientOrders" />
           <AssociationSet Name="FK_ClientOrders_Client" Association="OpenRentModel.FK_ClientOrders_Client">
@@ -292,7 +277,107 @@
             <End Role="Order" EntitySet="Order" />
             <End Role="ClientOrders" EntitySet="ClientOrders" />
           </AssociationSet>
+          <EntitySet Name="AdditionalServices" EntityType="OpenRentModel.AdditionalServices" />
+          <EntitySet Name="Area" EntityType="OpenRentModel.Area" />
+          <EntitySet Name="OrderAdditionalServices" EntityType="OpenRentModel.OrderAdditionalServices" />
+          <AssociationSet Name="FK_OrderAdditionalServices_Service" Association="OpenRentModel.FK_OrderAdditionalServices_Service">
+            <End Role="AdditionalServices" EntitySet="AdditionalServices" />
+            <End Role="OrderAdditionalServices" EntitySet="OrderAdditionalServices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Area" Association="OpenRentModel.FK_Order_Area">
+            <End Role="Area" EntitySet="Area" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderAdditionalServices_Order" Association="OpenRentModel.FK_OrderAdditionalServices_Order">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="OrderAdditionalServices" EntitySet="OrderAdditionalServices" />
+          </AssociationSet>
           </EntityContainer>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="Guid" />
+          </Key>
+          <Property Name="Guid" Type="Guid" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Patronymic" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Birthday" Type="DateTime" Precision="0" />
+          <Property Name="Sex" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="PassportSeries" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="PassportNumber" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BankCard" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ImagePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ClientOrders" Relationship="OpenRentModel.FK_ClientOrders_Client" FromRole="Client" ToRole="ClientOrders" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="Guid" />
+          </Key>
+          <Property Name="Guid" Type="Guid" Nullable="false" />
+          <Property Name="CarGuid" Type="Guid" />
+          <Property Name="AreaGuid" Type="Guid" />
+          <Property Name="OrderDate" Type="DateTime" Precision="3" />
+          <Property Name="RentBeginDate" Type="DateTime" Precision="3" />
+          <Property Name="RentEndDate" Type="DateTime" Precision="3" />
+          <Property Name="StatusId" Type="Int32" />
+          <Property Name="PaymentTypeId" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="TotalCost" Type="Double" />
+          <NavigationProperty Name="Car" Relationship="OpenRentModel.FK_Order_Car" FromRole="Order" ToRole="Car" />
+          <NavigationProperty Name="ClientOrders" Relationship="OpenRentModel.FK_ClientOrders_Order" FromRole="Order" ToRole="ClientOrders" />
+          <NavigationProperty Name="Area" Relationship="OpenRentModel.FK_Order_Area" FromRole="Order" ToRole="Area" />
+          <NavigationProperty Name="OrderAdditionalServices" Relationship="OpenRentModel.FK_OrderAdditionalServices_Order" FromRole="Order" ToRole="OrderAdditionalServices" />
+        </EntityType>
+        <Association Name="FK_Order_Car">
+          <End Type="OpenRentModel.Car" Role="Car" Multiplicity="0..1" />
+          <End Type="OpenRentModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Car">
+              <PropertyRef Name="Guid" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="CarGuid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ClientOrders">
+          <Key>
+            <PropertyRef Name="Guid" />
+          </Key>
+          <Property Name="Guid" Type="Guid" Nullable="false" />
+          <Property Name="ClientGuid" Type="Guid" Nullable="false" />
+          <Property Name="OrderGuid" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="Client" Relationship="OpenRentModel.FK_ClientOrders_Client" FromRole="ClientOrders" ToRole="Client" />
+          <NavigationProperty Name="Order" Relationship="OpenRentModel.FK_ClientOrders_Order" FromRole="ClientOrders" ToRole="Order" />
+        </EntityType>
+        <Association Name="FK_ClientOrders_Client">
+          <End Type="OpenRentModel.Client" Role="Client" Multiplicity="1" />
+          <End Type="OpenRentModel.ClientOrders" Role="ClientOrders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Guid" />
+            </Principal>
+            <Dependent Role="ClientOrders">
+              <PropertyRef Name="ClientGuid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClientOrders_Order">
+          <End Type="OpenRentModel.Order" Role="Order" Multiplicity="1" />
+          <End Type="OpenRentModel.ClientOrders" Role="ClientOrders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="Guid" />
+            </Principal>
+            <Dependent Role="ClientOrders">
+              <PropertyRef Name="OrderGuid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityType Name="AdditionalServices">
           <Key>
             <PropertyRef Name="Guid" />
@@ -334,45 +419,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Client">
-          <Key>
-            <PropertyRef Name="Guid" />
-          </Key>
-          <Property Name="Guid" Type="Guid" Nullable="false" />
-          <Property Name="FirstName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="LastName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Patronymic" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Birthday" Type="DateTime" Precision="0" />
-          <Property Name="Sex" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="PassportSeries" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="PassportNumber" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Password" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="BankCard" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ImagePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="ClientOrders" Relationship="OpenRentModel.FK_ClientOrders_Client" FromRole="Client" ToRole="ClientOrders" />
-        </EntityType>
-        <EntityType Name="Order">
-          <Key>
-            <PropertyRef Name="Guid" />
-          </Key>
-          <Property Name="Guid" Type="Guid" Nullable="false" />
-          <Property Name="CarGuid" Type="Guid" />
-          <Property Name="AreaGuid" Type="Guid" />
-          <Property Name="OrderDate" Type="DateTime" Precision="3" />
-          <Property Name="RentBeginDate" Type="DateTime" Precision="3" />
-          <Property Name="RentEndDate" Type="DateTime" Precision="3" />
-          <Property Name="StatusId" Type="Int32" />
-          <Property Name="PaymentTypeId" Type="Int32" />
-          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="TotalCost" Type="Double" />
-          <NavigationProperty Name="Area" Relationship="OpenRentModel.FK_Order_Area" FromRole="Order" ToRole="Area" />
-          <NavigationProperty Name="Car" Relationship="OpenRentModel.FK_Order_Car" FromRole="Order" ToRole="Car" />
-          <NavigationProperty Name="OrderAdditionalServices" Relationship="OpenRentModel.FK_OrderAdditionalServices_Order" FromRole="Order" ToRole="OrderAdditionalServices" />
-          <NavigationProperty Name="ClientOrders" Relationship="OpenRentModel.FK_ClientOrders_Order" FromRole="Order" ToRole="ClientOrders" />
-        </EntityType>
         <Association Name="FK_Order_Area">
           <End Type="OpenRentModel.Area" Role="Area" Multiplicity="0..1" />
           <End Type="OpenRentModel.Order" Role="Order" Multiplicity="*" />
@@ -385,18 +431,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Order_Car">
-          <End Type="OpenRentModel.Car" Role="Car" Multiplicity="0..1" />
-          <End Type="OpenRentModel.Order" Role="Order" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Car">
-              <PropertyRef Name="Guid" />
-            </Principal>
-            <Dependent Role="Order">
-              <PropertyRef Name="CarGuid" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_OrderAdditionalServices_Order">
           <End Type="OpenRentModel.Order" Role="Order" Multiplicity="1" />
           <End Type="OpenRentModel.OrderAdditionalServices" Role="OrderAdditionalServices" Multiplicity="*" />
@@ -405,40 +439,6 @@
               <PropertyRef Name="Guid" />
             </Principal>
             <Dependent Role="OrderAdditionalServices">
-              <PropertyRef Name="OrderGuid" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="ClientOrders">
-          <Key>
-            <PropertyRef Name="Guid" />
-          </Key>
-          <Property Name="Guid" Type="Guid" Nullable="false" />
-          <Property Name="ClientGuid" Type="Guid" Nullable="false" />
-          <Property Name="OrderGuid" Type="Guid" Nullable="false" />
-          <NavigationProperty Name="Client" Relationship="OpenRentModel.FK_ClientOrders_Client" FromRole="ClientOrders" ToRole="Client" />
-          <NavigationProperty Name="Order" Relationship="OpenRentModel.FK_ClientOrders_Order" FromRole="ClientOrders" ToRole="Order" />
-        </EntityType>
-        <Association Name="FK_ClientOrders_Client">
-          <End Type="OpenRentModel.Client" Role="Client" Multiplicity="1" />
-          <End Type="OpenRentModel.ClientOrders" Role="ClientOrders" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Client">
-              <PropertyRef Name="Guid" />
-            </Principal>
-            <Dependent Role="ClientOrders">
-              <PropertyRef Name="ClientGuid" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ClientOrders_Order">
-          <End Type="OpenRentModel.Order" Role="Order" Multiplicity="1" />
-          <End Type="OpenRentModel.ClientOrders" Role="ClientOrders" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Order">
-              <PropertyRef Name="Guid" />
-            </Principal>
-            <Dependent Role="ClientOrders">
               <PropertyRef Name="OrderGuid" />
             </Dependent>
           </ReferentialConstraint>
@@ -479,34 +479,6 @@
               <MappingFragment StoreEntitySet="OrderStatus">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AdditionalServices">
-            <EntityTypeMapping TypeName="OpenRentModel.AdditionalServices">
-              <MappingFragment StoreEntitySet="AdditionalServices">
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Guid" ColumnName="Guid" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Area">
-            <EntityTypeMapping TypeName="OpenRentModel.Area">
-              <MappingFragment StoreEntitySet="Area">
-                <ScalarProperty Name="PriceMultiplier" ColumnName="PriceMultiplier" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="Area1" ColumnName="Area" />
-                <ScalarProperty Name="Guid" ColumnName="Guid" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="OrderAdditionalServices">
-            <EntityTypeMapping TypeName="OpenRentModel.OrderAdditionalServices">
-              <MappingFragment StoreEntitySet="OrderAdditionalServices">
-                <ScalarProperty Name="ServiceGuid" ColumnName="ServiceGuid" />
-                <ScalarProperty Name="OrderGuid" ColumnName="OrderGuid" />
-                <ScalarProperty Name="Guid" ColumnName="Guid" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -551,6 +523,34 @@
               <MappingFragment StoreEntitySet="ClientOrders">
                 <ScalarProperty Name="OrderGuid" ColumnName="OrderGuid" />
                 <ScalarProperty Name="ClientGuid" ColumnName="ClientGuid" />
+                <ScalarProperty Name="Guid" ColumnName="Guid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AdditionalServices">
+            <EntityTypeMapping TypeName="OpenRentModel.AdditionalServices">
+              <MappingFragment StoreEntitySet="AdditionalServices">
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Guid" ColumnName="Guid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Area">
+            <EntityTypeMapping TypeName="OpenRentModel.Area">
+              <MappingFragment StoreEntitySet="Area">
+                <ScalarProperty Name="PriceMultiplier" ColumnName="PriceMultiplier" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Area1" ColumnName="Area" />
+                <ScalarProperty Name="Guid" ColumnName="Guid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderAdditionalServices">
+            <EntityTypeMapping TypeName="OpenRentModel.OrderAdditionalServices">
+              <MappingFragment StoreEntitySet="OrderAdditionalServices">
+                <ScalarProperty Name="ServiceGuid" ColumnName="ServiceGuid" />
+                <ScalarProperty Name="OrderGuid" ColumnName="OrderGuid" />
                 <ScalarProperty Name="Guid" ColumnName="Guid" />
               </MappingFragment>
             </EntityTypeMapping>

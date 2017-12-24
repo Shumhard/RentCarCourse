@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using RentEventArgs;
+using Common;
+using DbWorkers;
 
 namespace RentCar.Controls
 {
@@ -33,9 +35,24 @@ namespace RentCar.Controls
         {
             //TODO: Логика проверки Клиента
 
-            if (AutorizationCompleted != null)
+            var login = LoginTxt.Text;
+            var password = PasswordTxt.Password;
+
+            if(string.IsNullOrEmpty(login) || string.IsNullOrEmpty(password))
             {
-                AutorizationCompleted(this, new AuthorizedEventArgs(true));
+                MessageBox.Show("Error");
+            }
+
+            if((UserData.User.UserGuid = DbClientWorker.SignIn(login, password)) != null)
+            {
+                if (AutorizationCompleted != null)
+                {
+                    AutorizationCompleted(this, new AuthorizedEventArgs(true));
+                }
+            }
+            else
+            {
+                MessageBox.Show("Error");
             }
         }
 

@@ -4,6 +4,9 @@
     <EntitySetMapping Name="Car">
       <EntityTypeMapping TypeName="OpenRentModel.Car">
         <MappingFragment StoreEntitySet="Car">
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Mark" ColumnName="Mark" />
           <ScalarProperty Name="Guid" ColumnName="Guid" />
           <ScalarProperty Name="Model" ColumnName="Model" />
           <ScalarProperty Name="Color" ColumnName="Color" />
@@ -11,43 +14,6 @@
           <ScalarProperty Name="YearProduction" ColumnName="YearProduction" />
           <ScalarProperty Name="Price" ColumnName="Price" />
           <ScalarProperty Name="Mileage" ColumnName="Mileage" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Client">
-      <EntityTypeMapping TypeName="OpenRentModel.Client">
-        <MappingFragment StoreEntitySet="Client">
-          <ScalarProperty Name="Guid" ColumnName="Guid" />
-          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-          <ScalarProperty Name="LastName" ColumnName="LastName" />
-          <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
-          <ScalarProperty Name="Birthday" ColumnName="Birthday" />
-          <ScalarProperty Name="Sex" ColumnName="Sex" />
-          <ScalarProperty Name="Mileage" ColumnName="Mileage" />
-          <ScalarProperty Name="PassportSeries" ColumnName="PassportSeries" />
-          <ScalarProperty Name="PassportNumber" ColumnName="PassportNumber" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="ClientOrders">
-      <EntityTypeMapping TypeName="OpenRentModel.ClientOrders">
-        <MappingFragment StoreEntitySet="ClientOrders">
-          <ScalarProperty Name="Guid" ColumnName="Guid" />
-          <ScalarProperty Name="ClientGuid" ColumnName="ClientGuid" />
-          <ScalarProperty Name="OrderGuid" ColumnName="OrderGuid" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Order">
-      <EntityTypeMapping TypeName="OpenRentModel.Order">
-        <MappingFragment StoreEntitySet="Order">
-          <ScalarProperty Name="Guid" ColumnName="Guid" />
-          <ScalarProperty Name="CarGuid" ColumnName="CarGuid" />
-          <ScalarProperty Name="Address" ColumnName="Address" />
-          <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
-          <ScalarProperty Name="DeliveryDate" ColumnName="DeliveryDate" />
-          <ScalarProperty Name="ExpirationDate" ColumnName="ExpirationDate" />
           <ScalarProperty Name="Status" ColumnName="Status" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -65,6 +31,79 @@
         <MappingFragment StoreEntitySet="OrderStatus">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Client">
+      <EntityTypeMapping TypeName="OpenRentModel.Client">
+        <MappingFragment StoreEntitySet="Client">
+          <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+          <ScalarProperty Name="BankCard" ColumnName="BankCard" />
+          <ScalarProperty Name="Login" ColumnName="Login" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="PassportNumber" ColumnName="PassportNumber" />
+          <ScalarProperty Name="PassportSeries" ColumnName="PassportSeries" />
+          <ScalarProperty Name="Sex" ColumnName="Sex" />
+          <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+          <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="Guid" ColumnName="Guid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Order">
+      <EntityTypeMapping TypeName="OpenRentModel.Order">
+        <MappingFragment StoreEntitySet="Order">
+          <ScalarProperty Name="TotalCost" ColumnName="TotalCost" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="PaymentTypeId" ColumnName="PaymentTypeId" />
+          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+          <ScalarProperty Name="RentEndDate" ColumnName="RentEndDate" />
+          <ScalarProperty Name="RentBeginDate" ColumnName="RentBeginDate" />
+          <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+          <ScalarProperty Name="AreaGuid" ColumnName="AreaGuid" />
+          <ScalarProperty Name="CarGuid" ColumnName="CarGuid" />
+          <ScalarProperty Name="Guid" ColumnName="Guid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClientOrders">
+      <EntityTypeMapping TypeName="OpenRentModel.ClientOrders">
+        <MappingFragment StoreEntitySet="ClientOrders">
+          <ScalarProperty Name="OrderGuid" ColumnName="OrderGuid" />
+          <ScalarProperty Name="ClientGuid" ColumnName="ClientGuid" />
+          <ScalarProperty Name="Guid" ColumnName="Guid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AdditionalServices">
+      <EntityTypeMapping TypeName="OpenRentModel.AdditionalServices">
+        <MappingFragment StoreEntitySet="AdditionalServices">
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Guid" ColumnName="Guid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Area">
+      <EntityTypeMapping TypeName="OpenRentModel.Area">
+        <MappingFragment StoreEntitySet="Area">
+          <ScalarProperty Name="PriceMultiplier" ColumnName="PriceMultiplier" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Area1" ColumnName="Area" />
+          <ScalarProperty Name="Guid" ColumnName="Guid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrderAdditionalServices">
+      <EntityTypeMapping TypeName="OpenRentModel.OrderAdditionalServices">
+        <MappingFragment StoreEntitySet="OrderAdditionalServices">
+          <ScalarProperty Name="ServiceGuid" ColumnName="ServiceGuid" />
+          <ScalarProperty Name="OrderGuid" ColumnName="OrderGuid" />
+          <ScalarProperty Name="Guid" ColumnName="Guid" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

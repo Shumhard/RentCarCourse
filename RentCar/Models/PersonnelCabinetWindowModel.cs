@@ -9,7 +9,7 @@ using Common;
 
 namespace Models
 {
-    public class PersonnelCabinetWindowModel : INotifyPropertyChanged
+    public class PersonnelCabinetWindowModel : NotifyModel
     {
         private string _login;
         private string _password;
@@ -191,13 +191,6 @@ namespace Models
                 _imagePath = value;
                 OnPropertyChanged("ImagePath");
             }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName]string prop = "")
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
     }
 }

@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Common;
+using DbWorkers;
 
 namespace RentCar.Controls
 {
@@ -31,9 +33,47 @@ namespace RentCar.Controls
         {
             //TODO: Создание нового клиента
 
-            if(RegisterEnded != null)
+            if (IsAgree.IsChecked.Value)
             {
-                RegisterEnded(this, new EventArgs());
+                var login = LoginTxt.Text;
+                var password = PasswordTxt.Password;
+                var passwordRepeat = PasswordRepeatTxt.Password;
+                var email = EmailTxt.Text;
+                var phone = PhoneTxt.Text;
+
+                if (password.Equals(passwordRepeat))
+                {
+                    if (DbClientWorker.CheckClient(login))
+                    {
+                        var client = new Client
+                        {
+                            Guid = Guid.NewGuid(),
+                            Login = login,
+                            Password = password,
+                            Email = email,
+                            Phone = phone
+                        };
+
+                        DbClientWorker.AddClient(client);
+
+                        if (RegisterEnded != null)
+                        {
+                            RegisterEnded(this, new EventArgs());
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Error");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Warning");
             }
         }
 

@@ -11,7 +11,10 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using RentCar;
 using RentCar.Controls;
+using Common;
+using DbWorkers;
 using Models;
 
 namespace RentCar
@@ -24,27 +27,29 @@ namespace RentCar
         public Personnel_CabinetWindow()
         {
             InitializeComponent();
-
-            var model = new PersonnelCabinetWindowModel
-            {
-                Login = "Shumhard",
-                Password = "Vss24031993",
-                FirstName = "Василий",
-                SecondName = "Шумихин",
-                Burthday = "24.03.1993",
-                BankCard = "1111111111112222",
-                Email = "shumhard93",
-                PassportNumber = "999988",
-                PassportSeria = "4455",
-                Phone = "95554876588",
-                Sex = "Мужской",
-                ImagePath = @"C:\Users\shuhard93\Desktop\Segments\0_seg_left.jpg"
-            };
-            DataContext = model;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            var client = DbClientWorker.GetClient(UserData.User.UserGuid.Value);
+            var model = new PersonnelCabinetWindowModel
+            {
+                Login = client.Login,
+                Password = client.Password,
+                FirstName = client.FirstName,
+                SecondName = client.LastName,
+                Patronymic = client.Patronymic,
+                Burthday = client.Birthday.ToString(),
+                BankCard = client.BankCard,
+                Email = client.Email,
+                PassportNumber = client.PassportNumber,
+                PassportSeria = client.PassportSeries,
+                Phone = client.Phone,
+                Sex = client.Sex,
+                ImagePath = System.IO.Path.Combine(Settings.AttachedFiles, client.ImagePath)
+            };
+            DataContext = model;
+
             SetPersonnelInfo();
         }
 

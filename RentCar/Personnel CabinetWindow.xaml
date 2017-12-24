@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RentCar"
         mc:Ignorable="d"
-        Title="Личный кабинет" Height="640" Width="660" MaxWidth="640" MinHeight="660" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
+        Title="Личный кабинет" Height="680" Width="660" MaxWidth="640" MinHeight="680" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

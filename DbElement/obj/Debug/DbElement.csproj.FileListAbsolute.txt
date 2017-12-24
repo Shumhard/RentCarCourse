@@ -8,3 +8,13 @@ C:\Users\shuhard93\Documents\Visual Studio 2015\Projects\RentCar\DbElement\bin\D
 C:\Users\shuhard93\Documents\Visual Studio 2015\Projects\RentCar\DbElement\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\shuhard93\Documents\Visual Studio 2015\Projects\RentCar\DbElement\obj\Debug\DbElement.dll
 C:\Users\shuhard93\Documents\Visual Studio 2015\Projects\RentCar\DbElement\obj\Debug\DbElement.pdb
+C:\Git\RentCarCourse\DbElement\bin\Debug\DbElement.dll.config
+C:\Git\RentCarCourse\DbElement\bin\Debug\DbElement.dll
+C:\Git\RentCarCourse\DbElement\bin\Debug\DbElement.pdb
+C:\Git\RentCarCourse\DbElement\bin\Debug\EntityFramework.dll
+C:\Git\RentCarCourse\DbElement\bin\Debug\EntityFramework.SqlServer.dll
+C:\Git\RentCarCourse\DbElement\bin\Debug\EntityFramework.xml
+C:\Git\RentCarCourse\DbElement\bin\Debug\EntityFramework.SqlServer.xml
+C:\Git\RentCarCourse\DbElement\obj\Debug\DbElement.csprojResolveAssemblyReference.cache
+C:\Git\RentCarCourse\DbElement\obj\Debug\DbElement.dll
+C:\Git\RentCarCourse\DbElement\obj\Debug\DbElement.pdb

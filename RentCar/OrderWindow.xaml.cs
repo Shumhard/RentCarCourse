@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using RentCar.Controls;
 using DbWorkers;
-using RentCar.Models;
+using Models;
 
 namespace RentCar
 {
@@ -22,32 +22,105 @@ namespace RentCar
     /// </summary>
     public partial class OrderWindow : Window
     {
+        public static bool CreateOrder(Window owner, Guid carGuid)
+        {
+            try
+            {
+                var orderWindow = new OrderWindow(null, carGuid);
+                orderWindow.Owner = owner;
+                orderWindow.ShowDialog();
+
+                var model = (OrderWindowModel)orderWindow.DataContext;
+                return model.IsSuccess;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+        }
+
+        public static OrderWindowModel EditOrder(Window owner, Guid orderGuid)
+        {
+            try
+            {
+                var orderWindow = new OrderWindow(orderGuid, null);
+                orderWindow.Owner = owner;
+                orderWindow.ShowDialog();
+
+                var model = (OrderWindowModel)orderWindow.DataContext;
+                return model.IsSuccess ? model : null;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return null;
+            }
+        }
+
         public OrderWindow()
         {
             InitializeComponent();
-
-            var additionalServices = DbReferenceWorker.GetAdditionalServiceReference();
-
+            
             var model = new OrderWindowModel
             {
                 OrderGuid = Guid.Empty,
-                AdditionalServices = additionalServices.Select(x => new AdditionalService { Checked = false, Name = x.Name }).ToList()
+                AdditionalServices = DbReferenceWorker.GetAdditionalServiceReference()
             };
             DataContext = model;
         }
 
-        public OrderWindow(Guid orderGuid)
+        public OrderWindow(Guid? orderGuid, Guid? carGuid)
         {
             InitializeComponent();
 
-            var additionalServices = DbReferenceWorker.GetAdditionalServiceReference();
-
-            var model = new OrderWindowModel
+            if(orderGuid == null && carGuid == null)
             {
-                OrderGuid = orderGuid,
-                AdditionalServices = additionalServices.Select(x => new AdditionalService { Checked = false, Name = x.Name }).ToList()
-            };
+                throw new Exception("Отсутствуют данные для заказа");
+            }
+            
+            var model = orderGuid == null ? CreateModelByCar(carGuid.Value) : CreateModelByOrder(orderGuid.Value);
             DataContext = model;
+        }
+
+        private OrderWindowModel CreateModelByCar(Guid carGuid)
+        {
+            var model = new OrderWindowModel()
+            {
+                Car = DbCarWorker.GetCar(carGuid),
+                AdditionalServices = DbReferenceWorker.GetAdditionalServiceReference()
+            };
+
+            return model;
+        }
+
+        private OrderWindowModel CreateModelByOrder(Guid orderGuid)
+        {
+            var order = DbOrderWorker.GetOrder(orderGuid);
+            var additionalServices = DbReferenceWorker.GetAdditionalServiceReference();
+            foreach(var serviceGuid in order.AdditonalServiceGuids)
+            {
+                var service = additionalServices.SingleOrDefault(x => x.Guid == serviceGuid);
+                if(service != null)
+                {
+                    service.Checked = true;
+                }
+            }
+
+            var model = new OrderWindowModel()
+            {
+                OrderGuid = order.Guid,
+                AdditionalServices = additionalServices,
+                Area = order.Area,
+                BeginRentDate = order.RentBeginDate,
+                EndRentDate = order.RentEndDate,
+                Name = order.Name,
+                TotalCost = order.TotalCost ?? 0,
+                Car = order.Car,
+                IsEdit = true
+            };
+
+            return model;
         }
 
         private void OrderWindow_OnLoaded(object sender, RoutedEventArgs e)
@@ -70,6 +143,7 @@ namespace RentCar
             this.Title = "Подтвердить заказ";
             var control = new CompleteOrderControl();
             control.CompleteCanceled += OnCompleteCanceled;
+            control.CompleteSuccessed += OnCompleteSuccessed;
             MainControl.Content = control;
         }
 
@@ -81,6 +155,13 @@ namespace RentCar
         private void OnCompleteCanceled(object sender, EventArgs e)
         {
             SetOrderControl();
+        }
+
+        private void OnCompleteSuccessed(object sender, EventArgs e)
+        {
+            var model = (OrderWindowModel)DataContext;
+            model.IsSuccess = true;
+            Close();
         }
     }
 }

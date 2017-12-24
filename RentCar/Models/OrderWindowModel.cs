@@ -7,21 +7,23 @@ using System.Text;
 using System.Threading.Tasks;
 using Common;
 
-namespace RentCar.Models
+namespace Models
 {
-    public class OrderWindowModel : INotifyPropertyChanged
+    public class OrderWindowModel : NotifyModel
     {
-        private string _beginRentDate;
-        private string _endRentDate;
-        private string _city;
-        private string _area;
+        private DateTime? _beginRentDate;
+        private DateTime? _endRentDate;
+        private Area _area;
         private string _name;
         private List<AdditionalService> _additionalServices;
         private double _totalCost;
 
         public Guid OrderGuid { get; set; }
+        public Car Car { get; set; }
+        public bool IsEdit { get; set; }
+        public bool IsSuccess { get; set; }
 
-        public string BeginRentDate
+        public DateTime? BeginRentDate
         {
             get { return _beginRentDate; }
             set
@@ -31,7 +33,7 @@ namespace RentCar.Models
             }
         }
 
-        public string EndRentDate
+        public DateTime? EndRentDate
         {
             get { return _endRentDate; }
             set
@@ -43,15 +45,10 @@ namespace RentCar.Models
 
         public string City
         {
-            get { return _city; }
-            set
-            {
-                _city = value;
-                OnPropertyChanged("City");
-            }
+            get { return Car.City; }
         }
 
-        public string Area
+        public Area Area
         {
             get { return _area; }
             set
@@ -95,22 +92,12 @@ namespace RentCar.Models
         public string TotalCostString
         {
             get { return _totalCost.ToString() + " рублей"; }
-        }
-
-        public Car Car { get; set; }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName]string prop = "")
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
-        }        
+        }       
     }
 
-    public class AdditionalService : INotifyPropertyChanged
+    public class AdditionalService : NotifyModel
     {
         private bool _checked;
-        private string _name;
 
         public bool Checked
         {
@@ -122,21 +109,10 @@ namespace RentCar.Models
             }
         }
 
-        public string Name
-        {
-            get { return _name; }
-            set
-            {
-                _name = value;
-                OnPropertyChanged("Name");
-            }
-        }
+        public Guid Guid { get; set; }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName]string prop = "")
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
-        }
+        public string Name { get; set; }
+
+        public double Price { get; set; }
     }
 }

@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DbElement
+namespace Db
 {
     using System;
     using System.Data.Entity;
@@ -28,11 +28,11 @@ namespace DbElement
         public virtual DbSet<Car> Car { get; set; }
         public virtual DbSet<CarStatus> CarStatus { get; set; }
         public virtual DbSet<OrderStatus> OrderStatus { get; set; }
-        public virtual DbSet<AdditionalServices> AdditionalServices { get; set; }
-        public virtual DbSet<Area> Area { get; set; }
-        public virtual DbSet<OrderAdditionalServices> OrderAdditionalServices { get; set; }
         public virtual DbSet<Client> Client { get; set; }
         public virtual DbSet<Order> Order { get; set; }
         public virtual DbSet<ClientOrders> ClientOrders { get; set; }
+        public virtual DbSet<AdditionalServices> AdditionalServices { get; set; }
+        public virtual DbSet<Area> Area { get; set; }
+        public virtual DbSet<OrderAdditionalServices> OrderAdditionalServices { get; set; }
     }
 }

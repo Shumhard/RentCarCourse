@@ -4,16 +4,30 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Common;
+using RentCar;
 
 namespace DbWorkers
 {
     public static class DbClientWorker
     {
-        public static bool CheckClient(string email)
+        public static Guid? SignIn(string login, string password)
         {
             using (var context = new Db.OpenRentEntities())
             {
-                var dbClient = context.Client.SingleOrDefault(x => x.Email == email);
+                var dbClient = context.Client.SingleOrDefault(x => x.Login == login && x.Password == password);
+                if(dbClient == null)
+                {
+                    return null;
+                }
+                return dbClient.Guid;
+            }
+        }
+
+        public static bool CheckClient(string login)
+        {
+            using (var context = new Db.OpenRentEntities())
+            {
+                var dbClient = context.Client.SingleOrDefault(x => x.Login == login);
                 return dbClient == null;
             }
         }
@@ -62,7 +76,10 @@ namespace DbWorkers
                 Password = dbClient.Password,
                 Sex = dbClient.Sex,
                 PassportNumber = dbClient.PassportNumber,
-                PassportSeries = dbClient.PassportSeries
+                PassportSeries = dbClient.PassportSeries,
+                BankCard = dbClient.BankCard,
+                Login = dbClient.Login,
+                ImagePath = System.IO.Path.Combine(Settings.AttachedFiles, dbClient.ImagePath)
             };
         }
 
@@ -72,17 +89,12 @@ namespace DbWorkers
             {
                 context.Client.Add(new Db.Client
                 {
-                    FirstName = client.FirstName,
-                    LastName = client.LastName,
-                    Patronymic = client.Patronymic,
-                    Birthday = client.Birthday,
                     Guid = client.Guid,
                     Email = client.Email,
-                    Sex = client.Sex,
                     Phone =  client.Phone,
-                    PassportNumber = client.PassportNumber,
-                    PassportSeries = client.PassportSeries,
+                    Login = client.Login,
                     Password = client.Password,
+                    ImagePath = @"Users\default.png"
                 });
                 context.SaveChanges();
             }
@@ -103,27 +115,33 @@ namespace DbWorkers
             }
         }
 
-        public static void UpdateClient(Client client)
+        public static bool UpdateClient(Client client)
         {
             using (var context = new Db.OpenRentEntities())
             {
                 var dbClient = context.Client.SingleOrDefault(x => x.Guid == client.Guid);
                 if(dbClient == null)
                 {
-                    return;
+                    return false;
                 }
 
                 dbClient.FirstName = client.FirstName;
                 dbClient.LastName = client.LastName;
                 dbClient.Patronymic = client.Patronymic;
                 dbClient.Birthday = client.Birthday;
-                dbClient.Sex = client.Sex;
                 dbClient.Phone = client.Phone;
+                dbClient.Email = client.Email;
                 dbClient.Password = client.Password;
-                dbClient.PassportSeries = client.PassportSeries;
+                dbClient.Sex = client.Sex;
                 dbClient.PassportNumber = client.PassportNumber;
+                dbClient.PassportSeries = client.PassportSeries;
+                dbClient.BankCard = client.BankCard;
+                dbClient.Login = client.Login;
+                dbClient.ImagePath = client.ImagePath;
 
                 context.SaveChanges();
+
+                return true;
             }
         }
     }

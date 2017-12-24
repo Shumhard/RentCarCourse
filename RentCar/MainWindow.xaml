@@ -71,41 +71,59 @@
                                 </Grid.RowDefinitions>
 
                                 <StackPanel Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="DimGray">
-                                    <TextBlock Text="{Binding Model}" HorizontalAlignment="Center" Foreground="White"></TextBlock>
+                                    <StackPanel.Style>
+                                        <Style TargetType="StackPanel">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Path=IsEnable}" Value="false">
+                                                    <Setter Property="Opacity" Value="0.5"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </StackPanel.Style>
+                                    <TextBlock Text="{Binding Name}" HorizontalAlignment="Center" Foreground="White"></TextBlock>
                                     <TextBlock Text="{Binding PriceFull}" Margin="0 3" HorizontalAlignment="Center" Foreground="White"></TextBlock>
                                 </StackPanel>
-                                <Image Grid.Row="1" Width="128" Height="128" Stretch="UniformToFill" RenderOptions.BitmapScalingMode="Fant" Source="{Binding ImagePath}"
+                                <Image Grid.Row="1" Width="128" Height="128" Stretch="Uniform" RenderOptions.BitmapScalingMode="Fant" Source="{Binding ImagePath}"
                                    HorizontalAlignment="Center" VerticalAlignment="Center"></Image>
                             </Grid>
                         </Border>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Path=IsEnabled}" Value="false">
+                                <Setter Property="IsEnabled" Value="false"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </ListBox.ItemContainerStyle>
             </ListBox>
             
             <StackPanel Grid.Column="1" Margin="10">
                 <TextBlock Margin="12 5">Город</TextBlock>
                 <ComboBox x:Name="CityCmb" MaxDropDownHeight="150" ScrollViewer.HorizontalScrollBarVisibility="Disabled" DisplayMemberPath="Name" 
-                          SelectedValuePath="Name" ItemsSource="{Binding CityList}"></ComboBox>
+                          SelectedValuePath="Name" SelectedValue="{Binding SelectedCity}" ItemsSource="{Binding CityList}"></ComboBox>
                 <TextBlock Margin="12 5">Марка</TextBlock>
                 <ComboBox x:Name="MarkCmb" MaxDropDownHeight="150" ScrollViewer.HorizontalScrollBarVisibility="Disabled" DisplayMemberPath="Name" 
-                          SelectedValuePath="Name" ItemsSource="{Binding MarkList}"></ComboBox>
+                          SelectedValuePath="Name" SelectedValue="{Binding SelectedMark}" ItemsSource="{Binding MarkList}"></ComboBox>
                 <TextBlock Margin="12 5">Модель</TextBlock>
                 <ComboBox x:Name="ModelCmb" MaxDropDownHeight="150" ScrollViewer.HorizontalScrollBarVisibility="Disabled" DisplayMemberPath="Name" 
-                          SelectedValuePath="Name" ItemsSource="{Binding ModelList}"></ComboBox>
+                          SelectedValuePath="Name" SelectedValue="{Binding SelectedModel}" ItemsSource="{Binding ModelList}"></ComboBox>
                 <TextBlock Margin="12 5">Тип</TextBlock>
                 <ComboBox x:Name="TypeCmb" MaxDropDownHeight="150" ScrollViewer.HorizontalScrollBarVisibility="Disabled" DisplayMemberPath="Name" 
-                          SelectedValuePath="Name" ItemsSource="{Binding TypeList}"></ComboBox>
+                          SelectedValuePath="Name" SelectedValue="{Binding SelectedType}" ItemsSource="{Binding TypeList}"></ComboBox>
                 <TextBlock Margin="12 5">Дата проката</TextBlock>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <TextBox x:Name="BeginDate"></TextBox>
+                    <TextBox x:Name="BeginDate" Text="{Binding DateFrom}"></TextBox>
                     <TextBlock Margin="5 0"> - </TextBlock>
-                    <TextBox x:Name="EndDate"></TextBox>
+                    <TextBox x:Name="EndDate" Text="{Binding DateTo}"></TextBox>
                 </StackPanel>
                 <TextBlock Margin="12 5">Цена / сутки</TextBlock>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <TextBox x:Name="LowPrice"></TextBox>
+                    <TextBox x:Name="LowPrice" Text="{Binding PriceFrom}"></TextBox>
                     <TextBlock Margin="5 0"> -</TextBlock>
-                    <TextBox x:Name="HighPrice"></TextBox>
+                    <TextBox x:Name="HighPrice" Text="{Binding PriceTo}"></TextBox>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                     <Button x:Name="SearchBtn" Click="SearchBtn_OnClick" HorizontalAlignment="Left" Width="80" Margin="0 17">Найти</Button>

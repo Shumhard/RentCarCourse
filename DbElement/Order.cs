@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DbElement
+namespace Db
 {
     using System;
     using System.Collections.Generic;
@@ -17,8 +17,8 @@ namespace DbElement
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Order()
         {
-            this.OrderAdditionalServices = new HashSet<OrderAdditionalServices>();
             this.ClientOrders = new HashSet<ClientOrders>();
+            this.OrderAdditionalServices = new HashSet<OrderAdditionalServices>();
         }
     
         public System.Guid Guid { get; set; }
@@ -32,11 +32,11 @@ namespace DbElement
         public string Name { get; set; }
         public Nullable<double> TotalCost { get; set; }
     
-        public virtual Area Area { get; set; }
         public virtual Car Car { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderAdditionalServices> OrderAdditionalServices { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ClientOrders> ClientOrders { get; set; }
+        public virtual Area Area { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OrderAdditionalServices> OrderAdditionalServices { get; set; }
     }
 }

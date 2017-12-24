@@ -26,7 +26,7 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Column="0" x:Name="PhotoPanel">
-            <Image Width="150" Height="256" Margin="0 10 0 0" Source="{Binding ImagePath}"></Image>
+            <Image Width="150" Height="256" Stretch="Uniform" Margin="0 10 0 0" Source="{Binding ImagePath}"></Image>
             <Button x:Name="JournalBtn" Click="JournalBtn_Click" HorizontalAlignment="Center">Журнал заказов</Button>
         </StackPanel>
 

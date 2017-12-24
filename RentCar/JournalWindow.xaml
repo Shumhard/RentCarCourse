@@ -33,7 +33,7 @@
                             <ColumnDefinition Width="4*"/>
                         </Grid.ColumnDefinitions>
 
-                        <Image Grid.Column="0"  Width="128" Height="128" Stretch="UniformToFill" RenderOptions.BitmapScalingMode="Fant" Source="{Binding ImgPath}"
+                        <Image Grid.Column="0"  Width="128" Height="128" Stretch="Uniform" RenderOptions.BitmapScalingMode="Fant" Source="{Binding ImagePath}"
                                HorizontalAlignment="Center" VerticalAlignment="Center"></Image>
                         <StackPanel Grid.Column="1" Margin="10 0 0 0" HorizontalAlignment="Stretch">
                             <Grid  HorizontalAlignment="Stretch">
@@ -53,7 +53,17 @@
                                 </StackPanel>
                                 <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
                                     <Button x:Name="EditBtn" Click="EditBtn_Click" HorizontalAlignment="Right" Height="40" VerticalAlignment="Top" Width="40" Background="#2196F3" FontSize="18" BorderBrush="#2196F3">
-                                        <Button.Template >
+                                        <Button.Style>
+                                            <Style TargetType="{x:Type Button}" BasedOn="{StaticResource BaseButton}">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Path=StatusString}" Value="Отменен">
+                                                        <Setter Property="Visibility" Value="Hidden"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                                <Setter Property="Margin" Value="5"/>
+                                            </Style>
+                                        </Button.Style>
+                                        <Button.Template>
                                             <ControlTemplate TargetType="Button" >
                                                 <Grid>
                                                     <Path Stretch="Uniform" UseLayoutRounding="False" Fill="#2196F3">
@@ -104,8 +114,18 @@
                                 <TextBlock Margin="5 0" Text="{Binding StatusString}"></TextBlock>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Margin="0 3">
-                                <TextBlock HorizontalAlignment="Left"><Hyperlink>отменить заказ</Hyperlink></TextBlock>
-                                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Margin="10 0">
+                                <TextBlock HorizontalAlignment="Left" Margin="0 0 10 0">
+                                    <TextBlock.Style>
+                                        <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource BaseTextBlock}">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Path=StatusString}" Value="Отменен">
+                                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                    <Hyperlink Click="Hyperlink_Click">отменить заказ</Hyperlink></TextBlock>
+                                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                                     <TextBlock>Стоимость заказа:</TextBlock>
                                     <TextBlock Margin="5 0" Text="{Binding PriceString}"></TextBlock>
                                 </StackPanel>

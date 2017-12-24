@@ -1,4 +1,4 @@
-﻿using RentCar.Models;
+﻿using Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using DbWorkers;
+using Extentions;
 
 namespace RentCar.Controls
 {
@@ -54,11 +55,69 @@ namespace RentCar.Controls
             var model = (OrderWindowModel)window.DataContext;
             DataContext = model;
 
-            model.Car = new Common.Car();
-            model.Car.City = "Томск";
-            model.City = model.Car.City;
             var areaList = DbReferenceWorker.GetAreaReference(model.City);
             AreaCmb.ItemsSource = areaList;
+            //AreaCmb.SelectedValue = model.Area.Name;
+        }
+
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            //var checkBox = (CheckBox)sender;
+            //var model = (AdditionalService)checkBox.DataContext;
+            //((OrderWindowModel)DataContext).TotalCost += model.Price;
+            UpdateTotalCost();
+        }
+
+        private void AreaCmb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            UpdateTotalCost();
+        }
+
+        private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            var checkBox = (CheckBox)sender;
+            var model = (AdditionalService)checkBox.DataContext;
+            ((OrderWindowModel)DataContext).TotalCost -= model.Price;
+        }
+
+        private void BeginRentDate_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var beginDate = BeginRentDate.Text.ToDateTime(null);
+            var endDate = EndRentDate.Text.ToDateTime(null);
+
+            if(beginDate != null && endDate != null)
+            {
+                var model = (OrderWindowModel)DataContext;
+                model.TotalCost = model.Car.Price * (endDate.Value.Day - beginDate.Value.Day);
+            }
+        }
+
+        private void BeginRentDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            UpdateTotalCost();
+        }
+
+        private void EndRentDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            UpdateTotalCost();
+        }
+
+        private void UpdateTotalCost()
+        {
+            var model = (OrderWindowModel)DataContext;
+            if (model.BeginRentDate != null && model.EndRentDate != null)
+            {
+                if (model.BeginRentDate > model.EndRentDate)
+                {
+                    MessageBox.Show("Дата окончания больше даты начала", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+
+                var area = AreaCmb.SelectedIndex > -1 ? (Common.Area)AreaCmb.SelectedItem : null;
+
+                model.TotalCost = ((model.EndRentDate.Value - model.BeginRentDate.Value).TotalDays + 1) * model.Car.Price * (area == null ? 1.0 : area.PriceMultiplier);
+                model.TotalCost += (model.AdditionalServices.Where(x => x.Checked).Sum(x => x.Price));
+            }
         }
     }
 }

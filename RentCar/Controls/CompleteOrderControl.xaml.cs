@@ -12,7 +12,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using RentCar.Models;
+using Common;
+using DbWorkers;
+using Extentions;
+using Models;
 
 namespace RentCar.Controls
 {
@@ -33,9 +36,45 @@ namespace RentCar.Controls
         {
             //TODO: Создание нового Заказа
 
-            if (CompleteSuccessed != null)
+            var model = (OrderWindowModel)DataContext;
+
+            var order = new Order
             {
-                CompleteSuccessed(this, new EventArgs());
+                Guid = model.IsEdit ? model.OrderGuid : Guid.NewGuid(),
+                ClientGuid = UserData.User.UserGuid.Value,
+                Car = model.Car,
+                Name = model.Name,
+                OrderDate = DateTime.Now.Date,
+                TotalCost = model.TotalCost,
+                RentBeginDate = model.BeginRentDate.Value,
+                RentEndDate = model.EndRentDate.Value,
+                AdditonalServiceGuids = model.AdditionalServices.Where(x => x.Checked).Select(x => x.Guid).ToList(),
+                Area = model.Area,
+                PaymentType = CashBtn.IsChecked.Value ? PaymentType.Cash : PaymentType.BankCard
+            };
+
+            if (model.IsEdit)
+            {
+                if (DbOrderWorker.UpdateOrder(order))
+                {
+                    if (CompleteSuccessed != null)
+                    {
+                        CompleteSuccessed(this, new EventArgs());
+                    }
+                }
+            }
+            else
+            {
+                if (DbOrderWorker.AddOrder(order))
+                {
+                    order.Car.Status = CarStatus.Busy;
+                    DbCarWorker.UpdateCar(model.Car);
+
+                    if (CompleteSuccessed != null)
+                    {
+                        CompleteSuccessed(this, new EventArgs());
+                    }
+                }
             }
         }
 

@@ -12,7 +12,7 @@
                 <ResourceDictionary Source="../Styles/BaseStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
-            <Style TargetType="Button" BasedOn="{StaticResource BaseButton}">
+            <Style x:Key="OrderButton" TargetType="Button" BasedOn="{StaticResource BaseButton}">
                 <Setter Property="Width" Value="90"/>
                 <Setter Property="Height" Value="30"/>
                 <Setter Property="Margin" Value="15"/>
@@ -23,12 +23,15 @@
         <StackPanel DockPanel.Dock="Top">
             <TextBlock HorizontalAlignment="Center">Дата проката</TextBlock>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <TextBox x:Name="BeginRentDate" Width="80" Margin="5" Text="{Binding BeginRentDate}"></TextBox>
+                <!--<TextBox x:Name="BeginRentDate" Width="80" Margin="5" Text="{Binding BeginRentDate}" TextChanged="BeginRentDate_TextChanged" ></TextBox>
                 <TextBlock VerticalAlignment="Center"> -</TextBlock>
-                <TextBox x:Name="EndRentDate" Width="80" Margin="5" Text="{Binding EndRentDate}"></TextBox>
+                <TextBox x:Name="EndRentDate" Width="80" Margin="5" Text="{Binding EndRentDate}"></TextBox>-->
+                <DatePicker x:Name="BeginRentDate" Width="100" Margin="5" SelectedDate="{Binding BeginRentDate}" SelectedDateChanged="BeginRentDate_SelectedDateChanged"></DatePicker>
+                <TextBlock VerticalAlignment="Center"> -</TextBlock>
+                <DatePicker x:Name="EndRentDate" Width="100" Margin="5" SelectedDate="{Binding EndRentDate}" SelectedDateChanged="EndRentDate_SelectedDateChanged"></DatePicker>
             </StackPanel>
             <TextBlock Margin="0 5 0 3" HorizontalAlignment="Center">Район проката (выбран город <TextBlock x:Name="CityTextBlock" Text="{Binding City}"></TextBlock>)</TextBlock>
-            <ComboBox x:Name="AreaCmb" DisplayMemberPath="Name" SelectedValuePath="Name" SelectedValue="{Binding Area}"></ComboBox>
+            <ComboBox x:Name="AreaCmb" DisplayMemberPath="Name" SelectedValuePath="Name" SelectedItem="{Binding Area, Mode=TwoWay}" SelectionChanged="AreaCmb_SelectionChanged"></ComboBox>
             <TextBox x:Name="NameTextBox" Height="30" VerticalContentAlignment="Center" Margin="0 3 0 20" Text="{Binding Name}"></TextBox>
             <TextBlock Margin="0 0 0 3">Дополнительные услуги</TextBlock>
             <Border BorderBrush="LightGray" Background="LightGray" BorderThickness="1,1,1,1" CornerRadius="8,8,8,8">
@@ -36,7 +39,7 @@
                      ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <CheckBox IsChecked="{Binding Checked}" Content="{Binding Name}" Margin="0, 5, 0, 0"></CheckBox>
+                            <CheckBox IsChecked="{Binding Checked}" Content="{Binding Name}" Margin="0, 5, 0, 0" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"></CheckBox>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
@@ -49,8 +52,21 @@
                 <TextBlock Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding TotalCostString}"></TextBlock>
             </Border>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="3">
-                <Button x:Name="OrderBtn" Click="OrderBtn_OnClick">Заказать</Button>
-                <Button x:Name="CancelBtn" Click="CancelBtn_OnClick">Отмена</Button>
+                <Button x:Name="OrderBtn" Click="OrderBtn_OnClick">
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}" BasedOn="{StaticResource OrderButton}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Path=IsEdit}" Value="true">
+                                    <Setter Property="Content" Value="Обновить"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Path=IsEdit}" Value="false">
+                                    <Setter Property="Content" Value="Заказать"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <Button x:Name="CancelBtn" Style="{StaticResource OrderButton}" Click="CancelBtn_OnClick">Отмена</Button>
             </StackPanel>
         </StackPanel>
     </DockPanel>

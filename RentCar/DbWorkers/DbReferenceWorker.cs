@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Common;
+using Models;
 
 namespace DbWorkers
 {
@@ -29,14 +30,31 @@ namespace DbWorkers
             return GetReferenceValues("Type", "Name");
         }
 
-        public static List<ReferenceValue> GetAreaReference(string city)
+        public static List<Area> GetAreaReference(string city)
         {
-            return GetReferenceValues("Area", "Name", string.Format("[City] = '{0}'", city));
+            using (var context = new Db.OpenRentEntities())
+            {
+                return context.Area.Where(x => x.City == city).Select(x => new Area
+                {
+                    Guid = x.Guid,
+                    Name = x.Area1,
+                    PriceMultiplier = x.PriceMultiplier.Value
+                }).OrderBy(x => x.Name).ToList();
+            }            
         }
 
-        public static List<ReferenceValue> GetAdditionalServiceReference()
+        public static List<AdditionalService> GetAdditionalServiceReference()
         {
-            return GetReferenceValues("AdditionalService", "Name");
+            using (var context = new Db.OpenRentEntities())
+            {
+                return context.AdditionalServices.Select(x => new AdditionalService
+                {
+                    Checked = false,
+                    Guid = x.Guid,
+                    Name = x.Name,
+                    Price = x.Price.Value
+                }).OrderBy(x => x.Name).ToList();
+            }
         }
 
         public static List<ReferenceValue> GetSexReference()
