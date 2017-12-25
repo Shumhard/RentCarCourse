@@ -2,6 +2,8 @@ language: csharp
 solution: RentCar.sln  
 mono: none
 dotnet: 2.1.3
+install:
+- dotnet restore
 script:
 - dotnet build
 - dotnet test RentCarTest/RentCarTest.csproj
