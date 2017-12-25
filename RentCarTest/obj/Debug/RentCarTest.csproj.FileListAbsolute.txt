@@ -14,3 +14,11 @@ C:\Git\RentCarCourse\RentCarTest\bin\Debug\EntityFramework.dll
 C:\Git\RentCarCourse\RentCarTest\bin\Debug\RentCar.pdb
 C:\Git\RentCarCourse\RentCarTest\bin\Debug\DbElement.pdb
 C:\Git\RentCarCourse\RentCarTest\bin\Debug\EntityFramework.xml
+C:\Git\RentCarCourse\RentCarTest\bin\Debug\xunit.abstractions.dll
+C:\Git\RentCarCourse\RentCarTest\bin\Debug\xunit.assert.dll
+C:\Git\RentCarCourse\RentCarTest\bin\Debug\xunit.core.dll
+C:\Git\RentCarCourse\RentCarTest\bin\Debug\xunit.execution.desktop.dll
+C:\Git\RentCarCourse\RentCarTest\bin\Debug\xunit.abstractions.xml
+C:\Git\RentCarCourse\RentCarTest\bin\Debug\xunit.assert.xml
+C:\Git\RentCarCourse\RentCarTest\bin\Debug\xunit.core.xml
+C:\Git\RentCarCourse\RentCarTest\bin\Debug\xunit.execution.desktop.xml
