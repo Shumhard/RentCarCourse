@@ -3,7 +3,6 @@ solution: RentCar.sln
 mono: none
 dotnet: 2.1.3
 install:
-  - nuget restore RentCar.sln
   - nuget install NUnit.Runners -Version 2.6.4 -OutputDirectory testrunner
 script:
   - dotnet restore
