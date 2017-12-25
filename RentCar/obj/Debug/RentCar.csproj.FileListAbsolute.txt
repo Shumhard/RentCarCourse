@@ -125,8 +125,6 @@ C:\Git\RentCarCourse\RentCar\obj\Debug\JournalWindow.baml
 C:\Git\RentCarCourse\RentCar\bin\Debug\xunit.abstractions.dll
 C:\Git\RentCarCourse\RentCar\bin\Debug\xunit.assert.dll
 C:\Git\RentCarCourse\RentCar\bin\Debug\xunit.core.dll
-C:\Git\RentCarCourse\RentCar\bin\Debug\xunit.execution.desktop.dll
 C:\Git\RentCarCourse\RentCar\bin\Debug\xunit.abstractions.xml
 C:\Git\RentCarCourse\RentCar\bin\Debug\xunit.assert.xml
 C:\Git\RentCarCourse\RentCar\bin\Debug\xunit.core.xml
-C:\Git\RentCarCourse\RentCar\bin\Debug\xunit.execution.desktop.xml
