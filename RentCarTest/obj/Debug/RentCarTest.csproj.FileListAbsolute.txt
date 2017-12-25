@@ -3,3 +3,14 @@ C:\Users\shuhard93\Documents\Visual Studio 2015\Projects\RentCar\RentCarTest\bin
 C:\Users\shuhard93\Documents\Visual Studio 2015\Projects\RentCar\RentCarTest\obj\Debug\RentCarTest.csprojResolveAssemblyReference.cache
 C:\Users\shuhard93\Documents\Visual Studio 2015\Projects\RentCar\RentCarTest\obj\Debug\RentCarTest.dll
 C:\Users\shuhard93\Documents\Visual Studio 2015\Projects\RentCar\RentCarTest\obj\Debug\RentCarTest.pdb
+C:\Git\RentCarCourse\RentCarTest\obj\Debug\RentCarTest.csprojResolveAssemblyReference.cache
+C:\Git\RentCarCourse\RentCarTest\obj\Debug\RentCarTest.dll
+C:\Git\RentCarCourse\RentCarTest\obj\Debug\RentCarTest.pdb
+C:\Git\RentCarCourse\RentCarTest\bin\Debug\RentCarTest.dll
+C:\Git\RentCarCourse\RentCarTest\bin\Debug\RentCarTest.pdb
+C:\Git\RentCarCourse\RentCarTest\bin\Debug\RentCar.exe
+C:\Git\RentCarCourse\RentCarTest\bin\Debug\DbElement.dll
+C:\Git\RentCarCourse\RentCarTest\bin\Debug\EntityFramework.dll
+C:\Git\RentCarCourse\RentCarTest\bin\Debug\RentCar.pdb
+C:\Git\RentCarCourse\RentCarTest\bin\Debug\DbElement.pdb
+C:\Git\RentCarCourse\RentCarTest\bin\Debug\EntityFramework.xml

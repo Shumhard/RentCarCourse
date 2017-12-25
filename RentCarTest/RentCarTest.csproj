@@ -57,6 +57,12 @@
     <Compile Include="DbClientWorkerTest.cs" />
     <Compile Include="DbOrderWorkerTest.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RentCar\RentCar.csproj">
+      <Project>{eab0eb42-999d-4f89-b211-68c02239a694}</Project>
+      <Name>RentCar</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
