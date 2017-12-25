@@ -3,7 +3,7 @@ solution: RentCar.sln
 mono: none
 dotnet: 2.1.3
 install:
-  - travis_retry nuget restore -source "https://www.nuget.org/api/v2" RentCar.sln
+  - nuget restore -source "https://www.nuget.org/api/v2" RentCar.sln
 script:
   - dotnet restore
 - xbuild /p:Configuration=Release RentCar.sln
