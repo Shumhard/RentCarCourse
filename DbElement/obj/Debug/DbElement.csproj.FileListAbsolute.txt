@@ -18,3 +18,14 @@ C:\Git\RentCarCourse\DbElement\bin\Debug\EntityFramework.SqlServer.xml
 C:\Git\RentCarCourse\DbElement\obj\Debug\DbElement.csprojResolveAssemblyReference.cache
 C:\Git\RentCarCourse\DbElement\obj\Debug\DbElement.dll
 C:\Git\RentCarCourse\DbElement\obj\Debug\DbElement.pdb
+C:\Users\Admin\Source\Repos\RentCarCourse\DbElement\bin\Debug\DbElement.dll.config
+C:\Users\Admin\Source\Repos\RentCarCourse\DbElement\bin\Debug\DbElement.dll
+C:\Users\Admin\Source\Repos\RentCarCourse\DbElement\bin\Debug\DbElement.pdb
+C:\Users\Admin\Source\Repos\RentCarCourse\DbElement\bin\Debug\EntityFramework.dll
+C:\Users\Admin\Source\Repos\RentCarCourse\DbElement\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Admin\Source\Repos\RentCarCourse\DbElement\bin\Debug\EntityFramework.xml
+C:\Users\Admin\Source\Repos\RentCarCourse\DbElement\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Admin\Source\Repos\RentCarCourse\DbElement\obj\Debug\DbElement.csprojResolveAssemblyReference.cache
+C:\Users\Admin\Source\Repos\RentCarCourse\DbElement\obj\Debug\DbElement.csproj.CoreCompileInputs.cache
+C:\Users\Admin\Source\Repos\RentCarCourse\DbElement\obj\Debug\DbElement.dll
+C:\Users\Admin\Source\Repos\RentCarCourse\DbElement\obj\Debug\DbElement.pdb

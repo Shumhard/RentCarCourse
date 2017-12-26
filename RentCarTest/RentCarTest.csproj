@@ -85,7 +85,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DbCarWorkerTest.cs" />
     <Compile Include="DbClientWorkerTest.cs" />
-    <Compile Include="DbOrderWorkerTest.cs" />
+    <Compile Include="DbCar.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\RentCar\RentCar.csproj">

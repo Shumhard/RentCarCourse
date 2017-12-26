@@ -146,6 +146,7 @@ namespace DbWorkers
                 }
 
                 context.Car.Remove(dbCar);
+                context.Entry(dbCar).State = System.Data.Entity.EntityState.Deleted;
                 context.SaveChanges();
             }
         }

@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-C:\Git\RentCarCourse\RentCar\obj\Debug\
+C:\Users\Admin\Source\Repos\RentCarCourse\RentCar\obj\Debug\
 RentCar
 none
 false
 DEBUG;TRACE
-C:\Git\RentCarCourse\RentCar\App.xaml
+C:\Users\Admin\Source\Repos\RentCarCourse\RentCar\App.xaml
 13-1719637052
 
 41-549556755
-71-1786278088
+71-1375385342
 AuthWindow.xaml;ConditionsWindow.xaml;Controls\CompleteOrderControl.xaml;Controls\OrderControl.xaml;Controls\PersonnelInfoControl.xaml;Controls\PersonnelInfoEditControl.xaml;Controls\SignInControl.xaml;Controls\SignUpControl.xaml;JournalWindow.xaml;MainWindow.xaml;OrderWindow.xaml;Personnel CabinetWindow.xaml;Styles\BaseStyle.xaml;
 
 False
