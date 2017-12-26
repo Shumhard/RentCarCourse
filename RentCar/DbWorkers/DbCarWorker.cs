@@ -65,7 +65,7 @@ namespace DbWorkers
                     {
                         Guid = dbCar.Guid,
                         IsEnabled = (CarStatus)dbCar.Status.Value == CarStatus.Free,
-                        ImagePath = System.IO.Path.Combine(Settings.AttachedFiles, dbCar.Photo),
+                        ImagePath = System.IO.Path.Combine(Settings.AttachedFiles ?? "", dbCar.Photo),
                         Model = dbCar.Model,
                         Name = string.Format("{0} {1} {2}", dbCar.Mark, dbCar.Model, dbCar.Type),
                         Price = dbCar.Price.HasValue ? dbCar.Price.Value : 0,

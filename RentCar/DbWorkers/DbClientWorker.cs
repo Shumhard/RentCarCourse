@@ -79,7 +79,7 @@ namespace DbWorkers
                 PassportSeries = dbClient.PassportSeries,
                 BankCard = dbClient.BankCard,
                 Login = dbClient.Login,
-                ImagePath = System.IO.Path.Combine(Settings.AttachedFiles, dbClient.ImagePath)
+                ImagePath = System.IO.Path.Combine(Settings.AttachedFiles ?? "", dbClient.ImagePath)
             };
         }
 
@@ -111,6 +111,7 @@ namespace DbWorkers
                 }
 
                 context.Client.Remove(dbClient);
+                context.Entry(dbClient).State = System.Data.Entity.EntityState.Deleted;
                 context.SaveChanges();
             }
         }

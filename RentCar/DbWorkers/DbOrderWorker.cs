@@ -35,7 +35,7 @@ namespace DbWorkers
                         Area = dbOrder.Area.Area1,
                         PriceString = dbOrder.TotalCost.ToString() + " рублей",
                         StatusString = ((OrderStatus)dbOrder.StatusId.Value).DescriptionAttr(),
-                        ImagePath = System.IO.Path.Combine(Settings.AttachedFiles, dbOrder.Car.Photo),
+                        ImagePath = System.IO.Path.Combine(Settings.AttachedFiles ?? "", dbOrder.Car.Photo),
                         ServicesList = dbOrder.OrderAdditionalServices.Select(x => x.AdditionalServices.Name).OrderBy(x => x).ToList()
 
                         //Guid = dbOrder.Guid,
